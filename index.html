@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code — Getting Started for CSMs & AEs</title>
+<style>
+  :root {
+    --sf-blue: #00A1E0;
+    --sf-navy: #032E61;
+    --sf-dark: #16325C;
+    --sf-bg: #F3F3F3;
+    --sf-card: #FFFFFF;
+    --sf-border: #DDDBDA;
+    --sf-text: #2B2826;
+    --sf-muted: #706E6B;
+    --sf-success: #2E844A;
+    --sf-warn: #FE9339;
+    --sf-danger: #BA0517;
+    --code-bg: #1B1B1F;
+    --code-text: #F4F6F9;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Salesforce Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    background: var(--sf-bg);
+    color: var(--sf-text);
+    line-height: 1.55;
+    font-size: 16px;
+  }
+  header {
+    background: linear-gradient(135deg, var(--sf-navy) 0%, var(--sf-blue) 100%);
+    color: white;
+    padding: 32px 40px;
+  }
+  header .brand {
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    opacity: 0.85;
+    margin-bottom: 6px;
+  }
+  header h1 {
+    margin: 0 0 8px 0;
+    font-size: 32px;
+    font-weight: 300;
+    letter-spacing: -0.5px;
+  }
+  header p {
+    margin: 0;
+    font-size: 17px;
+    opacity: 0.92;
+    max-width: 720px;
+  }
+  main {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 32px 24px 80px;
+  }
+  .intro {
+    background: white;
+    border-left: 4px solid var(--sf-blue);
+    padding: 18px 22px;
+    border-radius: 4px;
+    margin-bottom: 28px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  }
+  .intro p { margin: 0; }
+  .intro p + p { margin-top: 8px; }
+  h2 {
+    color: var(--sf-dark);
+    font-weight: 400;
+    font-size: 22px;
+    margin: 36px 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--sf-blue);
+  }
+  h2 .step-num {
+    display: inline-block;
+    background: var(--sf-blue);
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 30px;
+    font-size: 15px;
+    font-weight: 600;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+  .card {
+    background: var(--sf-card);
+    border: 1px solid var(--sf-border);
+    border-radius: 6px;
+    padding: 18px 22px;
+    margin-bottom: 14px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+  }
+  .card p:first-child { margin-top: 0; }
+  .card p:last-child { margin-bottom: 0; }
+  code, pre {
+    font-family: 'SF Mono', Menlo, Monaco, Consolas, monospace;
+    font-size: 14px;
+  }
+  code.inline {
+    background: #F4F6F9;
+    border: 1px solid var(--sf-border);
+    padding: 1px 6px;
+    border-radius: 3px;
+    color: var(--sf-dark);
+  }
+  pre {
+    background: var(--code-bg);
+    color: var(--code-text);
+    padding: 14px 16px;
+    border-radius: 6px;
+    overflow-x: auto;
+    margin: 12px 0;
+    position: relative;
+  }
+  pre .copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(255,255,255,0.1);
+    color: var(--code-text);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 4px 10px;
+    font-size: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  pre .copy-btn:hover { background: rgba(255,255,255,0.2); }
+  pre .copy-btn.copied { background: var(--sf-success); border-color: var(--sf-success); }
+  details {
+    background: white;
+    border: 1px solid var(--sf-border);
+    border-radius: 6px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    transition: box-shadow 0.15s;
+  }
+  details[open] { box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
+  summary {
+    padding: 14px 18px;
+    cursor: pointer;
+    font-weight: 500;
+    color: var(--sf-dark);
+    list-style: none;
+    display: flex;
+    align-items: center;
+    user-select: none;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::before {
+    content: '▸';
+    color: var(--sf-blue);
+    margin-right: 10px;
+    font-size: 14px;
+    transition: transform 0.15s;
+    display: inline-block;
+  }
+  details[open] summary::before { transform: rotate(90deg); }
+  summary:hover { background: #F8FAFC; }
+  details .body {
+    padding: 0 18px 16px 38px;
+    color: var(--sf-text);
+  }
+  details .body p:first-child { margin-top: 0; }
+  details .body p:last-child { margin-bottom: 0; }
+  .tip {
+    background: #FEF8E7;
+    border-left: 4px solid var(--sf-warn);
+    padding: 12px 16px;
+    border-radius: 4px;
+    margin: 12px 0;
+    font-size: 14.5px;
+  }
+  .tip strong { color: #8C5500; }
+  .danger {
+    background: #FDECEC;
+    border-left: 4px solid var(--sf-danger);
+    padding: 12px 16px;
+    border-radius: 4px;
+    margin: 12px 0;
+    font-size: 14.5px;
+  }
+  .danger strong { color: var(--sf-danger); }
+  ol li, ul li { margin-bottom: 6px; }
+  a { color: var(--sf-blue); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 10px;
+    margin-top: 12px;
+  }
+  .link-card {
+    display: block;
+    padding: 14px 16px;
+    background: white;
+    border: 1px solid var(--sf-border);
+    border-radius: 6px;
+    transition: all 0.15s;
+  }
+  .link-card:hover {
+    border-color: var(--sf-blue);
+    box-shadow: 0 2px 8px rgba(0,161,224,0.15);
+    text-decoration: none;
+    transform: translateY(-1px);
+  }
+  .link-card .label {
+    font-weight: 500;
+    color: var(--sf-dark);
+    margin-bottom: 4px;
+  }
+  .link-card .desc {
+    font-size: 13.5px;
+    color: var(--sf-muted);
+  }
+  kbd {
+    display: inline-block;
+    background: #F4F6F9;
+    border: 1px solid var(--sf-border);
+    border-bottom-width: 2px;
+    border-radius: 4px;
+    padding: 1px 7px;
+    font-family: 'SF Mono', Menlo, monospace;
+    font-size: 13px;
+    color: var(--sf-dark);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 14.5px;
+  }
+  th, td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--sf-border);
+  }
+  th {
+    background: #F8FAFC;
+    color: var(--sf-dark);
+    font-weight: 500;
+  }
+  td code.inline { font-size: 13px; }
+  footer {
+    text-align: center;
+    color: var(--sf-muted);
+    font-size: 13px;
+    padding: 24px;
+    border-top: 1px solid var(--sf-border);
+    margin-top: 40px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">Salesforce · Customer Success</div>
+  <h1>Getting started with Claude Code</h1>
+  <p>A short guide for CSMs and AEs. Skim it once, set up the four things in Section 1, and you're working.</p>
+</header>
+
+<main>
+
+<div class="intro">
+  <p><strong>What is Claude Code?</strong> An AI assistant that runs in your Terminal. You point it at a folder on your Mac and it can read files, write drafts, search the web, and run tasks — all by typing in plain English.</p>
+  <p><strong>Why CSMs & AEs care:</strong> drafting customer emails, summarizing call notes, prepping for QBRs, comparing org artifacts, and doing the kind of "research + write" work that eats your morning.</p>
+</div>
+
+<h2><span class="step-num">1</span> One-time setup (5 minutes)</h2>
+
+<div class="tip">
+  <strong>Don't love the idea of Terminal?</strong> You don't have to use it. Claude Code also has a <strong>desktop app for Mac</strong> — same Claude, but it runs in its own window instead of inside Terminal. The way you talk to it is identical. The rest of this guide still applies; just substitute "open the desktop app and pick a folder" for the Terminal steps. If that's the route you want, see the "Skip Terminal entirely" section below for setup. Otherwise, keep reading — Terminal really is fine once you've used it three times.
+</div>
+
+<p>You've already installed Claude Code. Three small things to do before your first run:</p>
+
+<details open>
+  <summary>1a. Create a shortcut alias in your Terminal</summary>
+  <div class="body">
+    <p>An alias lets you launch Claude with a short word instead of a long command. We'll set up two: <code class="inline">claude</code> for normal use and <code class="inline">yolo</code> for when you want it to run without asking permission for every action.</p>
+
+    <p><strong>Open Terminal</strong> (Cmd+Space, type "Terminal", hit Enter), then paste this in and press Enter:</p>
+
+<pre><button class="copy-btn" onclick="copyCode(this)">Copy</button>echo '
+# Claude Code aliases
+alias claude="claude"
+alias yolo="claude --dangerously-skip-permissions"
+' &gt;&gt; ~/.zshrc &amp;&amp; source ~/.zshrc</pre>
+
+    <p>That appends two lines to your shell config and reloads it. From now on, anywhere in Terminal:</p>
+    <ul>
+      <li><code class="inline">claude</code> — normal mode. Claude asks before doing anything that touches your files or runs commands.</li>
+      <li><code class="inline">yolo</code> — Claude does what it needs to without asking. Faster, but only use it on folders where you trust what you're doing.</li>
+    </ul>
+
+    <div class="danger">
+      <strong>About <code class="inline">--dangerously-skip-permissions</code>:</strong> the name is dramatic on purpose. Claude won't ask permission to read, write, or delete inside the folder you launched it from. Don't run <code class="inline">yolo</code> from your home folder (<code class="inline">~</code>) or anywhere with files you can't afford to lose. Run it from a project folder where the worst case is "I have to redo this work."
+    </div>
+  </div>
+</details>
+
+<details>
+  <summary>1b. Pick (or make) a folder for Claude to work in</summary>
+  <div class="body">
+    <p>Claude works best when you launch it from a single folder, and then keep it focused on that folder. Whatever's in there is what Claude reads, edits, and writes to.</p>
+    <p>Technically Claude <em>can</em> reach out to other folders on your Mac if you ask it to. But the smart move is to treat the folder you launch from as its workspace. If you want to work on a different customer or project, quit Claude and re-launch it from that other folder. New folder = new Claude session.</p>
+    <p>Suggestions:</p>
+    <ul>
+      <li>One folder per customer (e.g. <code class="inline">~/Documents/CustomerName</code>)</li>
+      <li>Or one general folder (e.g. <code class="inline">~/Documents/Claude</code>) with subfolders inside, one per task</li>
+    </ul>
+    <p>Drop relevant context in there — call notes, a Success Plan PDF, an email thread you exported, a CSV from Gainsight. Claude reads what's there.</p>
+  </div>
+</details>
+
+<details>
+  <summary>1c. Open that folder in Terminal, then launch Claude</summary>
+  <div class="body">
+    <p>The trick most people don't know:</p>
+    <ol>
+      <li>Open <strong>Finder</strong> and navigate to the folder you want.</li>
+      <li><strong>Right-click the folder</strong> (or two-finger click on the trackpad).</li>
+      <li>Choose <strong>Services → New Terminal at Folder</strong>.</li>
+    </ol>
+    <p>If you don't see "New Terminal at Folder," turn it on once: <strong>System Settings → Keyboard → Keyboard Shortcuts → Services → Files and Folders</strong>, and check the box for "New Terminal at Folder."</p>
+    <p>A Terminal window opens already inside that folder. Now type:</p>
+<pre><button class="copy-btn" onclick="copyCode(this)">Copy</button>claude</pre>
+    <p>or for the no-permission-prompts version:</p>
+<pre><button class="copy-btn" onclick="copyCode(this)">Copy</button>yolo</pre>
+    <p>Claude starts up and waits for you to tell it what to do.</p>
+  </div>
+</details>
+
+<details>
+  <summary>1d. Skip Terminal entirely — use the desktop app instead</summary>
+  <div class="body">
+    <p>If Terminal feels alien, use the Mac desktop app. Same Claude, same way of talking to it, just in its own window.</p>
+    <ol>
+      <li>Download from the link your installer email pointed you at, or check <code class="inline">#claude-code-support</code> on Slack for the current download link.</li>
+      <li>Drag the app to <strong>Applications</strong>. Open it.</li>
+      <li>The app asks you to pick a folder when it launches — same idea as Terminal. Pick the folder you want it to work in (e.g. your <code class="inline">Weekly Updates</code> folder).</li>
+      <li>Type your prompt. Done.</li>
+    </ol>
+    <h4 style="color: var(--sf-dark); margin-bottom: 6px;">Things that are different in the app</h4>
+    <ul>
+      <li><strong>No aliases.</strong> Aliases are a Terminal thing — they don't exist in the app. But you can still get the equivalent of <code class="inline">yolo</code> by going to <strong>Settings → Permission mode → "Bypass permissions"</strong>. (Same warning applies: only use it on folders where the worst case is "I have to redo this work.")</li>
+      <li><strong>Switching folders</strong> happens through a folder picker in the app, not by opening a new Terminal window.</li>
+      <li><strong>Everything else</strong> — prompts, slash commands, file dragging, the way Claude reads your folder — works identically.</li>
+    </ul>
+    <p>The rest of this guide is written for Terminal because that's what most people end up using, but every prompt, every slash command, and every workflow below works exactly the same in the app. If a section says "in Terminal, type X," do the equivalent in the app's chat box.</p>
+  </div>
+</details>
+
+<h2><span class="step-num">2</span> Your first conversation</h2>
+
+<div class="card">
+  <p>Once Claude is running, you just type. No special syntax. Examples that work on day one:</p>
+  <ul>
+    <li><em>"What files are in this folder?"</em></li>
+    <li><em>"Read the call notes PDF and summarize the top 3 risks."</em></li>
+    <li><em>"Draft a follow-up email to the customer based on the notes from yesterday's call."</em></li>
+    <li><em>"Compare the Q1 and Q2 success plans and tell me what changed."</em></li>
+  </ul>
+  <p>When you're done, type <code class="inline">/exit</code> or press <kbd>Ctrl</kbd>+<kbd>C</kbd> twice.</p>
+</div>
+
+<div class="tip">
+  <strong>Tip:</strong> the more context you give upfront, the better the answer. "Draft a renewal email" is fine. "Draft a renewal email to the customer team — VP of Eng is the buyer, we're 60 days out, the main concern from last call was integration timeline" is much better.
+</div>
+
+<h2><span class="step-num">3</span> A few things worth knowing</h2>
+
+<details>
+  <summary>How do I stop Claude mid-task?</summary>
+  <div class="body">
+    <p>Press <kbd>Esc</kbd> once. It interrupts whatever it's doing and waits for new input. Press <kbd>Ctrl</kbd>+<kbd>C</kbd> twice to fully quit.</p>
+  </div>
+</details>
+
+<details>
+  <summary>Can I drag a file into the conversation?</summary>
+  <div class="body">
+    <p>Yes. Drag a file from Finder into the Terminal window and the path drops in as text. You can also just say "look at the file called X" and Claude will find it in the folder.</p>
+    <p>For images (screenshots of dashboards, error messages, etc.), drag them in the same way — Claude can read them.</p>
+  </div>
+</details>
+
+<details>
+  <summary>What does the slash <code class="inline">/</code> do?</summary>
+  <div class="body">
+    <p>Typing <code class="inline">/</code> at the start of a message opens a list of built-in commands. Useful ones:</p>
+    <table>
+      <tr><th>Command</th><th>What it does</th></tr>
+      <tr><td><code class="inline">/help</code></td><td>Lists everything available</td></tr>
+      <tr><td><code class="inline">/clear</code></td><td>Wipes conversation memory and starts fresh (use this between unrelated tasks)</td></tr>
+      <tr><td><code class="inline">/support</code></td><td>Salesforce-internal: diagnoses common install/sign-in issues, hands off to <code class="inline">#claude-code-support</code> if needed</td></tr>
+      <tr><td><code class="inline">/exit</code></td><td>Quits Claude</td></tr>
+    </table>
+  </div>
+</details>
+
+<details>
+  <summary>What's the difference between <code class="inline">claude</code> and <code class="inline">yolo</code> again?</summary>
+  <div class="body">
+    <p><code class="inline">claude</code> asks for permission before doing anything that affects your files or runs a command. Safer, slightly slower.</p>
+    <p><code class="inline">yolo</code> skips those prompts. Faster for repetitive work, but you're trusting Claude not to delete or overwrite something you cared about. Rule of thumb: use <code class="inline">claude</code> when you're new or experimenting, <code class="inline">yolo</code> when you've used it enough to know what to expect.</p>
+  </div>
+</details>
+
+<details>
+  <summary>Will Claude remember our last conversation?</summary>
+  <div class="body">
+    <p>Not by default. Each time you launch, it starts fresh — but it can <em>read</em> any files in the folder, so if you save your notes there, you've got persistent memory the easy way.</p>
+    <p>If you want Claude to remember preferences across sessions (e.g. "always format emails this way"), ask it to "save that as a memory" and it'll create a file it auto-loads next time.</p>
+  </div>
+</details>
+
+<details>
+  <summary>What if it gets something wrong or makes something up?</summary>
+  <div class="body">
+    <p>It happens. Claude is a strong drafter, not a source of truth. Treat output the way you'd treat a smart intern's first draft: skim it, fix the parts that don't match reality, ship the rest. Anything that's going to a customer should pass your eyes before it goes anywhere.</p>
+    <p>If you catch a hallucination, just tell it. "That's wrong — the renewal date is March, not May." It'll correct.</p>
+  </div>
+</details>
+
+<h2><span class="step-num">4</span> Working with AI — how to actually be good at this</h2>
+
+<p>Six things that separate "AI saved me hours this week" from "AI got me in trouble." Read these once before you start — they'll save you a lot of cleanup.</p>
+
+<div class="card">
+  <p><strong>Tell it what you want like you'd brief a teammate.</strong> "Write me an update" is too vague. "Write me a weekly update for these 5 accounts, 3–4 bullets each, focused on what changed this week and what's at risk" gets you something useful. Specific in, specific out.</p>
+</div>
+
+<div class="card">
+  <p><strong>It can only see what you give it.</strong> Claude does not read your inbox, your Slack, or your calendar on its own. If you want it to summarize this week's customer emails, you have to put those emails in the folder first. Section 5 walks you through exactly how.</p>
+</div>
+
+<div class="card">
+  <p><strong>Always read every line before you send.</strong> Especially the first dozen times you use it. Treat the output like a draft from a smart, fast intern: usually right, occasionally confidently wrong. If it invents a date, an exec name, or a commitment, you're the one who sent it. Audit anything going to a customer or to leadership.</p>
+</div>
+
+<div class="card">
+  <p><strong>Iterate. Don't expect one-shot magic.</strong> The first draft is a starting point, not the answer. Tell it specifically what's off: "tighten the second bullet," "the VP didn't say that, he said this," "less corporate." Each correction makes the next draft sharper. Three or four rounds is normal.</p>
+</div>
+
+<div class="card">
+  <p><strong>Show it what good looks like.</strong> If you have a previous deliverable you were happy with — an old email, an old update, a previous brief — drop it in the folder and tell Claude to match the style. This is the single biggest quality lever you have.</p>
+</div>
+
+<div class="card">
+  <p><strong>More context, better output.</strong> Bad: "write a renewal email." Good: "write a renewal email to the VP of Eng at the customer. Renewal is in 60 days. Last call they were worried about the integration timeline. Tone: warm but direct. Under 150 words." The second prompt isn't longer for the sake of it — every detail changes what comes back.</p>
+</div>
+
+<h2><span class="step-num">5</span> Slash commands and power tricks</h2>
+
+<p>While you're typing a message to Claude, type a forward slash (<code class="inline">/</code>) at the start of the line. A menu of commands pops up. These are shortcuts — small, named workflows you can fire off without writing a long prompt. Some are built in. Some you can build yourself. Below are the ones worth knowing.</p>
+
+<h3 style="color: var(--sf-dark); font-weight: 400; margin-top: 24px; margin-bottom: 8px;">Built-in slash commands</h3>
+
+<table>
+  <tr><th>Command</th><th>What it does</th><th>When to use it</th></tr>
+  <tr>
+    <td><code class="inline">/help</code></td>
+    <td>Lists every slash command available right now.</td>
+    <td>When you forget what's possible.</td>
+  </tr>
+  <tr>
+    <td><code class="inline">/clear</code></td>
+    <td>Wipes Claude's memory of this conversation and starts fresh.</td>
+    <td>Between unrelated tasks. Stops earlier context from polluting the new task.</td>
+  </tr>
+  <tr>
+    <td><code class="inline">/init</code></td>
+    <td>Creates a <code class="inline">CLAUDE.md</code> file that teaches Claude about this folder — what it is, how you work, what to keep in mind.</td>
+    <td>Once per folder you'll use a lot. Worth doing for your weekly-updates folder.</td>
+  </tr>
+  <tr>
+    <td><code class="inline">/support</code></td>
+    <td>Diagnoses common Claude Code install/sign-in issues. Routes you to <code class="inline">#claude-code-support</code> if it can't fix it.</td>
+    <td>When something isn't working.</td>
+  </tr>
+  <tr>
+    <td><code class="inline">/exit</code></td>
+    <td>Quits Claude.</td>
+    <td>End of session.</td>
+  </tr>
+</table>
+
+<h3 style="color: var(--sf-dark); font-weight: 400; margin-top: 24px; margin-bottom: 8px;">Things you can do that look like magic</h3>
+
+<details>
+  <summary>Make your own slash command (a "skill")</summary>
+  <div class="body">
+    <p>You can teach Claude a custom command that does exactly what you want, every time. For example, <code class="inline">/weekly-update</code> could run the whole flow from Section 6 with one keystroke.</p>
+    <p>The way you make one is genuinely the easiest part: <strong>just ask Claude to make it for you</strong>. In any Claude session, type:</p>
+<pre><button class="copy-btn" onclick="copyCode(this)">Copy</button>I want to create a slash command called /weekly-update that
+[describe what you want it to do]. Set it up for me.</pre>
+    <p>Claude will create the files and put them where they need to go. Next time you launch Claude, type <code class="inline">/weekly-update</code> and it runs.</p>
+    <p>Good candidates for custom commands:</p>
+    <ul>
+      <li><code class="inline">/qbr-prep</code> — pulls your QBR template prompt with your standard structure baked in</li>
+      <li><code class="inline">/audit-this</code> — runs a customer-facing draft through your usual checks before you send</li>
+      <li><code class="inline">/call-summary</code> — your house style for turning raw notes into a clean recap</li>
+    </ul>
+  </div>
+</details>
+
+<details>
+  <summary>Ask Claude to interview you</summary>
+  <div class="body">
+    <p>Genuinely the most underused trick. When you have a vague idea but don't know how to brief it, flip the script:</p>
+<pre><button class="copy-btn" onclick="copyCode(this)">Copy</button>Interview me. I want to write a [renewal email / QBR brief /
+weekly update / whatever]. Ask me one question at a time
+until you have enough to draft something I'd actually send.
+Don't ask everything at once — go one at a time and react
+to my answers.</pre>
+    <p>Claude asks you a question. You answer in plain English. It asks the next one. After 5–8 questions it has more context than you'd ever bother typing into a prompt — and the draft that comes out is dramatically better.</p>
+  </div>
+</details>
+
+<details>
+  <summary>Ask it to challenge your thinking before you ship</summary>
+  <div class="body">
+    <p>Before you send something high-stakes, paste your draft and say:</p>
+<pre><button class="copy-btn" onclick="copyCode(this)">Copy</button>Be a skeptic. Read this like you're the customer's procurement
+team / the VP I'm sending it to / a competitor's AE. Where would
+you push back? What's vague, hedgy, or making promises I can't
+keep? Don't be polite — be useful.</pre>
+    <p>It's not that Claude is smarter than you. It's that you've been staring at the draft for 20 minutes and can't see it fresh anymore.</p>
+  </div>
+</details>
+
+<details>
+  <summary>Save context across sessions with a CLAUDE.md file</summary>
+  <div class="body">
+    <p>Run <code class="inline">/init</code> once in a folder. It creates a file called <code class="inline">CLAUDE.md</code> that Claude auto-reads every time you launch in that folder.</p>
+    <p>Edit that file (it's just text) to include things like:</p>
+    <ul>
+      <li>"My accounts are: [list your accounts]."</li>
+      <li>"I'm a CSM in Health & Life Sciences. Don't suggest revenue plays — that's the AE's job."</li>
+      <li>"Tone preference: direct, no corporate fluff. Under 150 words for emails unless I say otherwise."</li>
+    </ul>
+    <p>From then on, Claude already knows that going in. You don't have to repeat it every time.</p>
+  </div>
+</details>
+
+<details>
+  <summary>Drag a file (or screenshot) directly into the conversation</summary>
+  <div class="body">
+    <p>Working in Terminal: drag a file from Finder into the Terminal window. The file path drops in as text. Claude can then read it.</p>
+    <p>Working in the desktop app: same thing, drag right into the chat box. For screenshots, Cmd+Shift+4 to capture, then drag it in. Claude can read screenshots too — useful for "what does this dashboard tell us" or "this error keeps showing up, what is it?"</p>
+  </div>
+</details>
+
+<details>
+  <summary>Ask "what should I have asked?"</summary>
+  <div class="body">
+    <p>After Claude finishes a task, before you accept the answer, try this:</p>
+<pre><button class="copy-btn" onclick="copyCode(this)">Copy</button>What should I have asked you that I didn't? What's missing
+from this output that I might not realize is missing?</pre>
+    <p>It's a quiet way to catch the gap you didn't know you had.</p>
+  </div>
+</details>
+
+<h2><span class="step-num">6</span> A worked example: your weekly account update</h2>
+
+<p>This walks through one full task end to end — a weekly account update sent in Slack — so you can see how the pieces fit together. The same flow works for almost any "draft something based on what happened this week" task.</p>
+
+<details open>
+  <summary>Set this up once (5 minutes, then never again)</summary>
+  <div class="body">
+    <p>You're making a home for these updates. One main folder, then a sub-folder for each week.</p>
+    <ol>
+      <li>Open <strong>Finder</strong>. Go to <strong>Documents</strong>.</li>
+      <li>Right-click in the empty space and choose <strong>New Folder</strong>. Name it <code class="inline">Weekly Updates</code>.</li>
+      <li>Open <strong>TextEdit</strong> (Cmd+Space, type "TextEdit," hit Enter).</li>
+      <li>Paste in <strong>one of your previous weekly updates that you liked</strong>. The most recent good one is fine.</li>
+      <li>In TextEdit, click <strong>Format → Make Plain Text</strong> (so it saves cleanly with no hidden formatting).</li>
+      <li>Click <strong>File → Save</strong>. Navigate to the <code class="inline">Weekly Updates</code> folder you just made. Name the file <code class="inline">style-example.txt</code>. Save.</li>
+    </ol>
+    <p>That <code class="inline">style-example.txt</code> file is the most important thing in this whole setup. It teaches Claude what your voice sounds like. The closer the example matches the format and tone you actually want, the less editing you'll do every week.</p>
+    <div class="tip"><strong>Tip:</strong> if you have two or three previous updates you liked, paste them all in (separated by a row of dashes). Claude picks up patterns better from a few examples than from one.</div>
+  </div>
+</details>
+
+<details>
+  <summary>Step 1 — Make a folder for this week</summary>
+  <div class="body">
+    <p>Inside <code class="inline">Weekly Updates</code>, right-click → <strong>New Folder</strong>. Name it with this week's date in <code class="inline">YYYY-MM-DD</code> format, like <code class="inline">2026-06-09</code>. Year-first so they sort in order on screen.</p>
+    <p>Then drag a copy of <code class="inline">style-example.txt</code> from the parent folder into this week's folder. (Hold <kbd>Option</kbd> while dragging to copy instead of move.) That way every week's folder has the style example sitting right next to the source material.</p>
+  </div>
+</details>
+
+<details>
+  <summary>Step 2 — Drop this week's source material into the folder</summary>
+  <div class="body">
+    <p>Pick whichever of these you have. You don't need all of them. The more you give Claude, the sharper the draft.</p>
+
+    <p><strong>From Slack:</strong> open Slack and find the customer threads from this week. Highlight the messages, Cmd+C to copy. Open TextEdit, paste, save into your week folder as something like <code class="inline">slack-northwell.txt</code>. Repeat per customer.</p>
+
+    <p><strong>From email (Outlook on Mac):</strong> open Outlook. Find a customer email thread from this week. Drag the message directly out of the Outlook email list and drop it into your week folder in Finder. It saves as a <code class="inline">.eml</code> file that Claude can read. Repeat for each thread you want included.</p>
+    <p>If drag-and-drop doesn't work cleanly: select the message body, copy, paste into TextEdit, save as plain text into the week folder. Same result.</p>
+
+    <p><strong>From call notes:</strong> drop them in. PDF, Word, plain text — Claude reads all of those.</p>
+
+    <p><strong>From your head:</strong> often the most useful thing. Open TextEdit, type out what happened in plain language. Don't worry about writing well, just write it down. Like this:</p>
+<pre>Customer A — Tuesday call with VP of Eng. Security review delayed
+again, their internal team is the blocker. Follow-up Friday.
+
+Customer B — quiet week, no movement. Renewal still on track
+for August.
+
+Customer C — escalation Thursday, integration broke after their
+patch deployment. We have a fix going Friday.</pre>
+    <p>Save it as <code class="inline">my-notes.txt</code> in the week folder. Claude turns notes like this into clean prose.</p>
+
+    <div class="tip"><strong>Rule of thumb:</strong> five lines of "this week was busy" gives you a vague update. Five paragraphs of who-said-what gives you a sharp one. The output is only as good as what you put in.</div>
+  </div>
+</details>
+
+<details>
+  <summary>Step 3 — Launch Claude in that folder</summary>
+  <div class="body">
+    <p>Right-click your <em>week</em> folder (the dated one) in Finder. Choose <strong>Services → New Terminal at Folder</strong>. A Terminal window opens, already inside that folder. Type:</p>
+<pre><button class="copy-btn" onclick="copyCode(this)">Copy</button>claude</pre>
+    <p>Hit Enter. You're in.</p>
+  </div>
+</details>
+
+<details>
+  <summary>Step 4 — Ask for the first draft</summary>
+  <div class="body">
+    <p>Copy this in. Edit the bracketed parts to match your accounts:</p>
+<pre><button class="copy-btn" onclick="copyCode(this)">Copy</button>I send a weekly account update in Slack. Here's how I want it:
+- One section per account
+- 3-4 bullets per account
+- Each bullet covers: what changed, what the risk is, what's next
+- Tone: direct, no corporate fluff, no hedging
+- Whole thing under 400 words
+
+The accounts I cover are: [list your accounts here]
+
+In this folder you'll find this week's source material —
+emails, Slack exports, call notes, my own brain-dump notes.
+There's also a file called style-example.txt that shows the
+voice and format I want to match.
+
+Read everything in the folder, then draft this week's update.</pre>
+    <p>Hit Enter. Claude reads the folder, then writes a draft. This usually takes 30-60 seconds.</p>
+  </div>
+</details>
+
+<details>
+  <summary>Step 5 — Audit (this is the part you cannot skip)</summary>
+  <div class="body">
+    <p>Read every line of the draft. Specifically check for:</p>
+    <ul>
+      <li><strong>Wrong names</strong> — wrong customer, wrong exec, wrong product. It happens.</li>
+      <li><strong>Wrong dates</strong> — "renewal is in March" when it's May.</li>
+      <li><strong>Commitments you didn't make</strong> — "we promised X by Friday" when you didn't.</li>
+      <li><strong>Plausible-but-not-real details</strong> — these are the dangerous ones because they sound right.</li>
+      <li><strong>Tone that's off</strong> — too corporate, too casual, too hedgy.</li>
+    </ul>
+    <div class="danger"><strong>Don't send anything you haven't read line by line</strong> — especially in the first month or two of using this. AI confidence and AI accuracy are not the same thing. The output reads like it knows what it's talking about even when it doesn't. You are the last line of defense.</div>
+  </div>
+</details>
+
+<details>
+  <summary>Step 6 — Iterate (this is the part most people quit too early on)</summary>
+  <div class="body">
+    <p>Found something off? Tell Claude exactly what. A real exchange looks like this:</p>
+<pre>You:  The Customer A section is wrong — the VP didn't say
+      integration is delayed, he said the security review
+      is delayed. Fix that and tighten the rest of that
+      section.
+
+Claude: [revised draft]
+
+You:  Better. Now the Customer B section — bullets 1 and 2 are
+      saying the same thing. Merge them.
+
+Claude: [revised again]
+
+You:  Last thing — the closing line is too soft. Make it
+      a clear ask, not a check-in.</pre>
+    <p>Keep going until you'd be comfortable putting your name on it. Three or four rounds is normal. If you're still not happy after five, the problem is usually upstream — the source material was thin, or the style example doesn't actually match what you want. Fix that, then ask for a fresh draft.</p>
+  </div>
+</details>
+
+<details>
+  <summary>Step 7 — Format for Slack and send</summary>
+  <div class="body">
+    <p>Once the content is right:</p>
+<pre><button class="copy-btn" onclick="copyCode(this)">Copy</button>Format this for a Slack message. Use Slack's bold (*asterisks*)
+and bullet style. Keep paragraph breaks tight.</pre>
+    <p>Copy the result, paste into Slack, send. Done.</p>
+  </div>
+</details>
+
+<details>
+  <summary>What this looks like once it's a habit</summary>
+  <div class="body">
+    <p>After a few weeks, the whole flow takes 15–25 minutes:</p>
+    <ul>
+      <li>~5 min: drag this week's emails / Slack exports / notes into the week folder</li>
+      <li>~2 min: launch Claude, paste the prompt</li>
+      <li>~10 min: read, audit, iterate 2–3 times</li>
+      <li>~2 min: format for Slack, paste, send</li>
+    </ul>
+    <p>The first time will take longer. That's expected. Most of the investment is in the style example and getting comfortable with the iteration loop — not in any single week's update.</p>
+  </div>
+</details>
+
+<h2><span class="step-num">7</span> More starter prompts</h2>
+
+<p>Below are starter prompts. Drop the relevant files into your Claude folder first (call notes, success plans, email exports), launch Claude, and try one.</p>
+
+<details>
+  <summary>Summarize a customer call into a structured note</summary>
+  <div class="body">
+    <p>Drop the call recording transcript or your raw notes in the folder, then:</p>
+<pre><button class="copy-btn" onclick="copyCode(this)">Copy</button>Read the call notes file in this folder. Give me:
+1. The 3-5 things the customer actually cared about (their words, not mine)
+2. Any commitments I made
+3. Open questions I owe them
+4. Risks or red flags I should flag internally</pre>
+  </div>
+</details>
+
+<details>
+  <summary>Draft a follow-up email after a meeting</summary>
+  <div class="body">
+<pre><button class="copy-btn" onclick="copyCode(this)">Copy</button>Based on the call notes, draft a follow-up email to [Customer Name].
+Tone: warm but direct, no fluff. Keep it under 150 words.
+Include: a one-line recap, the commitments I made with dates,
+and one specific next step that keeps momentum.</pre>
+  </div>
+</details>
+
+<details>
+  <summary>Prep for a QBR or exec briefing</summary>
+  <div class="body">
+<pre><button class="copy-btn" onclick="copyCode(this)">Copy</button>I have a QBR with [Customer] next week. In this folder are their
+success plan, the last 3 call notes, and their renewal date.
+
+Draft a one-page exec brief covering:
+- What they came in wanting
+- What we've actually delivered
+- Where we're behind or at risk
+- What to ask for in the meeting (specific, not generic)</pre>
+  </div>
+</details>
+
+<details>
+  <summary>Compare two versions of a document</summary>
+  <div class="body">
+<pre><button class="copy-btn" onclick="copyCode(this)">Copy</button>There are two success plans in this folder — the Q1 version and
+the Q2 version. Tell me what changed: new commitments, removed
+items, shifted dates, and anything that looks like scope creep.</pre>
+  </div>
+</details>
+
+<details>
+  <summary>Pull together a renewal narrative</summary>
+  <div class="body">
+<pre><button class="copy-btn" onclick="copyCode(this)">Copy</button>Renewal is in 90 days. Look at the call notes, the success plan,
+and the usage data CSV. Build me a renewal narrative I can use
+internally:
+- Value delivered (with specifics, not adjectives)
+- Friction we caused or didn't solve
+- What expansion looks like if it goes well
+- What to watch for if it doesn't</pre>
+  </div>
+</details>
+
+<details>
+  <summary>Stress-test your own draft before sending</summary>
+  <div class="body">
+<pre><button class="copy-btn" onclick="copyCode(this)">Copy</button>Here's an email I'm about to send to [VP at customer]. Read it
+like you're the recipient. What would make you push back, ask
+a clarifying question, or feel managed? Suggest tighter wording
+where I'm being vague.</pre>
+  </div>
+</details>
+
+<h2><span class="step-num">8</span> When something breaks</h2>
+
+<div class="card">
+  <p><strong>First stop:</strong> inside Claude, type <code class="inline">/support</code>. It walks you through common install, sign-in, and setup issues, and hands off to <code class="inline">#claude-code-support</code> on Slack with a pre-filled diagnostic if it can't fix it.</p>
+  <p><strong>If Claude won't launch at all:</strong> open Terminal and run <code class="inline">claude doctor</code> — it prints what's wrong.</p>
+  <p><strong>If you're stuck and the above doesn't help:</strong> drop into <code class="inline">#claude-code-support</code> on Slack with a screenshot of what you're seeing.</p>
+</div>
+
+<h2><span class="step-num">9</span> Where to go deeper</h2>
+
+<div class="links-grid">
+  <a class="link-card" href="https://docs.claude.com/en/docs/claude-code/overview" target="_blank" rel="noopener">
+    <div class="label">Claude Code overview →</div>
+    <div class="desc">Anthropic's official intro to what Claude Code is and what it can do.</div>
+  </a>
+  <a class="link-card" href="https://docs.claude.com/en/docs/claude-code/quickstart" target="_blank" rel="noopener">
+    <div class="label">Quickstart guide →</div>
+    <div class="desc">A 5-minute walkthrough from Anthropic. Good second read after this page.</div>
+  </a>
+  <a class="link-card" href="https://docs.claude.com/en/docs/claude-code/common-workflows" target="_blank" rel="noopener">
+    <div class="label">Common workflows →</div>
+    <div class="desc">Patterns for using Claude Code on real tasks — extends the examples above.</div>
+  </a>
+  <a class="link-card" href="https://docs.claude.com/en/docs/claude-code/slash-commands" target="_blank" rel="noopener">
+    <div class="label">Slash commands reference →</div>
+    <div class="desc">Full list of <code class="inline">/</code> commands and what they do.</div>
+  </a>
+  <a class="link-card" href="https://docs.claude.com/en/docs/claude-code/memory" target="_blank" rel="noopener">
+    <div class="label">Memory & CLAUDE.md →</div>
+    <div class="desc">How to teach Claude things it should remember between sessions.</div>
+  </a>
+  <a class="link-card" href="https://docs.claude.com/en/docs/claude-code/cli-reference" target="_blank" rel="noopener">
+    <div class="label">CLI reference →</div>
+    <div class="desc">Every flag and option, including <code class="inline">--dangerously-skip-permissions</code>.</div>
+  </a>
+</div>
+
+<footer>
+  Internal training doc · Customer Success · Maintained by Jilly
+</footer>
+
+</main>
+
+<script>
+function copyCode(btn) {
+  const pre = btn.parentElement;
+  const text = pre.innerText.replace(/^Copy\s*/, '');
+  navigator.clipboard.writeText(text).then(() => {
+    const original = btn.innerText;
+    btn.innerText = 'Copied';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.innerText = original;
+      btn.classList.remove('copied');
+    }, 1500);
+  });
+}
+</script>
+
+</body>
+</html>
