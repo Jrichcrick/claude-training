@@ -34,13 +34,6 @@
     color: white;
     padding: 32px 40px;
   }
-  header .brand {
-    font-size: 13px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    opacity: 0.85;
-    margin-bottom: 6px;
-  }
   header h1 {
     margin: 0 0 8px 0;
     font-size: 32px;
@@ -262,9 +255,8 @@
 <body>
 
 <header>
-  <div class="brand">Salesforce · Customer Success</div>
   <h1>Getting started with Claude Code</h1>
-  <p>A short guide for CSMs and AEs. Skim it once, set up the four things in Section 1, and you're working.</p>
+  <p>A short guide for people who work with customers, not code. Skim it once, set up the four things in Section 1, and start using it.</p>
 </header>
 
 <main>
@@ -567,6 +559,37 @@ keep? Don't be polite — be useful.</pre>
 <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button>What should I have asked you that I didn't? What's missing
 from this output that I might not realize is missing?</pre>
     <p>It's a quiet way to catch the gap you didn't know you had.</p>
+  </div>
+</details>
+
+<details>
+  <summary>Two prompts to keep in your back pocket (these change everything)</summary>
+  <div class="body">
+    <p>Two phrases worth using almost every session. Borrowed from <a href="https://github.com/matthewdricci/personal-ai-workspace" target="_blank" rel="noopener">Matthew Ricci's setup</a>:</p>
+<pre><button class="copy-btn" onclick="copyCode(this)">Copy</button>Ask me clarifying questions if it will help improve the output.</pre>
+    <p>Drop this into almost any prompt. Claude will pause and interview you instead of guessing — and the output gets visibly better.</p>
+<pre><button class="copy-btn" onclick="copyCode(this)">Copy</button>Let's start with a plan and refine it before acting.</pre>
+    <p>For anything multi-step. Claude proposes a plan, you correct it, <em>then</em> it executes. Saves you from "well, that's not what I wanted" moments.</p>
+  </div>
+</details>
+
+<details>
+  <summary>The inbox / outbox trick</summary>
+  <div class="body">
+    <p>Inside any folder you work in regularly, make two subfolders: <code class="inline">inbox</code> and <code class="inline">outbox</code>.</p>
+    <ul>
+      <li><strong>Inbox</strong> — drop files here for Claude to read (call notes, PDFs, exported emails).</li>
+      <li><strong>Outbox</strong> — tell Claude to leave finished drafts here.</li>
+    </ul>
+    <p>Sounds tiny. Once you've used it a week, you stop losing track of which version is which. (Credit: Matthew Ricci.)</p>
+  </div>
+</details>
+
+<details>
+  <summary>Talk to Claude instead of typing — Wispr Flow</summary>
+  <div class="body">
+    <p><a href="https://wisprflow.ai/" target="_blank" rel="noopener">Wispr Flow</a> is a Mac dictation tool that turns your voice into clean text in any app, including Claude. The reason it matters: when you're talking, you give more context naturally — the kind of detail that makes prompts good. Most people type two sentences. With voice, they ramble five, and the output gets dramatically better.</p>
+    <p>Free trial available. Optional but worth knowing about.</p>
   </div>
 </details>
 
