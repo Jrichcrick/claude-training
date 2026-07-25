@@ -74,6 +74,15 @@ For each tactic, capture:
 Quality bar: if a reader would have to think about how to apply the artifact, it isn't finished.
 Fill in the specifics — real scenarios from JR's world, not `[YOUR TASK HERE]` placeholders.
 
+**But this repo is public.** Write to the *shape* of his work, never its contents: "a renewal-risk
+account", not the account's name; "a CSM onboarding deck", not the customer's. No customer or
+prospect names, no deal specifics, no internal metrics, roadmap, pricing, or anything from a
+Salesforce system. The tactic is what's worth keeping; the proprietary particulars are what make it
+concrete in the moment, and they don't need to live in git history to do that.
+
+If a tactic can't be made useful without a specific detail, put the generic version in the library
+and keep the specific one in the email only.
+
 **Do not invent tactics.** If the episode yields one good technique, report one. A short honest
 email beats a padded one, and padding is what turns this into another unread newsletter.
 
