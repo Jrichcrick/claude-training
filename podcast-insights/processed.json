@@ -1,0 +1,5 @@
+{
+  "_comment": "Ledger of episodes the automation has already evaluated. Prevents re-sending the same episode and lets a run recover after a missed day. Newest first. Trim entries older than ~90 days.",
+  "last_run_utc": null,
+  "episodes": []
+}

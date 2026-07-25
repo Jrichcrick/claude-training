@@ -1,0 +1,55 @@
+{
+  "podcast": {
+    "name": "The AI Daily Brief (formerly The AI Breakdown)",
+    "host": "Nathaniel Whittemore (NLW)",
+    "apple_podcast_id": "1680633614",
+    "feed_url": "",
+    "feed_url_note": "Leave blank to auto-resolve from apple_podcast_id via the iTunes lookup API on each run. Fill it in to pin a specific feed and skip resolution.",
+    "listener_link": "https://pca.st/podcast/d41026a0-bb2a-013b-f3ee-0acc26574db2"
+  },
+
+  "delivery": {
+    "to": "REPLACE_WITH_WORK_EMAIL",
+    "from_account": "jrichcrick20@gmail.com",
+    "method": "gmail_draft",
+    "method_note": "The Gmail connector can create drafts but cannot send. The run leaves a finished draft addressed to `to` in the from_account; JR taps send.",
+    "schedule_local": "19:07 America/New_York",
+    "subject_prefix": "AI Daily Brief — tactics to try"
+  },
+
+  "filtering": {
+    "mode": "actionable_only",
+    "min_tactics_to_send": 2,
+    "send_when_nothing_actionable": false,
+    "actionable_signals": [
+      "prompting techniques, prompt structure, or system-prompt advice",
+      "how to use a specific model well (Claude, GPT, Gemini) — e.g. 'how to get the most out of X'",
+      "agent / Claude Code / tool-use workflow patterns",
+      "concrete workflows, evals, or context-engineering practice",
+      "named frameworks or repeatable processes a listener could run tomorrow"
+    ],
+    "skip_signals": [
+      "pure market/funding/valuation news",
+      "policy, regulation, and legal commentary with no listener action",
+      "interviews with no extractable technique",
+      "company drama, personnel moves, earnings"
+    ]
+  },
+
+  "audience_context": {
+    "who": "JR — works with Salesforce CSMs and AEs on Claude Code enablement (see repo index.html)",
+    "tools_at_work": ["Claude (web/desktop)", "Claude Code"],
+    "prompt_targets": [
+      "Claude web/desktop chat prompts — paste-and-go",
+      "Claude Code artifacts — CLAUDE.md rules, slash commands, terminal workflows"
+    ],
+    "bias": "Favor tactics that translate into customer-facing enablement or JR's own daily work. Skip anything that only matters to model researchers."
+  },
+
+  "output": {
+    "library_path": "podcast-insights/technique-library.md",
+    "ledger_path": "podcast-insights/processed.json",
+    "one_tactic_framing": "try tomorrow",
+    "one_tactic_framing_note": "The draft lands at 7pm, after the workday. The single highlighted tactic is framed for the next working day, not the current one."
+  }
+}
