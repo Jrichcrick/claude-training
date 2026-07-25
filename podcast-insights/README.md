@@ -56,10 +56,9 @@ Browser automation was considered and ruled out — `mail.google.com` is blocked
 policy, and each Routine firing gets a fresh container with no Google session. See the standing
 rule in [`../CLAUDE.md`](../CLAUDE.md).
 
-### 2. Set your work email address
+### 2. ~~Set your work email address~~ — done
 
-`config.json` → `delivery.to` is `REPLACE_WITH_WORK_EMAIL`. Until it's a real address, the job
-builds the library and commits it but skips the draft rather than mailing nowhere.
+`config.json` → `delivery.to` is `Jrichcrick@salesforce.com`.
 
 ### 3. Allowlist the podcast hosts on the environment
 

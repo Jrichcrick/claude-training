@@ -9,7 +9,7 @@
   },
 
   "delivery": {
-    "to": "REPLACE_WITH_WORK_EMAIL",
+    "to": "Jrichcrick@salesforce.com",
     "from_account": "jrichcrick20@gmail.com",
     "method": "gmail_draft",
     "method_note": "The Gmail connector can create drafts but cannot send. The run leaves a finished draft addressed to `to` in the from_account. Per JR's standing rule (see CLAUDE.md), self-addressed mail should be SENT without asking whenever a send path exists — draft-only is a tooling limit, not a preference.",

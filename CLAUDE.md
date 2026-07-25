@@ -20,7 +20,7 @@ is that things reach him without him having to do anything.
 **Scope — this covers only mail where every recipient is JR.** Addresses currently known:
 
 - `jrichcrick20@gmail.com` (personal)
-- his work address — see `delivery.to` in `podcast-insights/config.json`
+- `Jrichcrick@salesforce.com` (work)
 
 Any recipient who is not JR falls outside this rule and needs confirmation as normal. A CC to a
 colleague, a customer, or a mailing list makes the whole message out of scope, even if JR is also
