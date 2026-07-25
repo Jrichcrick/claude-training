@@ -18,14 +18,27 @@ Quiet nights are normal. If NLW spent the episode on funding rounds, you get no 
 
 ---
 
-## Two things you have to do before it works
+## Three things you have to do before it works
 
-### 1. Set your work email address
+### 1. Attach the Gmail connector to the Routine
+
+**Without this there is no email at all.** The nightly Routine
+(`AI Daily Brief — nightly tactic extraction`, `trig_01RsxLimNv5hp2a4K9sYv61x`) was created from a
+session that couldn't pass connector grants through, so the sessions it fires run with no
+`mcp__Gmail__*` tools — meaning no draft can be created.
+
+Fix it from the **Routines UI on claude.ai**: open the Routine and attach the **Gmail** connector.
+That's the only place the grant can be added; it can't be patched from a Claude Code session.
+
+Until it's attached, the job still runs, still extracts tactics, and still commits them to
+`technique-library.md` — you just have to read them in the repo instead of your inbox.
+
+### 2. Set your work email address
 
 `config.json` → `delivery.to` is `REPLACE_WITH_WORK_EMAIL`. Until it's a real address, the job
 builds the library and commits it but skips the draft rather than mailing nowhere.
 
-### 2. Allowlist the podcast hosts on the environment
+### 3. Allowlist the podcast hosts on the environment
 
 **This is the one that will silently break things.** The `Jrichcrick_git` environment's network
 policy currently denies the podcast hosts at the proxy — every one of these returns
@@ -79,3 +92,6 @@ the ledger, so running it twice in a night won't double-send.
   overhead, handled in Step 0 of the command.
 - Routines fire on a schedule, not on publish. An episode dropping at 6pm ET is caught that night;
   one dropping at 8pm waits for the next run.
+- **The cron is stored in UTC (`7 23 * * *`), so it does not follow daylight saving.** That's
+  7:07pm ET now; when the clocks go back in November it becomes 6:07pm ET. Shift the cron to
+  `7 0 * * *` at that point to hold 7pm.
