@@ -12,7 +12,8 @@
     "to": "REPLACE_WITH_WORK_EMAIL",
     "from_account": "jrichcrick20@gmail.com",
     "method": "gmail_draft",
-    "method_note": "The Gmail connector can create drafts but cannot send. The run leaves a finished draft addressed to `to` in the from_account; JR taps send.",
+    "method_note": "The Gmail connector can create drafts but cannot send. The run leaves a finished draft addressed to `to` in the from_account. Per JR's standing rule (see CLAUDE.md), self-addressed mail should be SENT without asking whenever a send path exists — draft-only is a tooling limit, not a preference.",
+    "auto_forward_note": "Zero-tap path: the Routine emails its run summary to from_account, and a one-time Gmail forwarding filter relays it to `to`. See README.md.",
     "schedule_local": "19:07 America/New_York",
     "subject_prefix": "AI Daily Brief — tactics to try"
   },

@@ -15,10 +15,11 @@ That's the whole reason it exists rather than living in your inbox.
 
 Empty. The first entries land on the first run that finds an actionable episode.
 
-**Pending backfill:** the Sonnet 5 / GPT-5.6 episode — the one about running a task through a
-batch of prompts, tactics in the back half. It's the reason this automation exists, and it aired
-before the automation did, so the nightly job won't pick it up on its own. Ask for it once the
-feed host is allowlisted (see `README.md`) and it'll be extracted and added here as entry one.
+**Pending backfill:** the **Fable 5 / GPT-5.6** episode — how to get the most out of both models,
+including running a task through a batch of prompts. The tactics are in the back half. It's the
+reason this automation exists, and it aired before the automation did, so the nightly job won't
+pick it up on its own. Ask for it once the feed host is allowlisted (see `README.md`) and it'll be
+extracted and added here as entry one.
 
 ---
 

@@ -23,7 +23,7 @@ Quiet nights are normal. If NLW spent the episode on funding rounds, you get no 
 ### 1. Attach the Gmail connector to the Routine
 
 **Without this there is no email at all.** The nightly Routine
-(`AI Daily Brief — nightly tactic extraction`, `trig_01RsxLimNv5hp2a4K9sYv61x`) was created from a
+(`AI Daily Brief — nightly tactic extraction`, `trig_01HsKPS7kVhzAvoUSWqGCP1T`) was created from a
 session that couldn't pass connector grants through, so the sessions it fires run with no
 `mcp__Gmail__*` tools — meaning no draft can be created.
 
@@ -32,6 +32,29 @@ That's the only place the grant can be added; it can't be patched from a Claude 
 
 Until it's attached, the job still runs, still extracts tactics, and still commits them to
 `technique-library.md` — you just have to read them in the repo instead of your inbox.
+
+**Note that even with Gmail attached, the connector can only draft, never send** — so that path
+tops out at one tap per email. For zero taps, see below.
+
+### 1b. Optional — the zero-tap path
+
+The Routine emails its run summary to the account owner (`jrichcrick20@gmail.com`) automatically.
+That send is real, not a draft. To get it to work without touching anything:
+
+1. In Gmail → Settings → **Forwarding and POP/IMAP** → add your work address as a forwarding
+   address. Google emails it a confirmation link — click it once.
+2. Settings → **Filters** → create a filter matching the Routine's digest mail (subject contains
+   `AI Daily Brief`, or from the Claude notification sender) → action: **Forward to** your work
+   address.
+
+That's a one-time setup and then the nightly digest lands at work on its own. The tradeoff: the
+notification carries the run's summary rather than the full hand-formatted HTML digest, so the
+paste-ready prompt blocks may come through less cleanly than in the drafted version. Worth it if
+you'd rather have it arrive automatically than arrive pretty.
+
+Browser automation was considered and ruled out — `mail.google.com` is blocked by the network
+policy, and each Routine firing gets a fresh container with no Google session. See the standing
+rule in [`../CLAUDE.md`](../CLAUDE.md).
 
 ### 2. Set your work email address
 
