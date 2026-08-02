@@ -1,5 +1,30 @@
 {
   "_comment": "Ledger of episodes the automation has already evaluated. Prevents re-sending the same episode and lets a run recover after a missed day. Newest first. Trim entries older than ~90 days.",
-  "last_run_utc": null,
-  "episodes": []
+  "last_run_utc": "2026-08-02T23:11:22Z",
+  "episodes": [
+    {
+      "guid": "websearch:ai-daily-brief:6-questions-every-enterprise-has-to-answer-about-ai:2026-07-30",
+      "title": "6 Questions Every Enterprise Has to Answer About AI",
+      "published": "2026-07-30",
+      "source": "websearch-fallback",
+      "actionable": false,
+      "reason": "iTunes lookup, the feed, and every podcast/show-notes host (pod.link, aidailybrief.ai, Spotify episode page, Apple Podcasts, Pocket Casts, podnews.net) returned 403 at the proxy — WebFetch is blocked broadly in this environment, not just the listed podcast hosts. WebSearch surfaced only that NLW recaps 'six questions' from a KPMG symposium (enterprise AI shifting from 'if' to 'how'), with four themes corroborated (token budgets, workforce enablement, business-model change, adaptive systems) but not the actual questions or NLW's mechanism for each. Building a ready-to-paste artifact from fragments would mean inventing content the episode may or may not actually contain. Promising — worth a manual listen once the network policy allows transcript/show-notes access."
+    },
+    {
+      "guid": "websearch:ai-daily-brief:openai-anthropic-revenue-vs-stock-drawdown-aschenbrenner:2026-07-31",
+      "title": "OpenAI and Anthropic revenue soars while AI stocks drawdown (Aschenbrenner hedge fund collapse)",
+      "published": "2026-07-31",
+      "source": "websearch-fallback",
+      "actionable": false,
+      "reason": "Market/funding news (hedge fund collapse, stock drawdown, revenue figures) — skip_signal, no extractable technique."
+    },
+    {
+      "guid": "websearch:ai-daily-brief:pacing-the-frontier-letter:2026-07-29",
+      "title": "1,200+ researchers sign 'Pacing the Frontier' letter calling for coordinated AI slowdown tools",
+      "published": "2026-07-29",
+      "source": "websearch-fallback",
+      "actionable": false,
+      "reason": "Policy/regulation commentary — skip_signal, no listener action."
+    }
+  ]
 }
