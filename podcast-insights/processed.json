@@ -1,7 +1,15 @@
 {
   "_comment": "Ledger of episodes the automation has already evaluated. Prevents re-sending the same episode and lets a run recover after a missed day. Newest first. Trim entries older than ~90 days.",
-  "last_run_utc": "2026-08-02T23:11:22Z",
+  "last_run_utc": "2026-08-03T23:12:56Z",
   "episodes": [
+    {
+      "guid": "websearch:ai-daily-brief:everything-you-need-to-know-about-ai-tokens:2026-08-02",
+      "title": "Everything You Need to Know About AI Tokens (Operator's Cut, with Nufar Gaspar)",
+      "published": "2026-08-02",
+      "source": "websearch-fallback",
+      "actionable": true,
+      "reason": "Podcast hosts (itunes.apple.com, feeds.megaphone.fm, podscan.fm, pca.st, aidailybrief.ai, podcasts.apple.com) all still 403 at the proxy, so this is a search-coverage extraction, not a transcript. Corroborated consistently across independent WebSearch queries (same phrasing recurred: 'cost per successful task', 'tokens that spin', 'choose the right models', 'protect the experimentation that creates real value', 'four eras of token consumption', 'Claudenomics and $500M bills'), which is a strong signal it's real show-notes text and not a hallucinated summary. Extracted 2 tactics: cost-per-successful-task accounting, and capping unproductive agentic retries ('tokens that spin'). Did not extract 'choose the right model' or 'protect experimentation' as standalone tactics — the material available on those was too thin to make concrete without inventing detail. A distinct 'August 3' episode also turned up in search, but two independent WebSearch queries gave contradictory content for it (one described a revenue/stock-drawdown recap, the other described an Astra-model/Deepseek/Amazon news recap) — unreliable enough that no ledger entry was recorded for it rather than guess. Direct episode URL unconfirmed; only the show's main page was reachable-ish in search results."
+    },
     {
       "guid": "websearch:ai-daily-brief:6-questions-every-enterprise-has-to-answer-about-ai:2026-07-30",
       "title": "6 Questions Every Enterprise Has to Answer About AI",
