@@ -1,7 +1,24 @@
 {
   "_comment": "Ledger of episodes the automation has already evaluated. Prevents re-sending the same episode and lets a run recover after a missed day. Newest first. Trim entries older than ~90 days.",
-  "last_run_utc": "2026-08-04T23:13:24Z",
+  "last_run_utc": "2026-08-05T23:14:10Z",
   "episodes": [
+    {
+      "guid": "websearch:ai-daily-brief:what-happens-when-ai-breakthroughs-outrun-human-understanding:2026-08-03",
+      "title": "What Happens When AI Breakthroughs Outrun Human Understanding (OpenAI's unreleased Astra model)",
+      "published": "2026-08-03",
+      "source": "websearch-fallback",
+      "actionable": false,
+      "reason": "Podcast hosts still 403 at the proxy. WebSearch consistently surfaces the same content (Astra reportedly solving ~10 decade-stalled math problems overnight for ~$200 each, nobody able to verify; DeepSeek's 3-cent model, Amazon's $50B OpenAI investment, agents 'breaching containment') but attributes it inconsistently to both Aug 3 and Aug 4 across separate queries -- date is uncertain, content is not. Pure capability/verification-epistemics news with no extractable listener technique; skip_signal (research news, no listener action)."
+    },
+    {
+      "guid": "websearch:ai-daily-brief:why-ai-washing-wont-work-much-longer:2026-08-04",
+      "title": "Why AI Washing Won't Work Much Longer",
+      "published": "2026-08-04",
+      "source": "websearch-fallback",
+      "actionable": false,
+      "reason": "Same proxy block as above. WebSearch summary: enterprise AI conversation shifting from 'if' to 'how', six questions on token budgets/workforce enablement/business-model change/organizational redesign. This closely echoes the already-skipped 2026-07-30 '6 Questions Every Enterprise' episode's fragments -- either NLW returned to the theme or search results are conflating the two episodes; either way no concrete, extractable technique reached via search (skip_signal: enterprise/organizational commentary, no listener action). Also searched for a possible Aug 5 episode; nothing indexed yet as of this run.",
+      "note": "A widely-corroborated 'give Claude judgement, not rules' tactic from Anthropic's own Claude 5 context-engineering guidance (also covered by an NLW episode on Claude Opus 5) surfaced repeatedly in search, but no query could pin a specific NLW episode title/date for it within this run's window -- estimates ranged from '1 day ago' to '1-3 weeks ago' (i.e. possibly ~2026-07-25, before this ledger's earliest recorded entry). Not recorded as a ledger entry to avoid fabricating an episode identity; worth a manual check of the archive next run to confirm which dated episode (if any) it belongs to."
+    },
     {
       "guid": "websearch:ai-daily-brief:everything-you-need-to-know-about-ai-tokens:2026-08-02",
       "title": "Everything You Need to Know About AI Tokens (Operator's Cut, with Nufar Gaspar)",
