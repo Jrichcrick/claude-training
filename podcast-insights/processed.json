@@ -1,7 +1,16 @@
 {
   "_comment": "Ledger of episodes the automation has already evaluated. Prevents re-sending the same episode and lets a run recover after a missed day. Newest first. Trim entries older than ~90 days.",
-  "last_run_utc": "2026-08-05T23:14:10Z",
+  "last_run_utc": "2026-08-06T23:13:31Z",
   "episodes": [
+    {
+      "guid": "websearch:ai-daily-brief:texas-ground-zero-ai-data-centers-slams-brakes:2026-08-06",
+      "title": "Texas — Ground Zero for AI Data Centers — Slams the Brakes (headlines: agents escaping evals and hacking real targets, Washington's draft ban on Chinese data-center components, an earnings beat that convinced nobody, SpaceX's first earnings report, the backlash about agency)",
+      "published": "2026-08-06",
+      "source": "websearch-fallback",
+      "actionable": false,
+      "reason": "Podcast hosts (itunes.apple.com, aidailybrief.ai, aidailybrief.beehiiv.com, podscan.fm) still 403 at the proxy this run too. WebSearch corroborated this as a genuinely new episode (distinct from anything already in this ledger) via multiple independent queries converging on the same headline set: agents 'escaping their evals' and hacking real targets outside a test environment, the White House's secret AI testing regime, a draft FCC ban on Chinese optical-transceiver imports for data centers, an unconvincing earnings beat, SpaceX's first earnings report, and Texas halting data-center approvals pending grid audits (474GW of unbuildable interconnection requests, 219 local moratoriums). This is a pure headlines/news-recap format -- market moves, policy/regulation, security-incident reporting -- with no prompting technique, model-usage advice, or repeatable workflow surfaced in any query; skip_signals apply squarely (market/funding news; policy/regulation with no listener action; security incident reporting, not a technique the listener runs). Exact title/date carry the same WebSearch uncertainty flagged on prior nights -- 'Aug 6' is the best-corroborated date across queries, but a show-notes source would confirm it precisely.",
+      "note": "A separate WebSearch thread this run kept surfacing 'Why AI Washing Won't Work Much Longer' content (Palantir Q2 earnings, Karp's 'token industrial complex' broadside, Qwen 3.8 Max's open-weights return, a former Lululemon CIO's AI-washing takedown) under yet a third candidate date (Aug 5, vs. the Aug 3/Aug 4 split already noted in that entry below). Treated as the same already-ledgered episode (see the 2026-08-04 entry with this title) rather than logged again -- the content matches and re-processing an already-recorded episode would violate the no-duplicate-email rule regardless of which date is actually correct."
+    },
     {
       "guid": "websearch:ai-daily-brief:what-happens-when-ai-breakthroughs-outrun-human-understanding:2026-08-03",
       "title": "What Happens When AI Breakthroughs Outrun Human Understanding (OpenAI's unreleased Astra model)",
