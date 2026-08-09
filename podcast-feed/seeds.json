@@ -6,6 +6,13 @@
     "aliases": ["Claire Hughes Johnson", "Claire Hughes-Johnson"]
   },
 
+  "_exclude_comment": "Substring-matched against the show name. These are book-summary and review shows: they put the author's name in the episode title, so every episode about Scaling People looks like an appearance even though she is never on them.",
+  "exclude_shows": [
+    "9Natree",
+    "Read to Lead",
+    "Libros para Emprendedores"
+  ],
+
   "search_terms": [
     "Claire Hughes Johnson",
     "Claire Hughes Johnson Stripe",

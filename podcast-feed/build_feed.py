@@ -111,8 +111,20 @@ GUEST_CUES = (
     "is the", "shares", "explains", "discusses", "tells",
 )
 
+# Wording that means the episode is advertising an appearance rather than
+# being one ("check back next week for our conversation with ...").
+PROMO_CUES = (
+    "check back", "coming soon", "next week", "next episode", "tune in",
+    "subscribe to hear", "stay tuned", "upcoming",
+)
+
 # The window is a rough proxy, so require a reasonably tight neighbourhood.
 CUE_WINDOW = 140
+
+# Guests get introduced up front. A name buried deep in a long description is
+# almost always a reading recommendation or a "related episodes" footer, which
+# is how Elad Gil's and Frances Frei's episodes were being miscredited to her.
+DESCRIPTION_HEAD = 600
 
 
 def find_name_hits(aliases: list[str], text: str) -> list[int]:
@@ -124,6 +136,14 @@ def find_name_hits(aliases: list[str], text: str) -> list[int]:
             hits.append(idx)
             start = idx + len(needle)
     return hits
+
+
+def is_excluded_show(show: str, excluded: list[str]) -> bool:
+    """Book-summary and review shows put the author's name in the episode
+    title, which trips the title rule on every episode about her book even
+    though she is never on them."""
+    name = normalize(show)
+    return any(normalize(x) in name for x in excluded)
 
 
 def appearance_evidence(
@@ -151,7 +171,11 @@ def appearance_evidence(
     # In the body, only count it when the surrounding words describe a guest.
     body = normalize(strip_html(description))
     for idx in find_name_hits(aliases, body):
+        if idx > DESCRIPTION_HEAD:
+            continue
         window = body[max(0, idx - CUE_WINDOW): idx + CUE_WINDOW]
+        if any(cue in window for cue in PROMO_CUES):
+            continue  # trailer for a future episode, not this one
         if any(cue in window for cue in GUEST_CUES):
             return "description-cue"
 
@@ -193,7 +217,7 @@ def episode_key(show: str, title: str) -> str:
 # discovery: iTunes Search API
 # --------------------------------------------------------------------------
 
-def search_itunes(term: str, aliases: list[str]) -> list[dict]:
+def search_itunes(term: str, aliases: list[str], excluded_shows: list[str]) -> list[dict]:
     params = urllib.parse.urlencode(
         {"term": term, "media": "podcast", "entity": "podcastEpisode", "limit": 200}
     )
@@ -209,6 +233,8 @@ def search_itunes(term: str, aliases: list[str]) -> list[dict]:
         title = r.get("trackName")
         show = r.get("collectionName")
         if not title or not show:
+            continue
+        if is_excluded_show(show, excluded_shows):
             continue
         # The search index matches loosely, so confirm she is actually on it.
         evidence = appearance_evidence(
@@ -240,7 +266,7 @@ def search_itunes(term: str, aliases: list[str]) -> list[dict]:
 # discovery: direct RSS scan
 # --------------------------------------------------------------------------
 
-def scan_feed(show: str, url: str, aliases: list[str]) -> list[dict]:
+def scan_feed(show: str, url: str, aliases: list[str], excluded_shows: list[str]) -> list[dict]:
     try:
         root = ET.fromstring(fetch(url))
     except (urllib.error.URLError, ET.ParseError, TimeoutError) as exc:
@@ -250,6 +276,9 @@ def scan_feed(show: str, url: str, aliases: list[str]) -> list[dict]:
     channel = root.find("channel")
     if channel is None:
         log(f"  ! {show}: no <channel> element")
+        return []
+
+    if is_excluded_show(show, excluded_shows):
         return []
 
     channel_art = ""
@@ -384,6 +413,7 @@ def render(store: dict) -> str:
 def main() -> int:
     seeds = json.loads(SEEDS_PATH.read_text())
     aliases = seeds["person"]["aliases"]
+    excluded = seeds.get("exclude_shows", [])
     store = json.loads(STORE_PATH.read_text()) if STORE_PATH.exists() else {}
     log(f"Loaded {len(store)} previously known episode(s).")
 
@@ -391,11 +421,11 @@ def main() -> int:
 
     log("Searching the iTunes episode index...")
     for term in seeds.get("search_terms", []):
-        discovered += search_itunes(term, aliases)
+        discovered += search_itunes(term, aliases, excluded)
 
     log("Scanning watched show feeds...")
     for feed in seeds.get("watch_feeds", []):
-        discovered += scan_feed(feed["show"], feed["url"], aliases)
+        discovered += scan_feed(feed["show"], feed["url"], aliases, excluded)
 
     if not discovered and not store:
         log("ERROR: no episodes found and no prior store -- refusing to write an empty feed.")
