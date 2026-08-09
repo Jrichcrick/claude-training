@@ -1,0 +1,28 @@
+name: Inspect a podcast feed
+
+# Diagnostic helper. Runs anywhere with open outbound network access, which is
+# the point: it reports what media a feed actually carries so you can tell a
+# real video feed from a directory listing that merely claims one.
+
+on:
+  workflow_dispatch:
+    inputs:
+      feeds:
+        description: "Space-separated feed URLs to inspect"
+        required: false
+        default: "https://anchor.fm/s/1035b1568/podcast/rss"
+  push:
+    paths:
+      - "podcast-feed/inspect_feed.py"
+      - ".github/workflows/inspect-feed.yml"
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Inspect
+        run: python podcast-feed/inspect_feed.py ${{ inputs.feeds }}
