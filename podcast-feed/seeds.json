@@ -1,0 +1,49 @@
+{
+  "_comment": "Hand-curated inputs for the Claire Hughes Johnson feed. 'watch_feeds' are scanned item-by-item every run, which catches episodes the iTunes episode index misses. 'search_terms' drive broad discovery of shows she has never been on before. Add to either list freely.",
+
+  "person": {
+    "name": "Claire Hughes Johnson",
+    "aliases": ["Claire Hughes Johnson", "Claire Hughes-Johnson"]
+  },
+
+  "search_terms": [
+    "Claire Hughes Johnson",
+    "Claire Hughes Johnson Stripe",
+    "Claire Hughes Johnson Scaling People"
+  ],
+
+  "watch_feeds": [
+    {
+      "show": "The Tim Ferriss Show",
+      "url": "https://rss.art19.com/tim-ferriss-show"
+    },
+    {
+      "show": "In Depth (First Round)",
+      "url": "https://feeds.simplecast.com/dgWkJ6ai"
+    },
+    {
+      "show": "Boss Class (The Economist)",
+      "url": "https://feeds.acast.com/public/shows/boss-class"
+    },
+    {
+      "show": "The Prof G Pod with Scott Galloway",
+      "url": "https://feeds.megaphone.fm/propgpod"
+    },
+    {
+      "show": "Permanent Podcast",
+      "url": "https://feeds.simplecast.com/kL1RerdX"
+    },
+    {
+      "show": "Newcomer Podcast",
+      "url": "https://anchor.fm/s/6a3a1c4c/podcast/rss"
+    },
+    {
+      "show": "Lenny's Podcast",
+      "url": "https://api.substack.com/feed/podcast/10845.rss"
+    },
+    {
+      "show": "Invest Like the Best",
+      "url": "https://feeds.megaphone.fm/investlikethebest"
+    }
+  ]
+}
