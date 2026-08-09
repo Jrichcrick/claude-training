@@ -25,10 +25,26 @@ Two passes run on every build, and their results are merged:
 | iTunes Search API episode search | Finding her on shows she has never been on before | Incomplete index, lags a few days |
 | Direct scan of `watch_feeds` in `seeds.json` | Immediate and authoritative for shows she recurs on | Only sees shows already on the list |
 
-Every hit must contain her full name in the title or description, so another
-Claire never lands in the feed. Anything found is written to
+### Appearance vs. mention
+
+Matching on her name alone does not work. `Scaling People` gets recommended
+constantly, so a name-only filter fills the feed with book-roundup episodes she
+has nothing to do with. An episode is only accepted on one of three signals,
+recorded as `evidence` on each stored entry:
+
+| Evidence | Meaning |
+| --- | --- |
+| `person-tag` | A `<podcast:person>` credit names her outright |
+| `title` | Her name is in the episode title |
+| `description-cue` | Her name appears near guest wording — "joins", "sits down with", "speaks with" |
+
+A description that names her with no such wording nearby is treated as a
+citation, not an appearance, and skipped. Anything accepted is written to
 `known_episodes.json` and never removed, so an episode that later drops out of
 a search index stays subscribed.
+
+If a real appearance ever gets filtered out, add its show to `watch_feeds` — or
+widen `GUEST_CUES` in `build_feed.py`.
 
 ## Adding a show to watch
 

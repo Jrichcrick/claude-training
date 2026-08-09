@@ -60,6 +60,7 @@ TIMEOUT = 30
 
 ITUNES_NS = "http://www.itunes.com/dtds/podcast-1.0.dtd"
 ATOM_NS = "http://www.w3.org/2005/Atom"
+PODCAST_NS = "https://podcastindex.org/namespace/1.0"
 
 
 # --------------------------------------------------------------------------
@@ -99,11 +100,62 @@ def fetch(url: str) -> bytes:
         return resp.read()
 
 
-def mentions_person(aliases: list[str], *fields: str | None) -> bool:
-    """True when any alias appears in any field. Requires the full name so that
-    a passing mention of some other Claire never lands in the feed."""
-    haystack = " ".join(normalize(strip_html(f)) for f in fields if f)
-    return any(normalize(alias) in haystack for alias in aliases)
+# Words that indicate the named person is *on* the episode, as opposed to
+# being cited in it. Checked in a window around the name.
+GUEST_CUES = (
+    "joins", "joined", "join us", "my guest", "our guest", "guest", "guests",
+    "sits down with", "sat down with", "in conversation with", "conversation with",
+    "talks to", "talks with", "speaks to", "speaks with", "spoke with", "spoke to",
+    "interview with", "interviews", "interviewed", "welcome", "welcomes",
+    "featuring", "features", "chats with", "returns to", "back on the show",
+    "is the", "shares", "explains", "discusses", "tells",
+)
+
+# The window is a rough proxy, so require a reasonably tight neighbourhood.
+CUE_WINDOW = 140
+
+
+def find_name_hits(aliases: list[str], text: str) -> list[int]:
+    hits = []
+    for alias in aliases:
+        needle = normalize(alias)
+        start = 0
+        while (idx := text.find(needle, start)) != -1:
+            hits.append(idx)
+            start = idx + len(needle)
+    return hits
+
+
+def appearance_evidence(
+    aliases: list[str],
+    title: str | None,
+    description: str | None,
+    people: list[str] | None = None,
+) -> str | None:
+    """Decide whether the person is actually *on* this episode.
+
+    A bare name match is not enough. Podcast descriptions are full of book
+    recommendations and 'as discussed by' asides, and treating those as
+    appearances fills the feed with episodes she has nothing to do with.
+    Returns the reason it was accepted, or None to reject.
+    """
+    # A <podcast:person> tag is an explicit, machine-readable credit.
+    for person in people or []:
+        if any(normalize(a) == normalize(person) for a in aliases):
+            return "person-tag"
+
+    # Her name in the episode title is a near-certain guest credit.
+    if find_name_hits(aliases, normalize(strip_html(title))):
+        return "title"
+
+    # In the body, only count it when the surrounding words describe a guest.
+    body = normalize(strip_html(description))
+    for idx in find_name_hits(aliases, body):
+        window = body[max(0, idx - CUE_WINDOW): idx + CUE_WINDOW]
+        if any(cue in window for cue in GUEST_CUES):
+            return "description-cue"
+
+    return None
 
 
 def parse_date(value: str | None) -> datetime | None:
@@ -125,9 +177,16 @@ def parse_date(value: str | None) -> datetime | None:
 
 
 def episode_key(show: str, title: str) -> str:
-    """Stable identity for an episode across both discovery paths, so the same
-    episode found via iTunes and via RSS scanning collapses into one entry."""
-    return f"{normalize(show)}|{re.sub(r'[^a-z0-9]+', '', normalize(title))}"
+    """Stable identity for an episode across both discovery paths.
+
+    Keyed on the title alone, not show+title: the same episode arrives with
+    different show labels depending on the source (iTunes reports "Boss Class
+    from The Economist", our seed list calls it "Boss Class (The Economist)"),
+    and including the show name lets that one episode into the feed twice.
+    Short titles keep the show name because "Episode 20" is not unique.
+    """
+    slug = re.sub(r"[^a-z0-9]+", "", normalize(title))
+    return slug if len(slug) >= 20 else f"{normalize(show)}|{slug}"
 
 
 # --------------------------------------------------------------------------
@@ -151,13 +210,17 @@ def search_itunes(term: str, aliases: list[str]) -> list[dict]:
         show = r.get("collectionName")
         if not title or not show:
             continue
-        # The search index matches loosely, so confirm she is actually in it.
-        if not mentions_person(aliases, title, r.get("description"), r.get("shortDescription")):
+        # The search index matches loosely, so confirm she is actually on it.
+        evidence = appearance_evidence(
+            aliases, title, r.get("description") or r.get("shortDescription")
+        )
+        if not evidence:
             continue
         found.append(
             {
                 "show": clean_title(show),
                 "title": clean_title(title),
+                "evidence": evidence,
                 "description": strip_html(r.get("description") or r.get("shortDescription")),
                 "published": (parse_date(r.get("releaseDate")) or datetime.now(timezone.utc)).isoformat(),
                 "audio_url": r.get("episodeUrl") or "",
@@ -202,7 +265,15 @@ def scan_feed(show: str, url: str, aliases: list[str]) -> list[dict]:
         summary = item.findtext("description") or ""
         subtitle = item.findtext(f"{{{ITUNES_NS}}}subtitle") or ""
         itunes_summary = item.findtext(f"{{{ITUNES_NS}}}summary") or ""
-        if not mentions_person(aliases, title, summary, subtitle, itunes_summary):
+        people = [
+            (el.text or "").strip()
+            for el in item.findall(f"{{{PODCAST_NS}}}person")
+            if (el.get("role") or "guest").lower() in ("guest", "host", "cohost")
+        ]
+        evidence = appearance_evidence(
+            aliases, title, " ".join([summary, itunes_summary, subtitle]), people
+        )
+        if not evidence:
             continue
 
         enclosure = item.find("enclosure")
@@ -214,6 +285,7 @@ def scan_feed(show: str, url: str, aliases: list[str]) -> list[dict]:
             {
                 "show": clean_title(show),
                 "title": clean_title(title),
+                "evidence": evidence,
                 "description": strip_html(summary or itunes_summary or subtitle),
                 "published": (parse_date(item.findtext("pubDate")) or datetime.now(timezone.utc)).isoformat(),
                 "audio_url": audio_url,
