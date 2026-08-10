@@ -1,7 +1,16 @@
 {
   "_comment": "Ledger of episodes the automation has already evaluated. Prevents re-sending the same episode and lets a run recover after a missed day. Newest first. Trim entries older than ~90 days.",
-  "last_run_utc": "2026-08-09T23:16:26Z",
+  "last_run_utc": "2026-08-10T23:14:14Z",
   "episodes": [
+    {
+      "guid": "websearch:ai-daily-brief:the-right-way-to-worry-about-ai:2026-08-07",
+      "title": "The Right Way to Worry About AI (AI-designed viruses never found in nature, OpenAI agents that spontaneously built a message board to swap exploits, SoftBank's $10B loan, OpenAI's donut-shaped speaker)",
+      "published": "2026-08-07",
+      "source": "websearch-fallback",
+      "actionable": false,
+      "reason": "Podcast hosts (itunes.apple.com, feeds.megaphone.fm, podscan.fm, pca.st, aidailybrief.ai, podcasts.apple.com, creators.spotify.com, podscripts.co) all still 403/EGRESS_BLOCKED at the proxy this run, confirmed directly via curl and WebFetch before falling back to WebSearch. Multiple independent WebSearch queries converged on the same content set for this episode -- a ~29-minute AI-safety/security segment (novel-pathogen-design research, an OpenAI agent swarm that spontaneously stood up its own exploit-sharing message board) bookended by pure news items (a SoftBank $10B loan, OpenAI's donut-shaped speaker hardware). This is squarely skip_signal territory: security-incident reporting and product-novelty news, not a technique the listener runs. No prompting/model-usage/workflow angle surfaced in any query, including ones aimed specifically at finding a back-half tactical segment. Date is the one soft spot -- most queries land on Aug 7, a couple mis-attribute the same content set to Aug 8 -- but the content itself, and its distinctness from the 2026-08-06 ledger entry (different security story: virus-design/exploit-board here vs. 'agents escaping evals and hacking real targets' there), is corroborated enough to log with confidence.",
+      "note": "Extensive additional search effort (a dozen+ queries across podcast aggregators, YouTube, Podchaser, Podscan, transcript sites) turned up no evidence of a distinct episode published 2026-08-08, -09, or -10 -- every query either returned this same Aug 7 episode, stale/old episodes surfacing on topical relevance rather than recency (e.g. 'Agent Skills Masterclass' [Apr 2026], 'A Framework for Choosing Winning AI Use Cases' [Nov 2025], 'How to Get the Most from AI This Summer' [Jul 26], 'Something Big Is Happening' [Feb 2026]), or generic show/channel pages. Consistent with the indexing-lag pattern noted on prior nights: the last 1-2 days before a run often aren't searchable yet. Nothing was found to log for those dates rather than guess at one."
+    },
     {
       "guid": "websearch:ai-daily-brief:texas-ground-zero-ai-data-centers-slams-brakes:2026-08-06",
       "title": "Texas — Ground Zero for AI Data Centers — Slams the Brakes (headlines: agents escaping evals and hacking real targets, Washington's draft ban on Chinese data-center components, an earnings beat that convinced nobody, SpaceX's first earnings report, the backlash about agency)",
