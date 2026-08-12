@@ -1,7 +1,24 @@
 {
   "_comment": "Ledger of episodes the automation has already evaluated. Prevents re-sending the same episode and lets a run recover after a missed day. Newest first. Trim entries older than ~90 days.",
-  "last_run_utc": "2026-08-10T23:14:14Z",
+  "last_run_utc": "2026-08-11T23:14:07Z",
   "episodes": [
+    {
+      "guid": "websearch:ai-daily-brief:what-the-heck-is-graph-engineering:2026-08-10",
+      "title": "What the Heck is Graph Engineering?",
+      "published": "2026-08-10",
+      "source": "websearch-fallback",
+      "actionable": true,
+      "reason": "Podcast hosts (itunes.apple.com, feeds.megaphone.fm, aidailybrief.ai, aidailybrief.beehiiv.com, podchaser.com, theaioperator.io) all still 403/EGRESS_BLOCKED at the proxy this run, confirmed via curl and WebFetch before falling back to WebSearch. Strongly corroborated across independent queries converging on identical phrasing from the show's own description/notes: a primer on 'graph engineering,' framed as the newest rung on a ladder that runs prompt -> context -> harness -> loop -> graph, where graph engineering is the layer that controls the agentic organization itself -- which agents exist, what each owns, how work moves between them, and what happens on failure. This is squarely actionable_signal territory (named framework / repeatable process a listener could run tomorrow; agent workflow pattern), not a news item. Extracted 2 tactics: using the ladder as a diagnostic when an AI workflow misbehaves, and writing an explicit ownership/handoff/failure-behavior graph before splitting work across agents. Direct episode URL (aidailybrief.ai/e/2026-08-10) located via search but not fetchable -- proxy-blocked -- so this remains a search-coverage extraction, not a transcript read.",
+      "note": "Also found via search: an August 8, 2026 episode ('41 Stats That Tell the Story of AI Right Now,' a Sunday long-read on AI adoption/ROI stats) and no distinct August 9 or 11 episode indexed yet as of this run -- consistent with the indexing-lag pattern noted on prior nights, where the day or two right before a run often isn't searchable yet."
+    },
+    {
+      "guid": "websearch:ai-daily-brief:41-stats-that-tell-the-story-of-ai-right-now:2026-08-08",
+      "title": "41 Stats That Tell the Story of AI Right Now",
+      "published": "2026-08-08",
+      "source": "websearch-fallback",
+      "actionable": false,
+      "reason": "Sunday long-read recap of ~41 AI adoption/ROI statistics (e.g. roughly half of US workers now use AI, only a small share of leaders can prove ROI, growing gap between AI vanguard and everyone else). Pure adoption-stats journalism with no extractable technique or workflow -- skip_signal territory (news/stats recap, no listener action)."
+    },
     {
       "guid": "websearch:ai-daily-brief:the-right-way-to-worry-about-ai:2026-08-07",
       "title": "The Right Way to Worry About AI (AI-designed viruses never found in nature, OpenAI agents that spontaneously built a message board to swap exploits, SoftBank's $10B loan, OpenAI's donut-shaped speaker)",

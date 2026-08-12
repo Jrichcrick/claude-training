@@ -21,6 +21,95 @@ extracted and added here.
 
 ---
 
+## 2026-08-10 — What the Heck is Graph Engineering?
+
+**Source:** search coverage (podcast hosts still blocked at the proxy — see README)
+**Link:** https://aidailybrief.ai/e/2026-08-10
+
+### 1. Use the prompt → context → harness → loop → graph ladder to diagnose a misbehaving AI workflow
+
+NLW's framing: every stage of working with AI has minted its own "engineering" discipline — prompts
+control the instructions, context controls what the model sees, the harness controls the
+environment it acts in, loops control iteration, and graph engineering is the newest rung, which
+controls the agentic organization itself. When something isn't working, the ladder is a checklist
+for where the actual problem lives, rather than a reason to keep rewriting the prompt.
+
+**Why it works:** a workflow that's failing at the context or harness layer looks identical, from
+the outside, to one that's failing because of bad prompt wording — so the default fix (edit the
+prompt again) often lands on the wrong layer. Naming the layers turns a vague "it's not working"
+into a specific question: which layer is actually broken?
+
+**For Claude web/desktop:**
+
+```
+I'm troubleshooting an AI workflow that isn't behaving the way I want, and I don't want to just
+keep rewriting the prompt and hoping something changes.
+
+Here's the situation: [describe it — e.g. "a Claude Code agent that's supposed to update an
+Opportunity's next-step notes after a customer call, but it keeps skipping the update or writing
+it to the wrong field"].
+
+Walk me through it layer by layer, and for each one tell me whether it's a likely culprit and what
+a fix at that layer would concretely look like:
+
+1. Prompt — is the instruction itself ambiguous, or missing a case it needs to handle?
+2. Context — is the model missing information it needs to see (the right fields, the right
+   history, a concrete example of "done right")?
+3. Harness — is the surrounding tool or environment giving it the wrong permissions, inputs, or
+   feedback about whether it succeeded?
+4. Loop — does this need iteration/self-checking that it isn't getting, or is it iterating when it
+   should just do the task once?
+5. Graph — is this actually too much for one agent, and does it need to be split into multiple
+   agents with an explicit handoff?
+
+Tell me which layer is most likely the real problem — not just where a fix is easiest to try — and
+give me the smallest concrete change to test first.
+```
+
+**JR's angle:** this is a sharper response than "let's tweak the prompt" when a CSM says their
+Claude Code setup "isn't doing what I told it to." It gives him a fast triage question to ask
+before touching anything, and it's a genuinely useful mental model to hand to a customer who's
+about to hit the same wall themselves.
+
+### 2. Before splitting work across agents, write the graph in three lines: owners, handoffs, failure behavior
+
+NLW's description of graph engineering itself: it's the layer that decides which agents exist,
+what each one owns, how work moves between them, and — the part that's easiest to skip — what
+happens when a step fails. The claim is that this should be designed explicitly, on purpose,
+rather than emerging by accident as a workflow grows past one agent.
+
+**Why it works:** an ad hoc chain of agents tends to leave failure handling implicit — nobody
+decided what happens if step two produces something step three can't use, so it just breaks
+downstream in a confusing way. Writing the three things down before building forces that decision
+to happen on purpose.
+
+**For Claude Code:**
+
+```
+## Agent graph for [workflow name]
+
+Before adding a second agent to this workflow, write out the graph in three lines:
+
+- **Owners** — for each agent, one line naming exactly what it owns and nothing else
+  (e.g. "research-agent owns pulling account history; drafting-agent owns writing the outreach
+  email; drafting-agent does not touch account data directly").
+- **Handoffs** — what one agent passes to the next, stated as actual fields/format, not "the
+  output" (e.g. "research-agent hands drafting-agent a bullet list of the last 3 account touches,
+  not a paragraph summary").
+- **Failure behavior** — for each agent, what happens if it fails or produces something the next
+  agent can't use: retry once, escalate to a human, or stop the whole graph. Do not leave this
+  implicit.
+
+Do not touch prompts for the individual agents until these three lines are written.
+```
+
+**JR's angle:** directly useful for any multi-step Claude Code demo he builds for CSMs/AEs — e.g.
+a research-then-draft pipeline for prepping a renewal-risk account. Having the three-line graph on
+a slide before showing the code answers "why would I need more than one agent here?" in a way that
+clicks faster than watching the agents run.
+
+---
+
 ## 2026-08-02 — Everything You Need to Know About AI Tokens (Operator's Cut, with Nufar Gaspar)
 
 **Source:** search coverage (podcast hosts still blocked at the proxy — see README)
