@@ -21,6 +21,91 @@ extracted and added here.
 
 ---
 
+## 2026-08-12 — Grok Bot Finally Makes AI Agents Easy
+
+**Source:** search coverage (podcast hosts still blocked at the proxy — see README)
+**Link:** https://aidailybrief.ai/e/2026-08-12
+
+### 1. Teach an agent a workflow by demonstration, not by upfront spec — then turn it into a reusable command
+
+NLW's framing: the computer-use agents in this episode learn a workflow the same way a new hire
+would — you do the task once while it watches, and it saves what it saw as an editable routine you
+refine with corrections, rather than you trying to write a complete procedure before it ever runs.
+
+**Why it works:** describing a task accurately in a prompt, up front, is harder than doing the task
+— you skip steps that feel obvious to you but aren't written down anywhere. Demonstrating it once
+captures the real order of operations; corrections after the fact are cheap compared to getting the
+spec right on the first try.
+
+**For Claude Code:**
+
+```
+I want to turn a task I just walked you through into a reusable slash command.
+
+Here's what I did, step by step, as I did it:
+[narrate the task in the order you did it — e.g. "First I pulled the account's last few adoption
+touchpoints from my notes. Then I checked which Claude Code features they'd actually turned on
+versus what's included in their license. Then I drafted three lines: what's working, what's sitting
+unused, and one specific next step tied to an outcome they've said they care about."]
+
+Turn this into a slash command:
+1. Name it something short and specific to what it does.
+2. Write it as a step-by-step procedure I can run again on a different account — generalize the
+   specifics I gave you into "the account" / "the customer" language, not the literal names or
+   numbers I used.
+3. Call out anywhere I made a judgment call (what counted as "working," how I picked the one next
+   step) as an explicit decision point in the command, so future-me knows what to weigh, not just
+   what to type.
+4. Tell me the exact file it should live in and the command name I'd type to run it.
+```
+
+**JR's angle:** most CSMs stall out at "write a slash command from scratch" — it feels like a
+programming task. This reframes it as "just talk me through what you already do once," which is a
+much lower-friction pitch in a demo, and it's exactly how JR can turn his own recurring prep work
+(account health checks, enablement one-pagers) into commands instead of redoing them from memory
+each time.
+
+### 2. Calibrate an agent's escalation threshold through correction, not upfront rules
+
+NLW's description of how these agents earn trust over a few tasks: they pick up on writing style,
+edge cases, and — the part worth stealing — when to interrupt you versus just keep going, purely
+from being corrected after the fact rather than from a rule written in advance.
+
+**Why it works:** nobody can enumerate every case where an agent should stop and ask first; trying
+produces either a rule so long it's ignored or one so short it misses the case that mattered. Acting
+first and treating a correction as the new default is faster to converge and cheaper to maintain.
+
+**For Claude Code — a CLAUDE.md rule:**
+
+```markdown
+## Escalation calibration
+
+Don't try to guess my judgment-call threshold from a spec — you won't get it right on the first
+try, and neither would I trying to write it. Instead:
+
+- When you're unsure whether something needs my sign-off (sending anything customer-facing,
+  changing a number in a deliverable, picking between two reasonable approaches), default to
+  asking the first few times you hit that kind of situation.
+- When I correct you — "you didn't need to check with me on that" or "you should have asked before
+  doing that" — add a one-line rule below under "Escalation rules," describing the pattern, not the
+  one-off instance.
+- Once a pattern has a rule here, stop asking about it and just apply the rule.
+
+### Escalation rules
+(empty until the first correction — this section is meant to grow from what actually happens, not
+from guessing in advance)
+```
+
+**JR's angle:** "how do I trust it to just handle things" is the objection JR hears most from
+customers piloting Claude Code past the demo stage. This turns that into a concrete answer — trust
+isn't a perfect prompt, it's a couple of corrections — and gives him a CLAUDE.md block he can hand a
+customer directly instead of just describing the idea.
+
+*Related:* the "chief of staff plus specialist agents" structure this episode also describes is the
+same ownership/handoff idea as entry 2 below (2026-08-10) — recorded there, not duplicated here.
+
+---
+
 ## 2026-08-10 — What the Heck is Graph Engineering?
 
 **Source:** search coverage (podcast hosts still blocked at the proxy — see README)

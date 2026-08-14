@@ -1,7 +1,33 @@
 {
   "_comment": "Ledger of episodes the automation has already evaluated. Prevents re-sending the same episode and lets a run recover after a missed day. Newest first. Trim entries older than ~90 days.",
-  "last_run_utc": "2026-08-12T23:12:08Z",
+  "last_run_utc": "2026-08-13T23:22:59Z",
   "episodes": [
+    {
+      "guid": "websearch:ai-daily-brief:grok-bot-finally-makes-ai-agents-easy:2026-08-12",
+      "title": "Grok Bot Finally Makes AI Agents Easy",
+      "published": "2026-08-12",
+      "source": "websearch-fallback",
+      "actionable": true,
+      "reason": "Podcast hosts (itunes.apple.com, aidailybrief.ai, feeds.megaphone.fm, podscan.fm) all still 403/EGRESS_BLOCKED at the proxy this run, confirmed via curl -v (explicit 403 on CONNECT) and WebFetch before falling back to WebSearch. Episode analyzes xAI's Grok Bot launch (persistent cloud-VM computer-use agents, workflow-by-demonstration, multi-agent coordination) through NLW's usual 'why does this matter' lens rather than pure product news -- squarely actionable_signal territory (agent/workflow pattern, repeatable process a listener could try). Multiple independent WebSearch queries converged on identical phrasing ('watches the steps and saves the workflow as a routine you can iterate on with corrections'; 'pass work, assign ownership, and only pull you in for judgment calls'; 'pick up your voice, your edge cases, and know when to ping versus keep going'), a strong signal it's real show content and not a hallucinated summary. Extracted 2 tactics: teaching an agent a workflow by demonstration instead of upfront spec, and calibrating an agent's escalation threshold through correction rather than trying to enumerate edge cases in advance. Did not extract the 'chief of staff plus specialist agents' team-structure point as a third tactic -- it substantially restates the ownership/handoff framing already in the library's 2026-08-10 graph-engineering entry, so it's noted there instead of duplicated. Direct episode page (aidailybrief.ai/e/2026-08-12) located via search but not fetchable -- proxy-blocked -- so this remains a search-coverage extraction, not a transcript read.",
+      "note": "Two other candidate episodes surfaced this run: an August 11 episode ('AI Optimism Has a Trust Problem,' on Zuckerberg's optimist manifesto) and a weakly-corroborated August 9 item (OpenAI's NextSlide acquisition + an Astra security note) -- both logged separately below as not actionable. No August 13 episode is indexed yet as of this run, consistent with the indexing-lag pattern noted on prior nights."
+    },
+    {
+      "guid": "websearch:ai-daily-brief:ai-optimism-has-a-trust-problem:2026-08-11",
+      "title": "AI Optimism Has a Trust Problem",
+      "published": "2026-08-11",
+      "source": "websearch-fallback",
+      "actionable": false,
+      "reason": "Podcast hosts still 403 at the proxy this run. WebSearch corroborated the episode consistently across queries: an analysis of Mark Zuckerberg's ~6,500-word 'optimist manifesto,' Meta's $1B community fund and new open-weights model, framed around whether a distrusted messenger can sell AI optimism to a public skeptical of Silicon Valley. Pure messaging/trust/policy commentary with no extractable technique or workflow a listener could run -- skip_signal territory (policy/regulation-adjacent commentary, no listener action; company/personnel framing)."
+    },
+    {
+      "guid": "websearch:ai-daily-brief:openai-nextslide-acquisition-astra-security:2026-08-09",
+      "title": "OpenAI acquires presentation startup NextSlide; Astra model's cybersecurity threshold note (episode identity weakly corroborated)",
+      "published": "2026-08-09",
+      "source": "websearch-fallback",
+      "actionable": false,
+      "reason": "Podcast hosts still 403 at the proxy. WebSearch surfaced widely-covered August 9-10 tech news (OpenAI's acquisition of presentation startup NextSlide, disclosed via LinkedIn; a separate note that OpenAI slowed Astra's development after it crossed a cybersecurity capability threshold) but could not confirm with confidence that this specific content set is NLW's own AI Daily Brief episode rather than general AI-news coverage that day -- one source referencing 'AI Daily Brief' content for this date appears to be a different, similarly-named show. Logged with this caveat rather than silently dropped, per the pattern of recording soft-corroborated entries elsewhere in this ledger. Moot for actionability either way: acquisition/M&A and security-capability reporting are skip_signal territory (market/funding news; security-incident reporting, not a listener technique) regardless of which show it's from.",
+      "note": "Consistent with the indexing-lag pattern noted on prior nights -- prior runs found nothing indexed for 2026-08-09; this run's search surfaced only generic industry news for that date rather than a confirmed NLW episode page."
+    },
     {
       "guid": "websearch:ai-daily-brief:what-the-heck-is-graph-engineering:2026-08-10",
       "title": "What the Heck is Graph Engineering?",
