@@ -1,7 +1,16 @@
 {
   "_comment": "Ledger of episodes the automation has already evaluated. Prevents re-sending the same episode and lets a run recover after a missed day. Newest first. Trim entries older than ~90 days.",
-  "last_run_utc": "2026-08-13T23:22:59Z",
+  "last_run_utc": "2026-08-14T23:11:34Z",
   "episodes": [
+    {
+      "guid": "websearch:ai-daily-brief:grok-4-6-shows-how-fast-your-ai-options-are-expanding:2026-08-13",
+      "title": "Grok 4.6 Shows How Fast Your AI Options Are Expanding",
+      "published": "2026-08-13",
+      "source": "websearch-fallback",
+      "actionable": false,
+      "reason": "Podcast hosts (itunes.apple.com, aidailybrief.ai, feeds.megaphone.fm) still 403/EGRESS_BLOCKED at the proxy this run -- confirmed via curl -v and the agent-proxy status endpoint (explicit 'gateway answered 403 to CONNECT, policy denial' for all three), and separately via WebFetch on a YouTube link for this same episode (EGRESS_BLOCKED). Fell back to WebSearch, including targeted queries for a back-half tactical segment ('how to choose' framework, decision criteria) per the spec's guidance that NLW often puts technique material after the news read. Every query converged on the same content: Grok 4.6's Artificial Analysis Intelligence Index score (61, behind only Opus 5 and Fable 5), its per-token pricing ($2/$6 per 1M), and the broader theme that rising model competition gives users 'more genuinely strong options than ever.' This is squarely skip_signal territory -- a model's benchmark scores and price comparison, not a technique -- and no distinct 'how to actually choose between these' framework or workflow surfaced despite specifically searching for one. Multiple independent queries converged on identical phrasing ('objectively No. 1 when considering intelligence, speed & cost'), a reasonable signal this is real show content, but there's nothing here to extract.",
+      "note": "No 2026-08-14 episode indexed yet as of this run (multiple targeted queries), consistent with the indexing-lag pattern noted on prior nights -- the day of a run often isn't searchable until the next one."
+    },
     {
       "guid": "websearch:ai-daily-brief:grok-bot-finally-makes-ai-agents-easy:2026-08-12",
       "title": "Grok Bot Finally Makes AI Agents Easy",
