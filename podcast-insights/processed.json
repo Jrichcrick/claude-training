@@ -1,7 +1,16 @@
 {
   "_comment": "Ledger of episodes the automation has already evaluated. Prevents re-sending the same episode and lets a run recover after a missed day. Newest first. Trim entries older than ~90 days.",
-  "last_run_utc": "2026-08-14T23:11:34Z",
+  "last_run_utc": "2026-08-15T23:12:31Z",
   "episodes": [
+    {
+      "guid": "websearch:ai-daily-brief:regulation-china-ai-politics-episode-title-unconfirmed:2026-08-14",
+      "title": "AI Daily Brief episode tagged Regulation / AI / China / AI politics (exact title unconfirmed)",
+      "published": "2026-08-14",
+      "source": "websearch-fallback",
+      "actionable": false,
+      "reason": "Podcast hosts (itunes.apple.com, aidailybrief.ai, feeds.megaphone.fm, aidailybrief.beehiiv.com, podscripts.co) all still 403/EGRESS_BLOCKED at the proxy this run, confirmed via direct WebFetch attempts on each before falling back to WebSearch. A dozen+ independent queries this run kept re-surfacing the already-ledgered 2026-08-12 (GrokBot) and 2026-08-13 (Grok 4.6) episodes under conflicting date attributions (some sources place both on Aug 14) -- treated as the same already-ledgered episodes per the pattern noted on prior nights, not logged again. Separately, one query surfaced a distinct signal: an Aug 14 entry tagged 'Regulation, AI, China, AI politics' on the show's Beehiiv archive, and a generic techstartups.com news roundup for the same date (Big Tech AI capex nearing $1.5T, Apple/Alibaba China model, OpenAI/Anthropic price cuts against DeepSeek/Moonshot, chips/data-centers/energy framed as the new axis of competition) that may or may not be this show's own content. Neither the exact episode title nor a transcript/show-notes page was reachable to confirm which is right or to check for a back-half tactical segment (searched specifically for one: 'how to' / framework / prompting / workflow angles tied to Aug 14 turned up nothing tied to this show). On the content available, this is skip_signal territory either way -- policy/regulation/China-politics commentary and market/capex/pricing news, no listener technique surfaced by any query.",
+      "note": "No 2026-08-15 episode indexed yet as of this run (multiple targeted queries, including direct aidailybrief.ai/e/2026-08-15 and site: searches), consistent with the indexing-lag pattern noted on prior nights -- the day of a run often isn't searchable until the next one."
+    },
     {
       "guid": "websearch:ai-daily-brief:grok-4-6-shows-how-fast-your-ai-options-are-expanding:2026-08-13",
       "title": "Grok 4.6 Shows How Fast Your AI Options Are Expanding",
