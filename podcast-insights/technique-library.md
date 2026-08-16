@@ -21,6 +21,79 @@ extracted and added here.
 
 ---
 
+## 2026-08-14 — How to Decide What Work AI Should Do for You: The AI Deputization Audit
+
+**Source:** search coverage (podcast hosts still blocked at the proxy — see README)
+**Link:** https://aidailybrief.ai/e/2026-08-14
+
+### 1. Score recurring work on five axes, then sort it into hand-off / partner / keep — not gut feel
+
+NLW's framing: for any recurring task, score it 0-10 on five dimensions — **frequency** (how often
+it happens and how long it takes), **teachability** (could you show someone the whole thing in a
+ten-minute screen share?), **checkability** (how long does verifying the output take compared to
+doing the task yourself?), **stakes** (how bad is it if AI gets it wrong and nobody catches it?),
+and **how much it needs to be you** (is your specific judgment actually the thing that makes the
+output good?). Add it up: **deputize the 8-10s** — hand them to AI, spot-check for a while, then
+stop checking. **Defend the 0-3s** — those stay yours. **Duet on everything in the middle**, which
+is where NLW says most knowledge work actually lives.
+
+**Why it works:** "should I let AI do this?" is usually answered by instinct, and instinct is
+inconsistent — the same person will delegate a high-stakes task on a good day and hoard a trivial
+one on a bad day. A shared scoring rubric turns that gut call into something repeatable and
+arguable, which matters most exactly where the answer isn't obvious (the "duet" middle, not the
+easy extremes).
+
+**For Claude web/desktop:**
+
+```
+I want to run my recurring work through a delegation framework called the AI Deputization Audit,
+then apply it to a real list of tasks.
+
+The rubric — score each task 0-10 on five axes:
+1. Frequency: how often does it happen, and how long does it take each time?
+2. Teachability: could you show someone the entire task in a 10-minute screen share?
+3. Checkability: how long does verifying the output take, compared to just doing the task yourself?
+4. Stakes: how bad is it if AI gets this wrong and nobody catches it before it goes out?
+5. "Needs to be you": is your specific judgment the thing that actually makes the output good, or
+   is it a process anyone competent could execute?
+
+Scoring: average the five, or note if one axis (usually stakes) should override the others on its
+own. 8-10 = deputize (hand it off, spot-check for a couple weeks, then stop checking). 0-3 = defend
+(keep it, don't delegate). Everything else = duet (AI drafts or assists, you stay in the loop on
+every instance).
+
+Worked example so you know the level of detail I want back — a weekly "how's this account doing"
+update for a renewal-risk customer:
+- Frequency: 9 (weekly, ~45 min each time)
+- Teachability: 8 (pull usage data, check it against last week, flag what changed — easy to show)
+- Checkability: 7 (skimming for a wrong number or an over-claimed win takes 5 min, writing it takes 45)
+- Stakes: 5 (goes to an internal channel, not the customer directly — wrong once isn't a crisis, but
+  wrong repeatedly erodes trust in the update itself)
+- Needs to be you: 4 (the judgment about what's worth flagging is learnable from a few examples;
+  it doesn't require context only I have)
+→ Average ~6.6, stakes doesn't override → duet: draft it, I review before it posts.
+
+Now here's my actual list of recurring tasks: [paste your list — one line each is fine, doesn't
+need to be formatted]
+
+Score each one on the five axes, give me the bucket (deputize / duet / defend) and a one-line
+reason, and flag any where stakes alone should override the average.
+```
+
+**JR's angle:** this is a demo-ready framework, not just a personal productivity trick — when a CSM
+or AE is stuck at "I don't know what to actually hand to Claude Code," this gives them a rubric to
+run in the room instead of a vague pep talk. It also reframes the sell: Claude Code enablement isn't
+"automate your job away," it's "score your own recurring work and see where you're already
+over-defending things that would score an 8." Worth pairing with a live pass through 3-4 of a
+customer's own recurring tasks in a demo rather than talking about the framework in the abstract.
+
+**Ledger note:** this episode was misidentified in the 2026-08-15 run as unrelated regulation/China
+policy content (see `processed.json`, the now-superseded `regulation-china-ai-politics-*` entry for
+2026-08-14) — that was a bad WebSearch match, not a second episode. This entry corrects it; the
+regulation/China content, whatever its actual source, contained no extractable tactic either way.
+
+---
+
 ## 2026-08-12 — Grok Bot Finally Makes AI Agents Easy
 
 **Source:** search coverage (podcast hosts still blocked at the proxy — see README)
