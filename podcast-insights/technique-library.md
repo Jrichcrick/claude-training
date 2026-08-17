@@ -393,4 +393,11 @@ whichever the tactic actually is.
 When a tactic shows up in more than one episode, it gets noted here rather than duplicated above.
 Repetition across episodes is signal: it's what NLW keeps coming back to.
 
-_(nothing yet)_
+**Demonstration-based skill capture and the AI Deputization Audit are becoming NLW's core
+framework, not one-off segments.** The 2026-08-16 episode ("The New Problems AI Is Creating (And
+How People Are Solving Them)") returned to both: GrokBot's teach-a-task and ChatGPT's Computer
+History as the same "show it once, it becomes a reusable skill" idea as the 2026-08-12 entry, and
+"Deputize, don't automate — step one: inventory your recurring processes" as the on-ramp to the
+full five-axis rubric in the 2026-08-14 entry. Nothing new enough to extract on its own, but two
+recaps in three episodes is a sign these are the two frameworks NLW treats as load-bearing right
+now — worth leading with either one if a demo needs a single anchor framework.

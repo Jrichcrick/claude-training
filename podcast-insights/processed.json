@@ -1,6 +1,6 @@
 {
   "_comment": "Ledger of episodes the automation has already evaluated. Prevents re-sending the same episode and lets a run recover after a missed day. Newest first. Trim entries older than ~90 days.",
-  "last_run_utc": "2026-08-16T23:59:00Z",
+  "last_run_utc": "2026-08-17T23:13:07Z",
   "episodes": [
     {
       "guid": "websearch:ai-daily-brief:how-to-decide-what-work-ai-should-do-for-you-the-ai-deputization-audit:2026-08-14",
@@ -138,6 +138,15 @@
       "source": "websearch-fallback",
       "actionable": false,
       "reason": "Policy/regulation commentary — skip_signal, no listener action."
+    },
+    {
+      "guid": "websearch:ai-daily-brief:the-new-problems-ai-is-creating:2026-08-16",
+      "title": "The New Problems AI Is Creating (And How People Are Solving Them)",
+      "published": "2026-08-16",
+      "source": "websearch-fallback",
+      "actionable": false,
+      "reason": "Podcast hosts (itunes.apple.com, aidailybrief.ai, podscan.fm, pod.link, aidailybrief.beehiiv.com) all still EGRESS_BLOCKED at the proxy this run, confirmed via direct WebFetch before falling back to WebSearch. Multiple independent WebSearch queries converged on identical framing — 'AI is solving old problems while creating entirely new ones', covering AI slop, rising token costs, uneven productivity, workforce deskilling, and preserving human expertise — so this is confidently the real episode, not a hallucinated summary. But every concretely-extractable piece of it restates ground already in the library rather than adding a new technique: (1) the headline claim that 'GrokBot's teach-a-task and ChatGPT's Computer History mark the moment the AI bottleneck moved from capability to context' is the same demonstration-based skill-capture idea already recorded as tactic 1 of the 2026-08-12 Grok Bot entry (there sourced to GrokBot's launch directly); (2) the 'Deputize, don't automate' framing with 'step one: inventory your recurring processes' is the same AI Deputization Audit already recorded in full as the 2026-08-14 entry, just introduced with its first practical step instead of the full rubric. No independent WebSearch query surfaced a concrete mechanism for the AI-slop, token-cost, deskilling, or productivity threads beyond naming them as problems — nothing there clears 'ready-to-paste artifact' without inventing detail the episode doesn't supply. Not marking actionable since no new library entry came from it, per the do-not-pad-a-thin-episode rule; logged the recurrence itself in the library's Recurring themes section instead of duplicating either existing entry.",
+      "note": "Also checked for an August 15 (Saturday) and August 17 episode this run. No August 15 episode: the only August 15-dated hit is the Beehiiv newsletter's recap of the August 14 episode, published a day late, not a separate episode. No August 17 episode indexed yet as of this run (23:13 UTC) — consistent with the indexing-lag pattern noted on prior nights; will pick it up next run if it's out by then."
     }
   ]
 }
