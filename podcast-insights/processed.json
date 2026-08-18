@@ -1,7 +1,16 @@
 {
   "_comment": "Ledger of episodes the automation has already evaluated. Prevents re-sending the same episode and lets a run recover after a missed day. Newest first. Trim entries older than ~90 days.",
-  "last_run_utc": "2026-08-17T23:13:07Z",
+  "last_run_utc": "2026-08-18T23:09:46Z",
   "episodes": [
+    {
+      "guid": "websearch:ai-daily-brief:ai-companies-still-havent-delivered-on-their-biggest-promises:2026-08-17",
+      "title": "AI Companies Still Haven't Delivered on Their Biggest Promises",
+      "published": "2026-08-17",
+      "source": "websearch-fallback",
+      "actionable": false,
+      "reason": "Podcast hosts (itunes.apple.com, aidailybrief.ai) still EGRESS_BLOCKED at the proxy this run, confirmed via direct WebFetch before falling back to WebSearch. Multiple independent WebSearch queries converged on the same content and confirmed it as a real, distinct episode (not a search conflation with an already-ledgered one): Dario Amodei's August 15 public remarks (posted to X, covered by Semafor/TechCrunch/others as 'AI backlash is a crisis of trust') that AI firms 'haven't yet delivered on our big promises to benefit the world,' his endorsement of a FINRA-like central AI regulator, and his view that the way through is 'actually curing cancer' rather than better marketing -- framed by NLW as a rare public response sparking a larger industry debate. Headline segment also covers ZAI's GLM 5.3 release, Anthropic keeping a powerful new model internal, and $2T Anthropic IPO speculation. Squarely skip_signal territory: policy/regulation-adjacent trust-and-messaging commentary plus market/funding/product news, no repeatable technique a listener could run tomorrow. Specifically searched for a back-half tactical segment (framework, 'how to' angle, prompting/workflow material) per the spec's guidance that NLW often puts technique material after the news read -- none surfaced in any query; every result reinforced the same trust-crisis/regulation framing end to end. One search result briefly resurfaced the already-ledgered 2026-08-14 Deputization Audit and 2026-08-16 GrokBot/Computer History content when summarizing 'recent episodes' generally -- that is a search-summary artifact conflating this show's back catalog, not content of this Aug 17 episode itself, and is not treated as such.",
+      "note": "No 2026-08-18 episode indexed yet as of this run (23:09 UTC) -- consistent with the indexing-lag pattern noted on prior nights; will pick it up next run if it's out by then."
+    },
     {
       "guid": "websearch:ai-daily-brief:how-to-decide-what-work-ai-should-do-for-you-the-ai-deputization-audit:2026-08-14",
       "title": "How to Decide What Work AI Should Do for You: The AI Deputization Audit",
