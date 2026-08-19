@@ -1,0 +1,5 @@
+# Your personal channel list and download state stay local.
+feeds.toml
+state/
+out/
+__pycache__/

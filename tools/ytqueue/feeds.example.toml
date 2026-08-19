@@ -1,0 +1,19 @@
+# ytqueue - one [[channel]] block per thing you want in your queue.
+# Channel URLs, @handles, /channel/UC... ids and playlist URLs all work.
+
+[settings]
+output_dir = "~/Podcasts/YouTube"
+max_age_days = 14            # ignore anything published longer ago than this
+min_duration_minutes = 3     # drops Shorts
+max_duration_minutes = 180
+quality = "720p"             # 1080p | 720p | 480p | audio
+limit_per_channel = 5        # most recent N feed items considered per run
+
+[[channel]]
+name = "AI Explained"
+url = "https://www.youtube.com/@aiexplained-official"
+
+[[channel]]
+name = "Big Technology Podcast"
+url = "https://www.youtube.com/@BigTechnologyPodcast"
+max_age_days = 7             # per-channel overrides go here
