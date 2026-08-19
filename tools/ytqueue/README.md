@@ -34,7 +34,49 @@ python3 ytqueue.py --reveal       # download it and open the folder
 `--catch-up` on the first run matters: without it, the first real run fetches
 every episode inside your `max_age_days` window at once.
 
-## Getting the files into Pocket Casts
+## Uploading automatically
+
+`--upload` pushes each new episode straight into Pocket Casts Files, so a run
+ends with the episode already on your phone:
+
+```bash
+export POCKETCASTS_EMAIL="you@example.com"
+python3 pocketcasts.py login      # prompts once, saves to the login keychain
+python3 ytqueue.py --upload
+```
+
+Set `upload = true` under `[settings]` to make that the default. The password
+is read from `POCKETCASTS_PASSWORD`, then the macOS login keychain, then a
+prompt — it is never written to the config file. The bearer token is cached
+`0600` in the state dir and silently refreshed when it expires.
+
+If an upload fails the file stays on disk and the run prints a ready-to-paste
+retry:
+
+```bash
+python3 pocketcasts.py upload '~/Podcasts/YouTube/2026-08-18 - Episode.mp4'
+```
+
+### How it works, and what that means for you
+
+Pocket Casts has no published API. The endpoints and the protobuf field
+numbers came from Pocket Casts' own open-source iOS client: log in for a
+bearer token, register the file to get a presigned URL, PUT the bytes there.
+
+Two things follow from that. It needs **Plus or Patron** — Files is a paid
+feature. And it can break without warning, since nothing obliges them to keep
+an undocumented interface stable. When it breaks it will be an HTTP error from
+one of those two calls, and `--reveal` plus a manual drag is always the
+fallback.
+
+`test_pocketcasts.py` covers the wire format and the whole upload flow against
+a local mock, so you can tell a protocol change from a bug here:
+
+```bash
+python3 test_pocketcasts.py
+```
+
+## Uploading by hand
 
 Pocket Casts calls user uploads **Files**, and it's a Plus/Patron feature.
 
@@ -66,6 +108,8 @@ Everything in `[settings]` is a default; most keys can be repeated inside a
 | `quality` | `720p` | `1080p`, `720p`, `480p`, or `audio` (m4a) |
 | `limit_per_channel` | `5` | Most recent N feed items considered per run |
 | `embed_thumbnail` | `false` | Cover art in the file (needs ffmpeg) |
+| `upload` | `false` | Upload to Pocket Casts without needing `--upload` |
+| `email` | — | Pocket Casts account email (or `POCKETCASTS_EMAIL`) |
 
 `720p` is the default because it's about the floor for reading text in a
 screen share, and going higher just costs upload time and storage.
@@ -73,6 +117,7 @@ screen share, and going higher just costs upload time and storage.
 ## Flags
 
 ```
+--upload           push new episodes into Pocket Casts Files
 --dry-run          list what's new, download nothing
 --catch-up         mark everything current as seen, download nothing
 --reveal           open the output folder when the run finishes
@@ -105,6 +150,6 @@ the usual cause of sudden failures (`brew upgrade yt-dlp`).
   which caps quality at whatever YouTube offers as one file (usually 720p).
 - Episodes rejected by the duration/live filters are written to the archive so
   they aren't re-checked on every run.
-- The upload step is manual. Pocket Casts has no documented API for Files, so
-  automating it would mean driving an undocumented endpoint that could break
-  without warning.
+- `--upload` drives an undocumented Pocket Casts endpoint (see above). Without
+  it, the tool just leaves files in a folder for you to drag in, which nothing
+  can break.

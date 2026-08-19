@@ -19,6 +19,8 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
+import shlex
 import re
 import shutil
 import subprocess
@@ -29,6 +31,8 @@ import urllib.request
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from xml.etree import ElementTree
+
+import pocketcasts
 
 try:
     import tomllib
@@ -52,6 +56,7 @@ DEFAULTS = {
     "quality": "720p",
     "embed_thumbnail": False,
     "limit_per_channel": 5,
+    "upload": False,
 }
 
 PER_CHANNEL_OVERRIDES = (
@@ -236,8 +241,8 @@ def format_args(quality: str, have_ffmpeg: bool) -> list[str]:
     return ["-f", f"b[height<={h}][ext=mp4]/b[ext=mp4]/b"]
 
 
-def download(item: dict, chan: dict, archive: Path, have_ffmpeg: bool) -> tuple[str, str]:
-    """Returns (status, detail). status is one of: ok, filtered, failed."""
+def download(item: dict, chan: dict, archive: Path, have_ffmpeg: bool) -> tuple[str, str, dict]:
+    """Returns (status, detail, info). status is one of: ok, filtered, failed."""
     out_dir = expand(chan["output_dir"])
     out_dir.mkdir(parents=True, exist_ok=True)
     prefix = item["published"].astimezone(timezone.utc).strftime("%Y-%m-%d")
@@ -262,7 +267,7 @@ def download(item: dict, chan: dict, archive: Path, have_ffmpeg: bool) -> tuple[
         "--download-archive", str(archive),
         "--match-filters", filters,
         "--embed-metadata",
-        "--print-to-file", "after_move:filepath", str(printed),
+        "--print-to-file", "after_move:%(duration)s|%(filepath)s", str(printed),
         *format_args(chan["quality"], have_ffmpeg),
     ]
     if chan.get("embed_thumbnail"):
@@ -278,16 +283,24 @@ def download(item: dict, chan: dict, archive: Path, have_ffmpeg: bool) -> tuple[
         # yt-dlp does not archive filter rejections, so record it here and
         # never look at this video again.
         mark_seen(archive, item["id"])
-        return "filtered", "outside the duration/live filters"
+        return "filtered", "outside the duration/live filters", {}
 
     if proc.returncode != 0:
         detail = next(
             (l for l in reversed(output.splitlines()) if l.strip().startswith("ERROR")),
             f"yt-dlp exited {proc.returncode}",
         )
-        return "failed", detail.strip()
+        return "failed", detail.strip(), {}
 
-    return "ok", (written.splitlines()[-1] if written else f"{prefix} - {item['title']}")
+    info = {}
+    if written:
+        duration, _, filepath = written.splitlines()[-1].partition("|")
+        info["path"] = Path(filepath)
+        try:
+            info["duration"] = int(float(duration))
+        except ValueError:
+            info["duration"] = 0
+    return "ok", (str(info["path"]) if info else f"{prefix} - {item['title']}"), info
 
 
 # --- main -------------------------------------------------------------------
@@ -306,6 +319,8 @@ def main() -> int:
     ap.add_argument("--since", type=int, metavar="DAYS", help="override max_age_days")
     ap.add_argument("--limit", type=int, metavar="N", help="override limit_per_channel")
     ap.add_argument("-o", "--out", metavar="DIR", help="override output_dir")
+    ap.add_argument("--upload", action="store_true",
+                    help="upload each new episode straight into Pocket Casts Files")
     ap.add_argument("--reveal", action="store_true",
                     help="open the output folder afterwards, to drag files into Pocket Casts")
     args = ap.parse_args()
@@ -354,8 +369,16 @@ def main() -> int:
             cache = {}
     cache_before = dict(cache)
 
+    upload_email = None
+    if args.upload or settings.get("upload"):
+        upload_email = settings.get("email") or os.environ.get("POCKETCASTS_EMAIL")
+        if not upload_email:
+            die("uploading needs an email: put email = \"...\" under [settings] "
+                "in your config, or set POCKETCASTS_EMAIL")
+
     now = datetime.now(timezone.utc)
-    downloaded = filtered = failed = queued = 0
+    downloaded = filtered = failed = queued = uploaded = 0
+    upload_failures: list[Path] = []
 
     for chan in channels:
         print(f"== {chan['name']}")
@@ -391,11 +414,20 @@ def main() -> int:
                 continue
 
             print(f"   fetching     {label}")
-            status, detail = download(item, chan, archive, have_ffmpeg)
+            status, detail, info = download(item, chan, archive, have_ffmpeg)
             seen.add(item["id"])
             if status == "ok":
                 downloaded += 1
                 print(f"   saved        {detail}")
+                if upload_email and info.get("path"):
+                    try:
+                        pocketcasts.upload_file(info["path"], upload_email,
+                                                duration=info.get("duration"))
+                        uploaded += 1
+                        print("   uploaded     to Pocket Casts Files")
+                    except pocketcasts.PocketCastsError as exc:
+                        upload_failures.append(info["path"])
+                        print(f"   UPLOAD FAILED {exc}")
             elif status == "filtered":
                 filtered += 1
                 print(f"   skipped      {detail}")
@@ -414,6 +446,8 @@ def main() -> int:
         print(f"{queued} item(s) marked as seen. Future runs only fetch what lands next.")
     else:
         parts = [f"{downloaded} downloaded"]
+        if uploaded:
+            parts.append(f"{uploaded} uploaded")
         if filtered:
             parts.append(f"{filtered} skipped by filter")
         if failed:
@@ -422,13 +456,18 @@ def main() -> int:
         if downloaded:
             out = expand(settings["output_dir"]).resolve()
             print(f"files are in {out}")
-            print("upload them at play.pocketcasts.com -> Files -> Upload")
+            if not upload_email:
+                print("upload them at play.pocketcasts.com -> Files -> Upload")
+            if upload_failures:
+                print("retry the uploads with:")
+                for path in upload_failures:
+                    print(f"  python3 pocketcasts.py upload {shlex.quote(str(path))}")
             if args.reveal:
                 opener = next((o for o in ("open", "xdg-open") if shutil.which(o)), None)
                 if opener:
                     subprocess.run([opener, str(out)], check=False)
 
-    return 1 if failed else 0
+    return 1 if (failed or upload_failures) else 0
 
 
 if __name__ == "__main__":
