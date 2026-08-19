@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
-ytqueue - pull new videos from YouTube channels and save them as
-"YYYY-MM-DD - Title.mp4" files, ready to drop into a podcast app.
+ytqueue - pull new episodes of How I AI (and any other YouTube channel that
+never made it into your podcast app) and save them as "YYYY-MM-DD - Title.mp4"
+files, ready to upload to Pocket Casts Files.
 
 Discovery uses YouTube's public per-channel RSS feeds, so there is no API key
 and no scraping of the channel page (except once, to turn an @handle into a
@@ -63,7 +64,7 @@ PER_CHANNEL_OVERRIDES = (
 )
 
 STARTER_CONFIG = '''\
-# ytqueue - one [[channel]] block per thing you want in your queue.
+# ytqueue - one [[channel]] block per show you want in your Pocket Casts queue.
 # Channel URLs, @handles, /channel/UC... ids and playlist URLs all work.
 
 [settings]
@@ -75,13 +76,15 @@ quality = "720p"             # 1080p | 720p | 480p | audio
 limit_per_channel = 5        # most recent N feed items considered per run
 
 [[channel]]
-name = "AI Explained"
-url = "https://www.youtube.com/@aiexplained-official"
+name = "How I AI"
+url = "https://www.youtube.com/@howiaipodcast"
 
-[[channel]]
-name = "Big Technology Podcast"
-url = "https://www.youtube.com/@BigTechnologyPodcast"
-max_age_days = 7             # per-channel overrides go here
+# Add more the same way. Per-channel overrides go inside the block:
+#
+# [[channel]]
+# name = "Big Technology Podcast"
+# url = "https://www.youtube.com/@BigTechnologyPodcast"
+# max_age_days = 7
 '''
 
 
@@ -303,6 +306,8 @@ def main() -> int:
     ap.add_argument("--since", type=int, metavar="DAYS", help="override max_age_days")
     ap.add_argument("--limit", type=int, metavar="N", help="override limit_per_channel")
     ap.add_argument("-o", "--out", metavar="DIR", help="override output_dir")
+    ap.add_argument("--reveal", action="store_true",
+                    help="open the output folder afterwards, to drag files into Pocket Casts")
     args = ap.parse_args()
 
     config_path = Path(args.config)
@@ -415,7 +420,13 @@ def main() -> int:
             parts.append(f"{failed} failed")
         print(", ".join(parts))
         if downloaded:
-            print(f"files are in {expand(settings['output_dir'])}")
+            out = expand(settings["output_dir"]).resolve()
+            print(f"files are in {out}")
+            print("upload them at play.pocketcasts.com -> Files -> Upload")
+            if args.reveal:
+                opener = next((o for o in ("open", "xdg-open") if shutil.which(o)), None)
+                if opener:
+                    subprocess.run([opener, str(out)], check=False)
 
     return 1 if failed else 0
 

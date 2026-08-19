@@ -1,4 +1,4 @@
-# ytqueue - one [[channel]] block per thing you want in your queue.
+# ytqueue - one [[channel]] block per show you want in your Pocket Casts queue.
 # Channel URLs, @handles, /channel/UC... ids and playlist URLs all work.
 
 [settings]
@@ -10,10 +10,12 @@ quality = "720p"             # 1080p | 720p | 480p | audio
 limit_per_channel = 5        # most recent N feed items considered per run
 
 [[channel]]
-name = "AI Explained"
-url = "https://www.youtube.com/@aiexplained-official"
+name = "How I AI"
+url = "https://www.youtube.com/@howiaipodcast"
 
-[[channel]]
-name = "Big Technology Podcast"
-url = "https://www.youtube.com/@BigTechnologyPodcast"
-max_age_days = 7             # per-channel overrides go here
+# Add more the same way. Per-channel overrides go inside the block:
+#
+# [[channel]]
+# name = "Big Technology Podcast"
+# url = "https://www.youtube.com/@BigTechnologyPodcast"
+# max_age_days = 7
