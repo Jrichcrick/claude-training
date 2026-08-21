@@ -1,7 +1,25 @@
 {
   "_comment": "Ledger of episodes the automation has already evaluated. Prevents re-sending the same episode and lets a run recover after a missed day. Newest first. Trim entries older than ~90 days.",
-  "last_run_utc": "2026-08-20T23:12:25Z",
+  "last_run_utc": "2026-08-21T23:11:23Z",
   "episodes": [
+    {
+      "guid": "websearch:ai-daily-brief:9-ai-techniques-you-probably-havent-tried:2026-08-20",
+      "title": "9 AI Techniques You Probably Haven't Tried",
+      "published": "2026-08-20",
+      "source": "websearch-fallback",
+      "actionable": false,
+      "reason": "Podcast hosts (itunes.apple.com, aidailybrief.ai, pod.wave.co) all still EGRESS_BLOCKED at the proxy this run, confirmed via direct WebFetch before falling back to WebSearch. Roughly a dozen independent WebSearch queries -- the general episode query, per-technique targeted queries for each of the nine named items, an aggregator/newsletter-recap query, and site-specific queries against pod.wave.co, podwise.ai, and YouTube -- all converged on the exact same one-sentence show description, word-for-word every time: 'a practical tour of nine techniques worth trying, from live voice mode, workflow teaching, custom skills, and Claude's /design command to team agents, GrokBot, local models, and deceptively useful two-word prompts' (a separate query surfaced 'Claude Tag' in place of/alongside 'workflow teaching' in some aggregator copy). That consistency is strong evidence this is real, current show content (squarely actionable_signal territory by category -- named techniques, agent/workflow patterns, model-usage tips) and not a hallucination. But no query, across any angle tried, surfaced a mechanism, example, or specific claim for any single one of the nine beyond its label -- every source stopped at the same table-of-contents-level description. Per the do-not-invent-tactics rule, could not build a ready-to-paste artifact grounded in NLW's actual claim for any of them without fabricating content the episode may or may not contain -- same situation as the already-ledgered 2026-07-30 'six questions' entry. Not marking actionable; no tactic extracted.",
+      "note": "Flagging as promising for a future run with transcript/feed access: several of the nine (Claude's /design command, custom skills, team agents, and -- if that's really what's referenced -- Claude Tag) sit squarely in JR's Claude Code enablement lane if the actual mechanism can ever be recovered. Worth a manual listen or a re-check once the proxy allows a real fetch, rather than guessing at content now."
+    },
+    {
+      "guid": "websearch:ai-daily-brief:the-ai-backlash-is-getting-stupider-but-also-smarter:2026-08-19",
+      "title": "The AI Backlash Is Getting Stupider. But Also Smarter.",
+      "published": "2026-08-19",
+      "source": "websearch-fallback",
+      "actionable": false,
+      "reason": "Podcast hosts still EGRESS_BLOCKED at the proxy this run, confirmed via direct WebFetch before falling back to WebSearch. Multiple independent WebSearch queries (including a YouTube listing of the episode itself) converged on the same content: the anti-AI backlash getting more meme-driven and politically potent (Liquid Death's viral Jason Kelce ad mailing urine to data centers) while also, in a few ways, getting more substantive (Josh Shapiro's new criteria-based data-center rules, OpenAI's voluntary training pause) -- framed as whether the AI debate is finally creating room for concrete standards instead of blanket reactions. Squarely skip_signal territory: policy/regulation/public-messaging commentary with no repeatable technique a listener could run tomorrow. Specifically checked for a back-half tactical segment per the spec's guidance; none surfaced in any query.",
+      "note": "No independent episode found for 2026-08-21 as of this run (23:11 UTC) -- consistent with the indexing-lag pattern noted on prior nights."
+    },
     {
       "guid": "websearch:ai-daily-brief:the-ai-engineering-skills-map-for-knowledge-workers:2026-08-18",
       "title": "The AI Engineering Skills Map for Knowledge Workers (episode existence/content NOT reliably corroborated -- see reason)",
