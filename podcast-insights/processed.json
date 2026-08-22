@@ -1,7 +1,16 @@
 {
   "_comment": "Ledger of episodes the automation has already evaluated. Prevents re-sending the same episode and lets a run recover after a missed day. Newest first. Trim entries older than ~90 days.",
-  "last_run_utc": "2026-08-21T23:11:23Z",
+  "last_run_utc": "2026-08-22T23:10:42Z",
   "episodes": [
+    {
+      "guid": "websearch:ai-daily-brief:the-midterms-made-data-centers-radioactive:2026-08-21",
+      "title": "The Midterms Made Data Centers Radioactive (date attribution split between Aug 21 and Aug 22 across sources -- see reason)",
+      "published": "2026-08-21",
+      "source": "websearch-fallback",
+      "actionable": false,
+      "reason": "Podcast hosts (itunes.apple.com, aidailybrief.ai) both still EGRESS_BLOCKED at the proxy this run, confirmed via direct WebFetch on each before falling back to WebSearch. Roughly a dozen independent WebSearch queries -- general title search, quote-anchored searches on two distinct verbatim lines ('pollsters have never seen opinion move this fast', 'the midterms made data centers radioactive'), an aidailybrief.ai archive-page search, and two exclusion searches (each date's query with -\"data center\" -\"radioactive\" to check for a second, distinct episode) -- all converged on one consistent, specific content set: data-center opposition going from a 'niche land-use gripe to bipartisan electoral force' in twelve months, an NRSC memo warning AI companies data centers are a midterm 'sleeper issue,' a Gallup stat (7 in 10 Americans oppose a local AI data center; would rather live next to a nuclear plant), NLW weighing and rejecting several surface explanations (water memes, a 'China psyop theory,' AI job-loss doomerism, big-tech baggage) before landing on 'agency and control' as the real driver and calling it 'the most winnable, value-creating political battle of all time.' That specificity and cross-query consistency is strong evidence of real, current show content, not a hallucination -- and the two exclusion searches confirm no second Aug 21 or Aug 22 episode exists independent of this one. The date itself is genuinely split: several queries anchor it to an Aug 21 archive entry, one explicitly calls it 'Saturday's August 22, 2026 episode' (Aug 22 is in fact a Saturday), consistent with the recurring indexing-lag/date-attribution-uncertainty pattern already logged repeatedly in this ledger -- logged once under Aug 21 rather than risk a duplicate entry for what is clearly one episode. On content: squarely skip_signal territory -- policy/regulation and electoral/political commentary, no repeatable technique a listener could run tomorrow. Specifically searched for a back-half tactical segment per the spec's guidance that NLW often puts technique material after the news read ('second half'/'back half'/technique/workflow queries); none surfaced -- every query reinforced the same electoral-backlash analysis end to end. Per the do-not-invent-tactics rule, no tactic extracted.",
+      "note": "This entry covers both the Aug 21 and Aug 22 calendar slots -- confirmed via the exclusion searches above that no separate, distinct episode exists for whichever of the two dates this one isn't. No new episode found for a still-later date (e.g. Aug 23) as of this run, consistent with the indexing-lag pattern noted on prior nights."
+    },
     {
       "guid": "websearch:ai-daily-brief:9-ai-techniques-you-probably-havent-tried:2026-08-20",
       "title": "9 AI Techniques You Probably Haven't Tried",
