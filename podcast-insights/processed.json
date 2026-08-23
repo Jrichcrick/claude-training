@@ -1,7 +1,16 @@
 {
   "_comment": "Ledger of episodes the automation has already evaluated. Prevents re-sending the same episode and lets a run recover after a missed day. Newest first. Trim entries older than ~90 days.",
-  "last_run_utc": "2026-08-22T23:10:42Z",
+  "last_run_utc": "2026-08-23T23:09:00Z",
   "episodes": [
+    {
+      "guid": "websearch:ai-daily-brief:the-next-phase-of-agent-competition-is-the-execution-loop:2026-08-22",
+      "title": "AI Daily Brief episode framing the next phase of agent competition around the 'execution loop' (exact title unconfirmed)",
+      "published": "2026-08-22",
+      "source": "websearch-fallback",
+      "actionable": false,
+      "reason": "Podcast hosts (itunes.apple.com, aidailybrief.ai, aidailybrief.beehiiv.com, feeds.megaphone.fm, podscan.fm, spoken.md, listennotes.com, player.fm, youtube.com) all still EGRESS_BLOCKED at the proxy this run, confirmed via direct WebFetch attempts on each before falling back to WebSearch. Roughly 20 independent WebSearch queries this run. Two threads surfaced: (1) a genuinely new one -- aiagentstore.ai's weekly agent-news roundup states, verbatim and identically across three separate queries, that 'an AI Daily Brief on August 22 framed the next phase of agent competition as being about the execution loop -- memory, tool use, feedback, supervision, governance, and execution environment -- rather than just model capability,' plus an aside that the same brief noted Snowflake moving CoCo Automations into public preview on August 21. That repetition across independent queries is reasonable evidence of real content and a real Aug 22 episode, but no query -- including ones targeting the episode's actual title, a back-half tactical segment, or any one of the six named dimensions individually -- surfaced anything past that single categorical sentence: no rubric, no worked example, no specific claim about any one of memory/tool-use/feedback/supervision/governance/execution-environment beyond naming it as an axis. This is a table-of-contents-level list of concerns, not a technique, and building a prompt or Claude Code artifact from it would mean inventing the mechanism NLW may or may not have actually given -- same situation as the already-ledgered 2026-08-20 'nine techniques' and 2026-08-18 'skills map' entries. (2) Also re-confirmed the already-ledgered 2026-08-21 data-center-backlash episode under an alternate title candidate, 'Why Everyone Suddenly Hates AI Data Centers' -- treated as the same episode already logged under 'The Midterms Made Data Centers Radioactive,' not a new one, consistent with this ledger's recurring title/date-attribution-uncertainty pattern. Per the do-not-invent-tactics rule, no tactic extracted from either thread.",
+      "note": "Flagging the execution-loop framing as worth a re-check once transcript/feed access exists: 'memory, tool use, feedback, supervision, governance, execution environment' as competitive axes for agent products sits squarely in JR's Claude Code / agent-enablement lane if NLW gave a concrete example or rubric for any of the six that search isn't surfacing. No 2026-08-23 episode indexed yet as of this run (23:09 UTC), consistent with the indexing-lag pattern noted on prior nights -- expected, since today is 2026-08-23."
+    },
     {
       "guid": "websearch:ai-daily-brief:the-midterms-made-data-centers-radioactive:2026-08-21",
       "title": "The Midterms Made Data Centers Radioactive (date attribution split between Aug 21 and Aug 22 across sources -- see reason)",
