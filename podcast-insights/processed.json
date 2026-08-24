@@ -1,7 +1,16 @@
 {
   "_comment": "Ledger of episodes the automation has already evaluated. Prevents re-sending the same episode and lets a run recover after a missed day. Newest first. Trim entries older than ~90 days.",
-  "last_run_utc": "2026-08-23T23:09:00Z",
+  "last_run_utc": "2026-08-24T23:11:59Z",
   "episodes": [
+    {
+      "guid": "websearch:ai-daily-brief:the-real-future-of-ai-and-work:2026-08-23",
+      "title": "The Real Future of AI and Work",
+      "published": "2026-08-23",
+      "source": "websearch-fallback",
+      "actionable": false,
+      "reason": "Podcast hosts (itunes.apple.com, aidailybrief.ai, feeds.megaphone.fm, sipsip.ai, podscripts.co, aiagentstore.ai) all still EGRESS_BLOCKED at the proxy this run, confirmed via direct WebFetch attempts on each before falling back to WebSearch. Roughly a dozen independent WebSearch queries -- general episode query, a quote-anchored search on the Every/Thesis-Statements framing, a back-half/framework-targeted query, and an aidailybrief.beehiiv.com-specific query -- converged consistently on the same content: a weekend 'Long Reads' episode built around Every's 'Thesis Statements' project (100 builders/thinkers writing short essays on the future of work after automation, culminating in a Nov 5 2026 live event at Pioneer Works), with NLW arguing the 'will AI take our jobs' debate is 'finally giving way to the questions that actually matter: how work, teams, companies, and human advantage get rebuilt.' That consistency across independent queries is reasonable evidence of real content. But this is an essay-collection/futures-commentary format, not a technique -- squarely skip_signal territory (broad future-of-work framing, no repeatable process a listener could run tomorrow). Specifically searched for a back-half tactical segment per the spec's guidance; the one query that returned framework-shaped language ('AI work architect' / 'AI steward' roles) did not corroborate across any other query and reads as generic web content about AI-and-work the search engine pulled in rather than this episode's actual content, so it was not used, consistent with the do-not-invent-tactics rule. Two other episodes surfaced repeatedly this run under Aug 22/23 date labels ('9 AI Techniques You Probably Haven't Tried' and the data-center-backlash episode) are word-for-word repeats of the already-ledgered 2026-08-20 and 2026-08-21 entries respectively -- treated as the same episodes, not logged again.",
+      "note": "No 2026-08-24 episode indexed yet as of this run (23:11 UTC) -- consistent with the indexing-lag pattern noted on prior nights; today is 2026-08-24, so this is expected. A YouTube search this run surfaced a same-named but unrelated show, 'DX Today AI Daily Brief,' which is not NLW's podcast -- not treated as a source, consistent with the similarly-named-show caution already logged in the 2026-08-09 entry."
+    },
     {
       "guid": "websearch:ai-daily-brief:the-next-phase-of-agent-competition-is-the-execution-loop:2026-08-22",
       "title": "AI Daily Brief episode framing the next phase of agent competition around the 'execution loop' (exact title unconfirmed)",
