@@ -1,6 +1,6 @@
 {
   "_comment": "Ledger of episodes the automation has already evaluated. Prevents re-sending the same episode and lets a run recover after a missed day. Newest first. Trim entries older than ~90 days.",
-  "last_run_utc": "2026-08-26T23:12:42Z",
+  "last_run_utc": "2026-08-27T23:20:00Z",
   "episodes": [
     {
       "guid": "websearch:ai-daily-brief:the-real-future-of-ai-and-work:2026-08-23",
@@ -146,7 +146,7 @@
     },
     {
       "guid": "websearch:ai-daily-brief:texas-ground-zero-ai-data-centers-slams-brakes:2026-08-06",
-      "title": "Texas — Ground Zero for AI Data Centers — Slams the Brakes (headlines: agents escaping evals and hacking real targets, Washington's draft ban on Chinese data-center components, an earnings beat that convinced nobody, SpaceX's first earnings report, the backlash about agency)",
+      "title": "Texas \u2014 Ground Zero for AI Data Centers \u2014 Slams the Brakes (headlines: agents escaping evals and hacking real targets, Washington's draft ban on Chinese data-center components, an earnings beat that convinced nobody, SpaceX's first earnings report, the backlash about agency)",
       "published": "2026-08-06",
       "source": "websearch-fallback",
       "actionable": false,
@@ -176,7 +176,7 @@
       "published": "2026-08-02",
       "source": "websearch-fallback",
       "actionable": true,
-      "reason": "Podcast hosts (itunes.apple.com, feeds.megaphone.fm, podscan.fm, pca.st, aidailybrief.ai, podcasts.apple.com) all still 403 at the proxy, so this is a search-coverage extraction, not a transcript. Corroborated consistently across independent WebSearch queries (same phrasing recurred: 'cost per successful task', 'tokens that spin', 'choose the right models', 'protect the experimentation that creates real value', 'four eras of token consumption', 'Claudenomics and $500M bills'), which is a strong signal it's real show-notes text and not a hallucinated summary. Extracted 2 tactics: cost-per-successful-task accounting, and capping unproductive agentic retries ('tokens that spin'). Did not extract 'choose the right model' or 'protect experimentation' as standalone tactics — the material available on those was too thin to make concrete without inventing detail. A distinct 'August 3' episode also turned up in search, but two independent WebSearch queries gave contradictory content for it (one described a revenue/stock-drawdown recap, the other described an Astra-model/Deepseek/Amazon news recap) — unreliable enough that no ledger entry was recorded for it rather than guess. Direct episode URL unconfirmed; only the show's main page was reachable-ish in search results."
+      "reason": "Podcast hosts (itunes.apple.com, feeds.megaphone.fm, podscan.fm, pca.st, aidailybrief.ai, podcasts.apple.com) all still 403 at the proxy, so this is a search-coverage extraction, not a transcript. Corroborated consistently across independent WebSearch queries (same phrasing recurred: 'cost per successful task', 'tokens that spin', 'choose the right models', 'protect the experimentation that creates real value', 'four eras of token consumption', 'Claudenomics and $500M bills'), which is a strong signal it's real show-notes text and not a hallucinated summary. Extracted 2 tactics: cost-per-successful-task accounting, and capping unproductive agentic retries ('tokens that spin'). Did not extract 'choose the right model' or 'protect experimentation' as standalone tactics \u2014 the material available on those was too thin to make concrete without inventing detail. A distinct 'August 3' episode also turned up in search, but two independent WebSearch queries gave contradictory content for it (one described a revenue/stock-drawdown recap, the other described an Astra-model/Deepseek/Amazon news recap) \u2014 unreliable enough that no ledger entry was recorded for it rather than guess. Direct episode URL unconfirmed; only the show's main page was reachable-ish in search results."
     },
     {
       "guid": "websearch:ai-daily-brief:6-questions-every-enterprise-has-to-answer-about-ai:2026-07-30",
@@ -184,7 +184,7 @@
       "published": "2026-07-30",
       "source": "websearch-fallback",
       "actionable": false,
-      "reason": "iTunes lookup, the feed, and every podcast/show-notes host (pod.link, aidailybrief.ai, Spotify episode page, Apple Podcasts, Pocket Casts, podnews.net) returned 403 at the proxy — WebFetch is blocked broadly in this environment, not just the listed podcast hosts. WebSearch surfaced only that NLW recaps 'six questions' from a KPMG symposium (enterprise AI shifting from 'if' to 'how'), with four themes corroborated (token budgets, workforce enablement, business-model change, adaptive systems) but not the actual questions or NLW's mechanism for each. Building a ready-to-paste artifact from fragments would mean inventing content the episode may or may not actually contain. Promising — worth a manual listen once the network policy allows transcript/show-notes access."
+      "reason": "iTunes lookup, the feed, and every podcast/show-notes host (pod.link, aidailybrief.ai, Spotify episode page, Apple Podcasts, Pocket Casts, podnews.net) returned 403 at the proxy \u2014 WebFetch is blocked broadly in this environment, not just the listed podcast hosts. WebSearch surfaced only that NLW recaps 'six questions' from a KPMG symposium (enterprise AI shifting from 'if' to 'how'), with four themes corroborated (token budgets, workforce enablement, business-model change, adaptive systems) but not the actual questions or NLW's mechanism for each. Building a ready-to-paste artifact from fragments would mean inventing content the episode may or may not actually contain. Promising \u2014 worth a manual listen once the network policy allows transcript/show-notes access."
     },
     {
       "guid": "websearch:ai-daily-brief:openai-anthropic-revenue-vs-stock-drawdown-aschenbrenner:2026-07-31",
@@ -192,7 +192,7 @@
       "published": "2026-07-31",
       "source": "websearch-fallback",
       "actionable": false,
-      "reason": "Market/funding news (hedge fund collapse, stock drawdown, revenue figures) — skip_signal, no extractable technique."
+      "reason": "Market/funding news (hedge fund collapse, stock drawdown, revenue figures) \u2014 skip_signal, no extractable technique."
     },
     {
       "guid": "websearch:ai-daily-brief:pacing-the-frontier-letter:2026-07-29",
@@ -200,7 +200,7 @@
       "published": "2026-07-29",
       "source": "websearch-fallback",
       "actionable": false,
-      "reason": "Policy/regulation commentary — skip_signal, no listener action."
+      "reason": "Policy/regulation commentary \u2014 skip_signal, no listener action."
     },
     {
       "guid": "websearch:ai-daily-brief:the-new-problems-ai-is-creating:2026-08-16",
@@ -208,8 +208,44 @@
       "published": "2026-08-16",
       "source": "websearch-fallback",
       "actionable": false,
-      "reason": "Podcast hosts (itunes.apple.com, aidailybrief.ai, podscan.fm, pod.link, aidailybrief.beehiiv.com) all still EGRESS_BLOCKED at the proxy this run, confirmed via direct WebFetch before falling back to WebSearch. Multiple independent WebSearch queries converged on identical framing — 'AI is solving old problems while creating entirely new ones', covering AI slop, rising token costs, uneven productivity, workforce deskilling, and preserving human expertise — so this is confidently the real episode, not a hallucinated summary. But every concretely-extractable piece of it restates ground already in the library rather than adding a new technique: (1) the headline claim that 'GrokBot's teach-a-task and ChatGPT's Computer History mark the moment the AI bottleneck moved from capability to context' is the same demonstration-based skill-capture idea already recorded as tactic 1 of the 2026-08-12 Grok Bot entry (there sourced to GrokBot's launch directly); (2) the 'Deputize, don't automate' framing with 'step one: inventory your recurring processes' is the same AI Deputization Audit already recorded in full as the 2026-08-14 entry, just introduced with its first practical step instead of the full rubric. No independent WebSearch query surfaced a concrete mechanism for the AI-slop, token-cost, deskilling, or productivity threads beyond naming them as problems — nothing there clears 'ready-to-paste artifact' without inventing detail the episode doesn't supply. Not marking actionable since no new library entry came from it, per the do-not-pad-a-thin-episode rule; logged the recurrence itself in the library's Recurring themes section instead of duplicating either existing entry.",
-      "note": "Also checked for an August 15 (Saturday) and August 17 episode this run. No August 15 episode: the only August 15-dated hit is the Beehiiv newsletter's recap of the August 14 episode, published a day late, not a separate episode. No August 17 episode indexed yet as of this run (23:13 UTC) — consistent with the indexing-lag pattern noted on prior nights; will pick it up next run if it's out by then."
+      "reason": "Podcast hosts (itunes.apple.com, aidailybrief.ai, podscan.fm, pod.link, aidailybrief.beehiiv.com) all still EGRESS_BLOCKED at the proxy this run, confirmed via direct WebFetch before falling back to WebSearch. Multiple independent WebSearch queries converged on identical framing \u2014 'AI is solving old problems while creating entirely new ones', covering AI slop, rising token costs, uneven productivity, workforce deskilling, and preserving human expertise \u2014 so this is confidently the real episode, not a hallucinated summary. But every concretely-extractable piece of it restates ground already in the library rather than adding a new technique: (1) the headline claim that 'GrokBot's teach-a-task and ChatGPT's Computer History mark the moment the AI bottleneck moved from capability to context' is the same demonstration-based skill-capture idea already recorded as tactic 1 of the 2026-08-12 Grok Bot entry (there sourced to GrokBot's launch directly); (2) the 'Deputize, don't automate' framing with 'step one: inventory your recurring processes' is the same AI Deputization Audit already recorded in full as the 2026-08-14 entry, just introduced with its first practical step instead of the full rubric. No independent WebSearch query surfaced a concrete mechanism for the AI-slop, token-cost, deskilling, or productivity threads beyond naming them as problems \u2014 nothing there clears 'ready-to-paste artifact' without inventing detail the episode doesn't supply. Not marking actionable since no new library entry came from it, per the do-not-pad-a-thin-episode rule; logged the recurrence itself in the library's Recurring themes section instead of duplicating either existing entry.",
+      "note": "Also checked for an August 15 (Saturday) and August 17 episode this run. No August 15 episode: the only August 15-dated hit is the Beehiiv newsletter's recap of the August 14 episode, published a day late, not a separate episode. No August 17 episode indexed yet as of this run (23:13 UTC) \u2014 consistent with the indexing-lag pattern noted on prior nights; will pick it up next run if it's out by then."
+    },
+    {
+      "guid": "websearch:ai-daily-brief:the-ai-model-tier-list:2026-08-24",
+      "title": "The AI Model Tier List",
+      "published": "2026-08-24",
+      "source": "websearch-fallback",
+      "actionable": false,
+      "reason": "Podcast hosts (itunes.apple.com, aidailybrief.ai) still EGRESS_BLOCKED at the proxy this run, confirmed via direct WebFetch (itunes.apple.com lookup returned EGRESS_BLOCKED) before falling back to WebSearch. Multiple independent queries converged consistently on: a viral AI model tier list, a misread FT chart, AT&T's plan to serve 70% of its AI queries with open models, and NLW's framing that 'the model war is now about stacks, not standings' plus a note that NVIDIA 'quietly bought its way into the open-model future.' That consistency is reasonable evidence of real content. But this is enterprise stack/procurement and market-positioning commentary -- which models/vendors are winning share and how -- not a technique a listener could run tomorrow; closest actionable_signal ('how to use a specific model well') doesn't fit since the framing is about which models an enterprise buys, not how an individual gets more out of one. Treated as skip_signal territory (market-positioning commentary). No tactic extracted.",
+      "note": "Also checked for a distinct August 23 vs August 24 date split -- multiple sources durably tag this one August 24, distinct from the already-ledgered August 23 'Real Future of AI and Work' entry. No overlap found."
+    },
+    {
+      "guid": "websearch:ai-daily-brief:what-the-top-ai-users-are-doing-differently:2026-08-25",
+      "title": "What the Top AI Users Are Doing Differently",
+      "published": "2026-08-25",
+      "source": "websearch-fallback",
+      "actionable": true,
+      "reason": "Podcast hosts (itunes.apple.com, aidailybrief.ai) still EGRESS_BLOCKED at the proxy this run, confirmed via direct WebFetch before falling back to WebSearch. Multiple independent WebSearch queries converged consistently on the episode covering OpenAI's enterprise usage report directly: the gap between top and typical AI users has widened from 2.6x to 8.3x output tokens per active user (frontier firms sending 16x as many Codex messages per worker), and NLW frames this as 'the whole story is agents' plus 'what frontier firms are doing differently.' Cross-referenced against OpenAI's own report language (which the episode is built on and multiple aggregator summaries paraphrase identically) for the mechanism: frontier firms start with workflows, connect agents to context/tools, and turn individuals' effective ad hoc AI usage into documented, repeatable, team-wide processes with permissions/review built in from the start. This mechanism materially repeats the already-ledgered 2026-08-12 tactic ('teach an agent a workflow by demonstration, then turn it into a reusable command') from a different, quantified angle -- per the duplicate-avoidance rule, did NOT add a new library section; instead updated the existing 2026-08-12 entry with this as a second source, the 2.6x/8.3x evidence, and an explicit review-checklist step the original command was missing. Extracted 1 tactic (as a refinement, not a new entry).",
+      "note": "Also surfaced but not used: Satya Nadella's 'learning loop' framing (private evals, private RL environments, queryable knowledge base) -- that's a June 2026 AI Daily Brief episode (2026-06-19) that keeps recurring in searches about this topic, not this episode; not conflated with it. Meta's Hatch agent and NVIDIA's 'central-bank-of-compute' framing also mentioned alongside this episode in search results but read as separate news items bundled into the same daily rundown, not part of the top-AI-users technique itself -- not extracted."
+    },
+    {
+      "guid": "websearch:ai-daily-brief:data-center-backlash-and-openai-training-pause:2026-08-26",
+      "title": "AI Daily Brief episode on data-center political backlash (Liquid Death/Jason Kelce ad, Josh Shapiro's data center rules, OpenAI's voluntary training pause) -- exact episode title unconfirmed",
+      "published": "2026-08-26",
+      "source": "websearch-fallback",
+      "actionable": false,
+      "reason": "Podcast hosts (itunes.apple.com, aidailybrief.ai) still EGRESS_BLOCKED at the proxy this run, confirmed via direct WebFetch before falling back to WebSearch. Independent queries converged on: anti-AI backlash becoming more 'meme-driven and politically powerful,' Liquid Death's viral Jason Kelce ad, Pennsylvania Governor Josh Shapiro's new data center rules, and OpenAI's voluntary training pause, framed around whether the AI debate is 'finally creating room for concrete standards instead of blanket bans.' Squarely skip_signal territory -- political/regulatory and cultural-backlash commentary, no repeatable technique a listener could run tomorrow. Specifically checked for a back-half tactical segment per the spec's guidance; every query reinforced the same policy/backlash analysis end to end. No tactic extracted.",
+      "note": null
+    },
+    {
+      "guid": "websearch:ai-daily-brief:druckenmiller-ai-op-ed-five-rules-for-ai-writing:2026-08-27",
+      "title": "AI Daily Brief episode on Stanley Druckenmiller's AI-written WSJ op-ed and NLW's five rules for AI writing (exact episode title unconfirmed)",
+      "published": "2026-08-27",
+      "source": "websearch-fallback",
+      "actionable": true,
+      "reason": "Podcast hosts (itunes.apple.com, aidailybrief.ai) still EGRESS_BLOCKED at the proxy this run, confirmed via direct WebFetch before falling back to WebSearch. Multiple independent WebSearch queries converged on specific, consistent content: Stanley Druckenmiller's WSJ op-ed scored 100% by an AI detector, published anyway with the Journal saying it broke no policy, Druckenmiller's 'of course I used AI' response, and NLW's response -- 'five rules, plus a use-case-by-use-case crib sheet for emails, memos, social, marketing copy, and op-eds.' Independently corroborated 3 of the 5 rules verbatim across separate queries ('different types of writing, different types of rules'; 'the purity test will die, the quality test won't'; 'longer is not better -- usually the opposite') plus the core mechanism ('get extremely clear on the thesis and supporting points before turning it over to AI... the five-paragraph essay from grade school, baby... then scrub the obvious AI-isms') and 2 of the crib-sheet items (emails: safe for AI, dictation might beat it; strategy memos: sneakily bad for AI). Rules 3 and 5, and the social/marketing-copy/op-ed crib-sheet entries, did not surface with independent corroboration across queries -- left out of the library rather than guessed, per the do-not-invent-tactics rule; this is recorded as a partial extraction. Extracted 2 tactics: the thesis-first-then-scrub drafting process, and matching the AI-writing rule to the document type (purity test vs. quality test).",
+      "note": "Exact episode title not confirmed independently across queries (one low-confidence result suggested 'The Main Episode,' which reads like a search artifact, not a real title -- not used). Used a descriptive placeholder title instead, consistent with this ledger's practice on prior unconfirmed-title entries (see 2026-08-18, 2026-08-21, 2026-08-22)."
     }
   ]
 }

@@ -21,6 +21,99 @@ extracted and added here.
 
 ---
 
+## 2026-08-27 — AI Daily Brief episode on Stanley Druckenmiller's AI-written WSJ op-ed and NLW's five rules for AI writing (exact episode title unconfirmed)
+
+**Source:** search coverage (podcast hosts still blocked at the proxy — see README). Independently
+corroborated: 3 of NLW's 5 rules ("different types of writing, different types of rules"; "the
+purity test will die, the quality test won't"; "longer is not better — usually the opposite") and 2
+of the use-case crib-sheet items (emails, strategy memos). The other 2 rules and the social/
+marketing-copy/op-ed crib-sheet entries didn't surface with independent corroboration across
+queries, so they're left out here rather than guessed at — this is a partial extraction of a real
+episode, not a complete one.
+**Link:** https://aidailybrief.ai/e/2026-08-27
+
+### 1. Get the thesis fully worked out before AI drafts a word — then run a dedicated pass to scrub AI-isms
+
+NLW's framing, hung on Stanley Druckenmiller's WSJ op-ed (an AI detector scored it 100%; the Journal
+published it anyway and said it broke no policy; Druckenmiller's answer when asked was "of course I
+used AI"): AI writing goes wrong not because AI wrote it, but because the writer skipped straight to
+"draft this" without doing the thesis work first. Get extremely clear on your actual argument and
+the points that support it — NLW's line was "the five-paragraph essay from grade school, baby" —
+*before* handing it to the model. Then, separately, go back through and scrub the obvious AI-isms.
+
+**Why it works:** a model asked to draft without a real argument to execute will invent generic
+structure and phrasing to fill the gap — that's where the AI-isms a detector catches actually come
+from. A worked-out thesis gives it something specific to execute instead of something to invent, and
+treating the scrub as its own deliberate pass — not a hope that it drafted clean — is what catches
+what a detector would.
+
+**For Claude web/desktop:**
+
+```
+I want to draft [a renewal-risk update email / a QBR prep memo / a LinkedIn post about a product
+launch — name the actual thing], and I want to do it in a way that doesn't read as AI-written.
+
+Before you draft anything, make me work out the thesis first — ask me these three questions and
+don't draft until I've answered them (if my answers are vague, push back and make me sharpen them):
+1. What is the one sentence this needs to argue or communicate?
+2. What are the 3-4 points that support it, in the order that makes the strongest case?
+3. What's the one thing I most want the reader to do or believe after reading it?
+
+Once I've given you a real thesis and supporting points, draft it in [email / memo / post] form,
+built tightly around exactly that thesis — no padding, no generic scene-setting.
+
+Then run a second pass as a skeptical editor scrubbing specifically for AI-isms: flag anything that
+reads as generic filler, over-hedged, unnecessarily long, or in a voice that doesn't sound like
+something I'd actually say out loud to this reader. Show me what you'd cut or rewrite and why,
+rather than silently fixing it.
+```
+
+**JR's angle:** this is a two-minute habit JR can run on the exact things his job produces daily —
+an enablement follow-up email, a customer-facing one-pager, a demo script — and it gives him a
+concrete answer, not a preachy one, the first time a CSM asks "won't this just sound like AI":
+show the thesis-first draft next to a bare "write me an email about X" draft, side by side.
+
+### 2. Match the AI-writing rule to what the document is actually for, not one blanket policy
+
+Two of NLW's use-case notes, independently confirmed: **emails are safe territory for AI** (though
+he notes dictation might actually beat it for speed) because an email is judged on being useful and
+fast, not on showing your thinking. **Strategy memos are "sneakily bad" for AI** — a memo's entire
+value is demonstrating the judgment behind it, and a fully AI-drafted one can read fine while
+quietly skipping the actual thinking it was supposed to capture. NLW's broader point: the "purity
+test" (was AI involved, yes/no) is a dead question after a Journal-published, admittedly AI-assisted
+op-ed drew a shrug — the "quality test" is the one that survives, and it gives a different answer
+depending on the format.
+
+**Why it works:** treating "AI or not" as one policy across every kind of writing ignores that
+different documents are judged on different things — speed and clarity for an email, demonstrated
+judgment for a memo. The habit that's harmless in one is quietly self-defeating in the other.
+
+**For Claude Code — a CLAUDE.md rule:**
+
+```markdown
+## AI-writing rule, by document type
+
+Check what kind of document this is before drafting, and apply the matching rule — don't use one
+blanket approach for all writing:
+
+- **Emails / quick internal updates:** full AI drafting is fine. Optimize for speed and clarity,
+  not for demonstrating that a human agonized over it.
+- **Strategy memos / QBR prep notes / anything meant to show my judgment:** don't fully draft this
+  from a one-line ask. Ask me for my actual reasoning and the calls I made first (why this account,
+  why this recommendation, what I'd do if I'm wrong) and draft it around my real thinking, not a
+  plausible-sounding stand-in for it. If I try to skip straight to "just write it," push back once
+  and ask what my actual take is before drafting.
+- **Customer-facing marketing copy / social posts:** draft freely, but flag anything that reads as
+  generic AI phrasing before I send it — this is exactly the kind of document readers are primed to
+  detect it in.
+```
+
+**JR's angle:** a CLAUDE.md starting point JR can hand a CSM or AE directly, and it doubles as a
+demo talking point for the governance question customers actually ask ("should we even let people
+use AI for X") — answered with a rule instead of a blanket yes/no.
+
+---
+
 ## 2026-08-14 — How to Decide What Work AI Should Do for You: The AI Deputization Audit
 
 **Source:** search coverage (podcast hosts still blocked at the proxy — see README)
@@ -129,7 +222,10 @@ Turn this into a slash command:
 3. Call out anywhere I made a judgment call (what counted as "working," how I picked the one next
    step) as an explicit decision point in the command, so future-me knows what to weigh, not just
    what to type.
-4. Tell me the exact file it should live in and the command name I'd type to run it.
+4. Tell me what someone else running this command should always double check before sending or
+   acting on its output — bake that in as an explicit review checklist at the end, not an
+   afterthought.
+5. Tell me the exact file it should live in and the command name I'd type to run it.
 ```
 
 **JR's angle:** most CSMs stall out at "write a slash command from scratch" — it feels like a
@@ -137,6 +233,17 @@ programming task. This reframes it as "just talk me through what you already do 
 much lower-friction pitch in a demo, and it's exactly how JR can turn his own recurring prep work
 (account health checks, enablement one-pagers) into commands instead of redoing them from memory
 each time.
+
+**Update (2026-08-25):** a second episode ("What the Top AI Users Are Doing Differently,"
+https://aidailybrief.ai/e/2026-08-25) independently arrives at the same core move from a different
+angle — OpenAI's enterprise usage data, which NLW covers directly, shows the gap between top and
+typical AI users has widened from 2.6x to 8.3x output per user, and attributes it to frontier firms
+turning individuals' effective ad hoc AI usage into documented, repeatable, team-wide processes with
+review built in from the start, rather than leaving good habits locked in one person's head. That's
+this same tactic, not a new one — logged here as a second, quantified source rather than a
+duplicate entry. It's also the reason step 4 above (the review checklist) was added: the earlier
+version of this command didn't force that step, and NLW's framing this time made explicit that
+skipping it is exactly what separates a one-off habit from something a team can actually run.
 
 ### 2. Calibrate an agent's escalation threshold through correction, not upfront rules
 
