@@ -21,6 +21,73 @@ extracted and added here.
 
 ---
 
+## 2026-09-03 — AI Daily Brief holiday-week special: Nufar Gaspar on loop engineering for knowledge workers (exact episode title unconfirmed; date split between Sept 3 and Sept 4 across sources — see reason in `processed.json`)
+
+**Source:** search coverage (podcast hosts still blocked at the proxy — see README). NLW handed the
+mic to Nufar Gaspar for a rebroadcast of her Aug 26 AIDB × Superintelligent webinar. Independently
+corroborated across many queries, consistently verbatim: "coders got verification for free; the
+rest of us have to manufacture the referee," "a schedule answers 'when,' a loop answers 'until,'"
+"a loop is a job; a graph is an organization," and the operating description of a loop as something
+that "runs on its own schedule, reads its own data, proposes something, waits for you to say yes,
+then acts and reports back." "Decide which tasks should be looped" and "prevent runaway costs" were
+also named as covered, but no query surfaced a mechanism for either beyond the label — left out here
+per the do-not-invent-tactics rule.
+**Link:** https://aidailybrief.ai/webinar
+
+### 1. Manufacture your own "finish line" before looping a task — knowledge work doesn't get one for free
+
+Gaspar's framing: software engineering got the loop-until-done pattern first because code has
+built-in verification — tests pass or they don't, the build compiles or it doesn't. Knowledge work
+(research, reports, decisions, content) has no such automatic check, so a loop only works if you
+define, up front, a specific and checkable condition for "actually done" — not "looks good." Once
+that finish line exists, the loop repeats — reading its own data, proposing something, waiting for
+your sign-off, then acting and reporting back — until the finish line is met, rather than running
+for a fixed number of turns or on a fixed schedule.
+
+**Why it works:** an agent looping without a defined finish line either stops too early (the first
+plausible-looking answer) or never knows if it's actually done — because nothing in a report or a
+research doc fails loudly the way broken code does. Writing the checkable condition first gives the
+loop (and you) the same kind of pass/fail signal a compiler gives a coder "for free."
+
+**For Claude web/desktop:**
+
+```
+I want to redesign one of my recurring tasks as an agentic loop instead of a single one-shot
+prompt, following the idea that "a schedule answers when, a loop answers until."
+
+Here's the task: [name a real recurring task — e.g. "putting together a weekly health-check
+summary for a renewal-risk account: pulling adoption data, checking it against last week, and
+flagging what changed"].
+
+Right now I either do this myself, or I ask you for it fresh each time with one prompt and stop
+when the answer looks good enough — there's no real check for "done."
+
+Help me redesign it as a loop:
+
+1. Define the finish line — what would make this task's output genuinely done, in a way I could
+   check without redoing the whole task myself? Not "looks good" — something specific, like "every
+   number in the summary matches this week's data source" or "every flagged item has a one-line
+   reason attached."
+2. Describe the loop's cycle in four steps: what it reads or checks each time, what it proposes,
+   what it should wait for my sign-off on before acting, and what it reports back once it's done.
+3. Tell me what should happen if it can't reach the finish line after a couple of passes — stop and
+   show me what's incomplete, or is there a smaller, still-useful version of "done"?
+
+Give me the finish line and the four-step loop description in a form I could hand to Claude Code as
+the seed for a real slash command, not just a description of the idea.
+```
+
+**JR's angle:** this turns "I keep re-asking Claude the same multi-step thing every week" into a
+concrete design exercise he can run tonight on one of his own recurring prep tasks (account health
+checks, enablement one-pagers) — and it gives him a sharp, memorable line for the "why loop instead
+of just prompting each time" question in a demo: coders get verification for free, everyone else has
+to build their own.
+
+*Related:* "when one loop isn't enough, compose them into teams" is the same idea as the
+2026-08-10 graph-engineering entry below — see the update there rather than a duplicate here.
+
+---
+
 ## 2026-08-27 — AI Daily Brief episode on Stanley Druckenmiller's AI-written WSJ op-ed and NLW's five rules for AI writing (exact episode title unconfirmed)
 
 **Source:** search coverage (podcast hosts still blocked at the proxy — see README). Independently
@@ -372,6 +439,13 @@ Do not touch prompts for the individual agents until these three lines are writt
 a research-then-draft pipeline for prepping a renewal-risk account. Having the three-line graph on
 a slide before showing the code answers "why would I need more than one agent here?" in a way that
 clicks faster than watching the agents run.
+
+**Update (2026-09-03):** a holiday-week special episode (Nufar Gaspar's loop-engineering webinar,
+see the entry above) independently arrives at the same "split work across agents when one isn't
+enough" idea, framed as "a loop is a job; a graph is an organization" — one loop is one worker
+running until done, a graph is loops composed into a team. Same core move as this entry, not a new
+one — logged here as a second source and a sharper one-line way to introduce the idea before the
+three-line owners/handoffs/failure-behavior breakdown.
 
 ---
 
