@@ -1,6 +1,7 @@
 {
   "_comment": "Ledger of episodes the automation has already evaluated. Prevents re-sending the same episode and lets a run recover after a missed day. Newest first. Trim entries older than ~90 days.",
-  "last_run_utc": "2026-09-04T23:12:25Z",
+  "last_run_utc": "2026-09-05T23:11:19Z",
+  "last_run_note": "Podcast hosts (itunes.apple.com, aidailybrief.ai, aidailybrief.beehiiv.com, podcasts.apple.com, podbean.com, podchaser.com, pod.link, listennotes.com, podnews.net, youtube.com) all confirmed EGRESS_BLOCKED at the proxy this run via direct WebFetch/curl before falling back to WebSearch. ~10 differently-worded WebSearch queries targeting a 2026-09-04 or 2026-09-05 episode found no episode distinct from the three already in this ledger (Nufar Gaspar loop/graph engineering 09-03, Fable 5.1 09-02, OpenClaw 2.0 09-01) -- every query either re-surfaced one of those three (in one case the OpenClaw content got re-attributed to '09-04 headlines' by the search summarizer, contradicting its own 09-01 ledger entry -- treated as index/date conflation, not a real distinct episode) or gave a non-committal 'couldn't find that episode' response. No new episode identified this run; nothing to add. last_run_utc advanced so the next run picks up from here.",
   "episodes": [
     {
       "guid": "websearch:ai-daily-brief:agentic-loops-for-knowledge-workers-nufar-gaspar:2026-09-03",
