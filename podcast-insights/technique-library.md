@@ -21,6 +21,161 @@ extracted and added here.
 
 ---
 
+## 2026-09-07 — The Multiplayer AI Sprint: Build Your Team's First Shared Agent
+
+**Source:** search coverage (podcast hosts still blocked at the proxy — see README). Labor Day
+special. Corroborated: the frontier shifting from single-player to multiplayer AI — shared context,
+shared sessions, shared agents — with evidence from Every, Claude Tag, OpenClaw, and YC, plus a free
+four-part self-directed sprint (assess current AI use, build a shared context repository, identify
+collaborative workflows, put a first multiplayer agent to work). "Session two" of the sprint was
+independently named as building the shared context repository specifically — that's the one piece
+with an actual mechanism; the other three stayed at program-description level across queries.
+**Link:** https://aidailybrief.ai/e/2026-09-07
+
+### 1. Before people or agents share work, stand up one shared context repository instead of leaving context scattered across everyone's own chat history
+
+NLW's framing: the concrete first move in going multiplayer is building a shared context
+repository — one place holding what the team's agents (and people) need to know about a piece of
+work — before trying to get multiple people or agents collaborating on top of it.
+
+**Why it works:** shared-agent workflows fail before they start if the only context that exists
+lives inside one person's private chat history — nobody else can hand work off, resume it, or check
+it, because the actual reasoning was never captured anywhere shared. A context repository is the
+prerequisite everything else in a multiplayer workflow depends on.
+
+**For Claude Code — a CLAUDE.md rule:**
+
+```markdown
+## Shared context repository
+
+Before starting work on an account, demo, or recurring deliverable, check
+`context/<account-or-project-name>.md` for what's already known — history, open questions,
+what's been tried, what worked and what didn't. Read it first, don't re-derive it.
+
+After the session, update that same file with anything a teammate picking this up next would
+need: new facts learned, decisions made and why, what's still open. Append, don't overwrite —
+if something changes, add a dated note rather than deleting the old one.
+
+If `context/<account-or-project-name>.md` doesn't exist yet, create it as part of this session
+so the next person (or the next session) isn't starting from zero.
+```
+
+**JR's angle:** this is the boring-but-necessary starting point behind the "multiplayer AI" pitch —
+before a customer's team can share an agent, they need to share context, and right now every CSM's
+account knowledge lives in their own chat history with nobody else able to touch it. A rule like
+this is a ten-minute setup that turns "only I know where this account stands" into a team asset, and
+it's a concrete first step to hand a customer who's intrigued by "shared agents" but not ready for a
+four-week sprint.
+
+*Callback:* the 2026-09-01 OpenClaw 2.0 entry flagged this exact "multiplayer workspace — share
+context, steer work, hand off without reconstructing everything" thread as promising but
+unextractable at the time, since no query then surfaced a concrete mechanism. This episode supplies
+one — see `processed.json` for the note.
+
+---
+
+## 2026-09-06 — How to Build an AI-Native Company Today
+
+**Source:** search coverage (podcast hosts still blocked at the proxy — see README). NLW's
+feature-by-feature tour of Alex Lieberman's (@businessbarista) public 30-point list of what makes a
+company AI-native, with his own agreements, quibbles, and enterprise field notes, plus a missing
+31st feature he adds: someone has to own the result. Independently corroborated against the original
+list text: feature #7 (a "skills distribution system" for token efficiency and consistent skill
+triggering), feature #29 ("earned autonomy" — an observe/suggest/act-with-approval/act-alone ladder,
+gated by evals fed by feedback), and feature #30 (traceability — every output traced to its prompt,
+model, data, and approver). The middle of the 30-point list (features 8–25) didn't surface with
+independent corroboration, so it's left out here.
+**Link:** https://aidailybrief.ai/e/2026-09-06
+
+### 1. Give the team a named, shared library of skills instead of letting everyone reinvent the same prompt
+
+Lieberman's framing (feature #7, which NLW walked through and endorsed): a "skills distribution
+system" is what keeps agent behavior consistent and token spend down — it works by making sure
+people trigger the same named skill for the same job, instead of each person writing their own
+one-off variant of the same prompt from scratch every time.
+
+**Why it works:** when everyone re-derives their own version of "draft the account update" or
+"summarize this call," you get inconsistent quality, no shared improvement over time, and everyone
+burning tokens re-explaining context a shared skill would already encode. Name and version the skill
+once, and the whole team's output for that job gets better every time the skill improves — not just
+one person's.
+
+**For Claude Code — a slash command, as the shared skill itself:**
+
+```markdown
+---
+name: account-health-check
+description: Weekly adoption/usage health check for one account, in the team's standard format
+---
+
+You are drafting the weekly account health check. Ask me for the account name and its usage data
+(or read `context/<account>.md` if it exists) before drafting.
+
+Structure, in this order:
+1. **This week vs last week** — one line per metric that moved, with the direction and size of
+   the change (e.g. "active seats: 42 → 38, down 10%")
+2. **What changed** — a one-line reason for each flagged metric, if one is known; say "unclear"
+   rather than guessing
+3. **Recommended next step** — one concrete action, not a list of options
+
+Keep it under 200 words. This is an internal update, not a customer-facing document — favor
+speed and clarity over polish.
+```
+
+Save this once as `.claude/commands/account-health-check.md`, and every teammate runs
+`/account-health-check` instead of writing their own prompt for the same job — improvements to the
+command benefit everyone who uses it, not just whoever wrote the best prompt that week.
+
+**JR's angle:** this is literally what Claude Code enablement work should produce for a CSM team —
+not "here's how to prompt well," but "here's the one skill file for this job, use it." It also
+reframes the "why not just let everyone prompt however they want" objection as consistency and token
+efficiency, not control for its own sake.
+
+### 2. Define the autonomy ladder explicitly, and don't promote a rung without evidence and a named owner
+
+Two pieces NLW built on: feature #29, "earned autonomy" — agents move up a ladder (observe →
+suggest → act with approval → act alone) as feedback feeds the evals that gate each new version,
+never by default; and NLW's own addition on top of Lieberman's list, that the missing 31st feature
+is ownership — someone concretely owns the result at whatever rung the agent is on, not "the AI did
+it."
+
+**Why it works:** the usual failure mode in agent rollouts is binary — either nobody trusts the
+agent with anything, or someone grants full autonomy on day one and gets burned. A named ladder with
+an evidence gate at each step gives a skeptical stakeholder a concrete, incremental thing to agree
+to instead of an all-or-nothing ask, and naming an owner at each rung prevents the "the agent did it,
+not me" deflection when something goes wrong.
+
+**For Claude web/desktop:**
+
+```
+I want to plan a staged rollout for a Claude Code agent doing [name the actual task — e.g.
+"drafting the first pass of account health-check summaries before a human reviews them"], using
+an earned-autonomy ladder instead of turning it loose all at once.
+
+Define the four rungs for this specific task:
+1. Observe — the agent watches or drafts, but nothing it produces is used yet
+2. Suggest — the agent proposes, a human does the actual work from scratch or from the suggestion
+3. Act with approval — the agent produces the real output, a named human reviews and approves
+   before it goes anywhere
+4. Act alone — the agent's output goes out with no per-instance review
+
+For each rung, tell me:
+- What evidence would justify promoting to the next rung (a number, a track record, not a vibe)
+- Who is the named owner of the result at that rung — the person accountable if it's wrong
+- What would justify demoting back a rung if something goes wrong
+
+Give me this as a short plan I could actually hand to a stakeholder who's nervous about
+autonomy, not a general explanation of the concept.
+```
+
+**JR's angle:** turns the vaguest, most recurring objection in every agent-adoption conversation —
+"how much should we trust this thing" — into a structured plan a skeptical stakeholder can actually
+sign off on rung by rung, and gives a specific answer to "who's accountable if the agent gets it
+wrong" instead of a shrug. Strong candidate for a demo script: walk a prospect through their own
+first use case on this ladder, live.
+
+---
+
 ## 2026-09-03 — AI Daily Brief holiday-week special: Nufar Gaspar on loop engineering for knowledge workers (exact episode title unconfirmed; date split between Sept 3 and Sept 4 across sources — see reason in `processed.json`)
 
 **Source:** search coverage (podcast hosts still blocked at the proxy — see README). NLW handed the
