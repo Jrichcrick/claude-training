@@ -21,6 +21,98 @@ extracted and added here.
 
 ---
 
+## 2026-09-10 — Anthropic Researcher Says AI Has Over a 10% Chance of Killing All Humans
+
+**Source:** search coverage (podcast hosts still blocked at the proxy — see README). Air date is
+split across sources between Sept 10 and Sept 11; content is corroborated regardless of which. The
+episode opens on the viral Anthropic-researcher x-risk debate (skip_signal — a safety/policy debate,
+no listener action), then moves in the back half to a rapid tour of "eight or nine" of the week's AI
+product launches, each run through NLW's own two-question filter — "who's it for, and what should
+you actually do with it" — landing on two trends across those launches: voice becoming the default
+interaction mode, and model stacks optimizing for "good-enough-and-cheap" over frontier performance.
+**Link:** https://aidailybrief.ai/e/2026-09-10 (also indexed under /e/2026-09-11 depending on source)
+
+### 1. Run every new AI launch through two questions before reacting to it: who's it for, and what should you actually do with it
+
+NLW's own frame for burning through a week's worth of releases fast: for each one, skip the feature
+description and answer only two things — who is this actually for, and what should a listener do
+about it (which, just as validly, can be "nothing").
+
+**Why it works:** launch coverage is forgettable precisely because it stops at capability
+description. A fixed two-question filter forces the translation step — from "what it does" to "does
+this apply to me, and what's the action" — which is the only part that changes what you do next.
+
+**For Claude Code — a slash command:**
+
+```markdown
+---
+description: Triage a new AI product/feature announcement into "who it's for" and "what to do about it"
+---
+
+I'm going to paste a new AI product or feature announcement below (a launch post, a release note,
+a news writeup). Don't summarize what it does — I can read that myself. Instead, answer exactly
+two questions, in this order:
+
+1. **Who's it for?** — Which of my accounts or account types would actually care about this, and
+   why? If the honest answer is "nobody in my book," say so instead of stretching for relevance.
+2. **What should I actually do with it?** — One concrete action for me to take this week: raise
+   it in a QBR, add a line to a demo script, flag it to an AE, or (just as valid) do nothing and
+   note why.
+
+Skip capability description, competitive positioning, and hype. If the announcement doesn't clear
+the bar for either question, say "not worth acting on" and stop there — don't manufacture an angle.
+
+Announcement:
+[paste here]
+```
+
+**JR's angle:** he's constantly fielding "did you see the new X" from CSMs and AEs reacting to a
+competitor or platform announcement. A 30-second filter he can run on any of them gives him a
+repeatable, credible answer instead of freestyling one each time — and it's just as useful handed
+straight to a CSM as a habit for triaging their own customers' new-feature news.
+
+### 2. Deliberately move some drafting work from typing to voice, then have Claude clean up the transcript
+
+NLW's own recommendation from the same segment: intentionally shift some work to voice — via a
+native voice mode or a dictation tool — because you gain real speed and can work while doing
+something else, like walking.
+
+**Why it works:** speaking is faster than typing, but a raw spoken transcript looks nothing like a
+finished draft — filler words, false starts, and points revised mid-sentence. Pairing the speed of
+talking with a cleanup pass whose only job is turning that mess into something send-ready — without
+inventing anything you didn't actually say — is what makes the speed usable instead of just messy.
+
+**For Claude web/desktop:**
+
+```
+I dictated this out loud instead of typing it, so it's rough — filler words, run-on sentences,
+thoughts repeated or corrected mid-stream. Clean it up into a [customer follow-up email / QBR
+talking points / demo script] without losing anything I actually said. Specifically:
+
+- Cut filler ("um," "like," "so anyway"), false starts, and repeated points — keep the final
+  version of each thought, not the first draft of it
+- Turn run-on spoken sentences into clear written ones, but keep it sounding like something I'd
+  say out loud, not a formal memo
+- If two things I said contradict each other (I second-guessed something mid-dictation), ask me
+  which one I meant rather than picking for me
+- Preserve every actual point and decision I made — don't add anything I didn't say, and don't
+  drop something because it seemed minor
+
+Here's the raw transcript:
+[paste dictated text here]
+```
+
+**JR's angle:** he writes the same handful of document types daily — QBR follow-ups, demo talk
+tracks, enablement recaps. Dictating a rough first pass while walking between meetings or commuting,
+then cleaning it up in Claude on arrival, could reclaim real time versus starting from a blank page
+— worth timing head-to-head against his normal typing habit.
+
+*Callback:* the AI-writing-by-document-type entry below already has NLW noting, in passing, that
+dictation might beat AI-drafting for speed on emails specifically. This episode gives that aside its
+own concrete mechanism — voice in, Claude cleanup out — rather than just flagging it as a footnote.
+
+---
+
 ## 2026-09-07 — The Multiplayer AI Sprint: Build Your Team's First Shared Agent
 
 **Source:** search coverage (podcast hosts still blocked at the proxy — see README). Labor Day
