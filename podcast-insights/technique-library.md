@@ -21,6 +21,60 @@ extracted and added here.
 
 ---
 
+## 2026-09-11 — What to Use the Latest AI Tools For
+
+**Source:** search coverage (podcast hosts still blocked at the proxy — see README). The episode's
+main segment (who should use which AI tool for which job, GPT-Live 1's voice/vision use cases)
+stayed at feature-list level across every query — no worked example, so nothing extracted from it.
+The one concrete piece is the KPMG-sponsored segment: **this is a sponsor read, not NLW's own
+editorial commentary** — it cites an 8-month KPMG/UT Austin study of 1.4 million real workplace AI
+interactions (published in *Harvard Business Review*), the same research covered independently by
+McCombs News, EurekAlert, and Newsweek. Worth keeping anyway: the technique is concrete,
+well-corroborated, and genuinely aired in the episode.
+**Link:** https://aidailybrief.ai/e/2026-09-11
+
+### 1. Treat the model as a reasoning partner: assign it a role, give it a concrete example, and require it to explain its reasoning before you accept the answer
+
+The study's finding: the ~5% of "sophisticated" AI users who got the most value didn't use AI more
+often or have better technical skills — they treated it as "a reasoning partner to think with,
+rather than just a tool to get answers from," by (1) asking it to assume a role, (2) providing a
+concrete example of what they wanted, and (3) requiring it to explain its reasoning before they
+acted on the output.
+
+**Why it works:** a role and an example anchor how the model approaches the problem *before* it
+starts generating, instead of leaving that to guesswork. Requiring it to show its reasoning turns
+the interaction from "grade the final answer" into "audit the thinking that produced it" — which is
+what actually lets you catch a wrong turn before you act on it, not just after.
+
+**For Claude web/desktop:**
+
+```
+You're going to help me think through this, not just hand me an answer.
+
+Before you start: you are acting as a [role — e.g. a skeptical renewal-risk analyst, a
+Salesforce onboarding specialist reviewing a new CSM's demo script, a QBR prep partner
+who pokes holes in weak talking points]. Approach this the way that role would — including
+pushing back if something looks off.
+
+Here's an example of the kind of output I'm looking for, so you can match the bar:
+[paste one concrete example — a past write-up, a sample judgment call, a demo script you
+liked]
+
+Now work through this one:
+[paste the actual task or materials]
+
+Before giving me your conclusion, walk me through your reasoning — what you weighed, what
+you ruled out, and why — so I can catch anything you got wrong before I act on it.
+```
+
+**JR's angle:** this is a direct upgrade to the one-shot prompts CSMs/AEs default to ("summarize
+this call," "draft this follow-up"). Teaching the three-part structure — role, example,
+show-your-work — is a single enablement session, and it doubles as a live demo move: showing a
+prospect the model's reasoning, not just its answer, is what makes the output look trustworthy
+instead of like a black box.
+
+---
+
 ## 2026-09-10 — Anthropic Researcher Says AI Has Over a 10% Chance of Killing All Humans
 
 **Source:** search coverage (podcast hosts still blocked at the proxy — see README). Air date is
