@@ -1,8 +1,58 @@
 {
   "_comment": "Ledger of episodes the automation has already evaluated. Prevents re-sending the same episode and lets a run recover after a missed day. Newest first. Trim entries older than ~90 days.",
-  "last_run_utc": "2026-09-18T23:12:42Z",
-  "last_run_note": "Podcast hosts confirmed EGRESS_BLOCKED at the proxy again this run: curl -v CONNECT to itunes.apple.com returned explicit 403 on CONNECT before any fallback was attempted; direct WebFetch on aidailybrief.ai/e/2026-09-17, aidailybrief.ai/e/2026-09-18, pod.link/1680633614, listennotes.com, and podcasts.apple.com were each independently blocked with the same EGRESS_BLOCKED error. Fell back to WebSearch. Unlike the 2026-09-16 run, this run could NOT pin down a genuinely new, distinct episode for either 2026-09-17 or 2026-09-18 despite roughly 20 independent queries from many angles (general title search, date-anchored site: queries, YouTube-channel queries, Spotify/Podchaser-scoped queries, product-name-anchored queries once candidate products surfaced, and a direct beehiiv/aidailybrief.ai archive-listing query). Every query either returned no indexed content for those two dates, or returned specific-sounding content that on cross-check traced back to already-ledgered episodes bleeding through search conflation: (1) a 'Multiplayer AI Sprint' / shared-agent description that is verbatim the already-ledgered 2026-09-07 episode; (2) a recurring 'September's model boom -- Gemini 3.8 Flash, Meta's MuSpark 1.3, the Muse personal agent, ChatGPT Images 2.5, model selection critical, plus Navier-Stokes/Claude-lawsuit/ElevenLabs/Cognition headlines' description that came back near-verbatim across three independently-phrased queries but is the same 'September's Model Boom' content already ledgered under 2026-09-12 (that entry already notes air-date uncertainty between the 12th and 13th) -- confirmed as stale by checking the two named products directly: Meta shipped MuSpark 1.3 on Sept 2 and launched Muse on Sept 8, both well before the 17th, so an episode bundling them as fresh news is not a 17th/18th episode, it is that same mid-September roundup resurfacing; (3) a '10 Ways to Think Bigger with Opportunity AI' title that indexed search associated with aidailybrief.ai/e/2026-09-13, conflicting with the already-ledgered 'Pacing the Frontier' title for that same date -- left alone rather than 'corrected,' since this run has no way to adjudicate which is right and that date is already recorded. No combination of query angles surfaced anything independently corroborated and date-confirmed as new. This reads as the same 1-2 day (here, possibly longer) indexing-lag pattern already logged repeatedly in this ledger, compounded by unusually heavy search-conflation noise this run. Per the do-not-invent-tactics rule and given no confirmed new episode to evaluate, no tactic extracted and no episode entry added below -- adding a guessed title/date pairing this uncertain would risk polluting the ledger with wrong dedup keys. Nothing to evaluate for actionability this run; no email sent; last_run_utc bumped to reflect this run so the next run's search has a fresh shot at 2026-09-17/09-18 once (if) indexing catches up.",
+  "last_run_utc": "2026-09-19T20:02:23Z",
+  "last_run_note": "First run with real feed-bridge access (episodes.json + YouTube transcripts) instead of WebSearch fallback. Processed AI Daily Brief episodes published since the prior run (2026-09-17, 2026-09-18) using real GUIDs and transcripts/show notes -- neither cleared the actionable bar. Also ran How I AI for the first time (first-run rule: most recent 3 episodes): the 2026-09-16 Muse review and 2026-09-14 Grok Bot designers episode both had transcripts and cleared the bar (3 tactics extracted, added to the library); the 2026-09-07 Stripe episode has no captions and its show notes, while detailed, stop at feature/topic labels without a specific mechanism -- not extracted, per the do-not-invent-tactics rule. Older AI Daily Brief entries below remain as originally logged via WebSearch (unverified against transcript) -- not retroactively re-checked, since this run's job is catching up since the last run, not auditing history.",
   "episodes": [
+    {
+      "guid": "05d6a935-f68e-4fd0-b9b7-fd2ce936d402",
+      "podcast": "ai-daily-brief",
+      "title": "The AI Challenges Businesses Are Actually Focused On Right Now",
+      "published": "2026-09-18",
+      "source": "show-notes",
+      "actionable": false,
+      "reason": "No transcript yet (video hadn't landed as of this run). Per show notes: businesses focused on agent security, shifting model choices, and owning their own AI systems against the safety-slowdown backdrop; headlines are Anthropic transparency metrics, an antitrust carve-out proposal, and Gemini Live. Reads as business-strategy/policy commentary -- no rubric, worked example, or step a listener could run tomorrow in the description itself. Not marking actionable; no tactic extracted.",
+      "note": null
+    },
+    {
+      "guid": "02b2d6fb-dfc7-4875-acc3-8fbceba79297",
+      "podcast": "ai-daily-brief",
+      "title": "Why Everyone Is Getting Excited About Personal AI Agents",
+      "published": "2026-09-17",
+      "source": "transcript",
+      "actionable": false,
+      "reason": "Full transcript read (YouTube video 'Why Everyone is Now Getting Excited About Personal AI Agents', published 2026-09-18, matched by title/date per README). Headlines segment: Fed rate hike and AI capex, OpenAI's new misalignment-disclosure framework, DeepMind Institute launch, Apple's M8 server hardware, a stealth coding model on OpenRouter, Nvidia-powered pediatric cardiac modeling. Main segment is a trend roundup on consumer/personal agents (Muse, Instinct, GrokBot) -- a curated sweep of X reactions and Lance Hassan's named design patterns (persistence, goal building, smart defaults, progressive disclosure) for why Muse feels good to use. This is product/market commentary about what makes consumer agents well-designed, not a workflow or prompt a listener runs -- closer to the already-rejected 'AI Model Tier List' and 'Grok 4.6' shape than an actionable episode. No concrete mechanism a CSM/AE could apply tomorrow; not marking actionable, no tactic extracted.",
+      "note": null
+    },
+    {
+      "guid": "0f25ae70-26ec-4915-a938-6a862e246e78",
+      "podcast": "how-i-ai",
+      "title": "Muse review: The personal AI agent that gets consumer UX right",
+      "published": "2026-09-16",
+      "source": "transcript",
+      "actionable": true,
+      "reason": "First How I AI run (first-run rule: most recent 3 episodes). Full transcript read (YouTube 'Muse gets AI agent UX right', published 2026-09-16, matched by date/topic -- same episode, video title differs slightly from the audio title per README). Claire Vo's solo hands-on review of Meta's Muse. Extracted 1 tactic: giving Claude a fully-specified output spec (audience, format, every section, tone) instead of a vague ask, illustrated by her literal one-shot family-newsletter-PDF prompt that succeeded where a vague 'make it easy to read' ask (and prior attempts in Claude/Codex) produced only a plain bullet list. Did not extract the permission-asking UX, the identity/soul.md feature, or the goals/ideas primitives as separate tactics -- those are Muse's own product design, not something Claire demonstrated doing herself with a technique a listener could copy.",
+      "note": null
+    },
+    {
+      "guid": "eca69c63-43d3-4972-aa6b-8015edf871df",
+      "podcast": "how-i-ai",
+      "title": "How Grok Bot designers use AI agents to build personal sites and product prototypes | John Bai & Peng Zheng",
+      "published": "2026-09-14",
+      "source": "transcript",
+      "actionable": true,
+      "reason": "First How I AI run (first-run rule: most recent 3 episodes). Full transcript read (YouTube 'How SpaceXAI designers use Grok Bot and Figma MCP to ship faster', published 2026-09-14 -- same date, video title differs from audio title per README). Extracted 2 tactics: (1) John's 'trash can method' -- build a disposable prototype from a rough voice-memo'd idea, on the presumption it costs nothing to throw away, so ideas get built and judged instead of gatekept; (2) John's tip to explicitly ask the bot to memorize a correction so the same mistake doesn't recur, generalizing the already-ledgered 2026-08-12 escalation-calibration idea beyond just permission-asking. Did not extract Peng's check-in-pipeline/personal-site workflow (compelling but too specific to his own Google-Places/image-pipeline setup to generalize without inventing detail) or the 'life vs work' bot-organization scheme (a personal filing convention, not a technique).",
+      "note": null
+    },
+    {
+      "guid": "70cc0567-b80c-4e51-a591-718cd6ede6ca",
+      "podcast": "how-i-ai",
+      "title": "Build your own company brain: the enterprise AI playbook from Stripe's engineering team | Sharadh Krishnamurthy",
+      "published": "2026-09-07",
+      "source": "show-notes",
+      "actionable": false,
+      "reason": "First How I AI run (first-run rule: most recent 3 episodes). No transcript available (YouTube status: no_captions). Show notes/chapter list are detailed but stay at topic-label level -- 'projects as a governance mechanism,' 'the skills platform,' 'how they rolled out Kai across the team' -- without the actual mechanism behind any of them (what a 'project' governance rule actually says, how the skill builder workflow works end to end). Building a ready-to-paste artifact from labels alone would mean inventing the specifics the episode may or may not give -- same shape as prior table-of-contents-only rejections. Not marking actionable; no tactic extracted.",
+      "note": "Flagging for a future run: if captions ever become available for this episode, this is worth a re-check -- Stripe's internal skills-platform-at-scale story (2,000+ packaged skills) sits squarely in JR's Claude Code enablement lane if the actual governance mechanism can be recovered from a transcript."
+    },
     {
       "guid": "websearch:ai-daily-brief:why-a-new-class-of-ai-judgment-models-could-have-big-business-implications:2026-09-16",
       "title": "Why a New Class of AI \"Judgment Models\" Could Have Big Business Implications",

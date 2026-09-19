@@ -21,6 +21,143 @@ extracted and added here.
 
 ---
 
+## 2026-09-16 — Muse review: The personal AI agent that gets consumer UX right
+
+**Source:** transcript
+**Link:** https://www.youtube.com/watch?v=2UwemqPkJSQ (podcast: How I AI, host Claire Vo)
+
+### 1. Give Claude the full shape of the output you want, not just the topic — and it'll one-shot what a vague ask never does
+
+Claire's own claim: after "hating the front-end design" of every prior agent's attempt at the same
+family PDF, she got a one-shot result she actually liked from Muse the moment she gave it the full
+spec — audience, format, every section, and even the tone — instead of a generic "make me an
+agenda." Her literal prompt: "I wanted a PDF agenda for tomorrow morning, kind of like a
+newsletter, one-page style that I can print out and put on the kitchen table. I wanted to have not
+only our schedule for the week, but highlights of each kid's callouts for the parents... and then
+recent news, recent events, things in [my city], the weather... fun for the whole family to talk
+about."
+
+**Why it works:** a vague ask forces the model to guess at format, length, and tone — and it
+guesses conservatively. That's exactly what happened on her first, underspecified try in the same
+episode: "make it really easy to read" produced a plain bulleted list, not the newsletter she
+actually wanted. Naming the audience, the physical format, and every section up front removes the
+guessing entirely.
+
+**For Claude web/desktop:**
+
+```
+I need a one-page pre-call brief I can skim in two minutes before a customer call, built from
+whatever I paste below (email threads, CRM notes, call transcripts — don't worry about the mess).
+
+Structure it in this order:
+1. **Where things stand** — one line on account health / sentiment, in plain language, not a score
+2. **What's changed since we last spoke** — 2-3 bullets, each tied to something concrete (a usage
+   number, a stated concern, a new stakeholder) — say "no update" rather than inventing one
+3. **What they've asked for or flagged** — verbatim or close to it, so I don't paraphrase away the
+   nuance
+4. **My one recommended talking point for this call** — a single suggestion, not a list of
+   options, tied to something they've actually said they care about
+5. **Open questions I should ask** — 2 at most
+
+Keep the whole thing under one printed page. This is for me to glance at right before the call,
+not a document I'll hand to anyone else — favor scannability over completeness.
+
+Here's what I have on this account:
+[paste your notes/emails/transcript here]
+```
+
+**JR's angle:** this is the exact gap JR sees CSMs and AEs hit constantly — they ask Claude to
+"summarize the account" and get a wall of text they still have to read closely before a call. The
+fix isn't a better model, it's specifying the shape of the output the way Claire did here. Worth
+demoing side by side: a vague "summarize this" prompt next to this one, on the same messy input, so
+the difference is visible in the room.
+
+---
+
+## 2026-09-14 — How Grok Bot designers use AI agents to build personal sites and product prototypes | John Bai & Peng Zheng
+
+**Source:** transcript
+**Link:** https://www.youtube.com/watch?v=zJEHbvT5_Yg (podcast: How I AI, host Claire Vo)
+
+### 1. Build the disposable version first — the "trash can method"
+
+John's framing, on why he and Peng ship so many small AI-built prototypes that never see a
+release: build with the presumption that it's totally inexpensive to throw a prototype away, so you
+stop gatekeeping every idea behind "is this worth building." His own workflow: he takes a
+screenshot of the current product plus a rough voice memo describing an interaction idea he had on
+the go, hands both to a bot, and doesn't check back in until it has produced a working version —
+which he then keeps, refines, or discards outright.
+
+**Why it works:** the normal cost of prototyping — a PM sign-off, an engineer's time, the social
+cost of "we built this and now we're killing it" — is what kills most exploratory ideas before
+they're tested at all. When the prototype is cheap enough that throwing it away costs nothing, you
+stop filtering ideas by "will this survive the gauntlet" and start filtering them by "does this
+actually feel good once it exists."
+
+**For Claude Code — a slash command for scrappy, throwaway builds:**
+
+```markdown
+---
+name: prototype
+description: Spin up a disposable prototype from a rough idea — explicitly not for keeping
+---
+
+I'm handing you a rough, possibly rambling description of an interaction or feature idea. Build a
+throwaway working version of it — not production code, not something we're committing to ship.
+
+Rules for this mode:
+1. Build it on a new branch, never on main, so it costs nothing to delete.
+2. Favor the fastest path to something I can actually click through over code quality or
+   reusability — this is disposable by design.
+3. If my description leaves something ambiguous, make a reasonable call and note it rather than
+   stopping to ask — I'll react to what you built, not to a list of clarifying questions.
+4. When you're done, tell me in one line what you built and what you guessed at, so I know what to
+   look at first.
+
+Here's the idea:
+[describe it however it came to you — rough is fine]
+```
+
+**JR's angle:** most CSMs treat "build a quick demo variant for this prospect" as a big ask because
+it feels like real engineering work. This reframes it as disposable by design — a five-minute
+branch that either becomes something or gets deleted with zero cost either way — which is a much
+easier pitch for trying Claude Code on something outside the standard playbook.
+
+### 2. When you correct the agent, tell it to remember the fix — don't just fix it and move on
+
+John's tip, when asked how he handles a bot going off track: "every time [it happens], you can ask
+the bot to memorize this, so in the future if this happens again, then just follow the script you
+learned last time... the longer you use it, the better it becomes and more adapted to your needs."
+
+**Why it works:** fixing a mistake once and moving on teaches the agent nothing — the same
+correction has to happen again next time. Explicitly asking it to record the fix turns a one-off
+annoyance into a permanent improvement, and the fixes compound the more you use it.
+
+**For Claude Code — a CLAUDE.md rule:**
+
+```markdown
+## Corrections become rules
+
+When I correct something you did — wrong format, wrong assumption, missed step — after fixing it,
+add a one-line rule to the "Lessons" section below describing the pattern (not the specific
+instance), so it doesn't happen again. Check this section before starting similar work.
+
+### Lessons
+(empty until the first correction)
+```
+
+**JR's angle:** this is the practical, low-drama on-ramp to the same idea as the escalation-
+calibration entry from 2026-08-12 — not just "when to ask before acting," but *any* recurring
+mistake becomes a standing rule instead of a repeated correction. It's the single easiest first
+CLAUDE.md edit to hand a customer in a demo: make one correction, show them the file update itself,
+done.
+
+*Related:* generalizes the correction-based-learning mechanism in the 2026-08-12 "Escalation
+calibration" entry beyond just permission-asking — logged separately since the mechanism here (any
+recurring mistake, not just when-to-ask) is broader, not a restatement.
+
+---
+
 ## 2026-09-11 — What to Use the Latest AI Tools For
 
 **Source:** search coverage (podcast hosts still blocked at the proxy — see README). The episode's
