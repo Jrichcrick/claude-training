@@ -1,12 +1,12 @@
 # podcast-insights
 
-Extract implementable tactics from new episodes of **The AI Daily Brief** (NLW), add them to
-JR's technique library, and leave a finished email draft addressed to his work address.
+Extract implementable tactics from new episodes of **The AI Daily Brief** (NLW) and **How I AI**
+(Claire Vo), add them to JR's technique library, and deliver a digest.
 
 Runs nightly at ~7:07pm ET via a Routine. Also runnable by hand: `/podcast-insights`.
 
-Read `podcast-insights/config.json` first — it holds the feed, the recipient, the filter rules,
-and the audience context. Config wins over anything hardcoded below.
+Read `podcast-insights/config.json` first — it holds the podcast list, the recipient, the filter
+rules, and the audience context. Config wins over anything hardcoded below.
 
 ---
 
@@ -22,21 +22,28 @@ The Routine fires a fresh session whose primary repo is `nyc-marathon-2026`, not
 
 Always `git pull` the branch before editing so you build on the previous night's ledger.
 
-## Step 1 — Find what's new
+## Step 1 — Find what's new (from feed-bridge, never from the network)
 
-Resolve the feed:
+This sandbox **cannot** reach anchor.fm, itunes.apple.com, aidailybrief.ai, podcasts.apple.com,
+or YouTube (403 at the proxy). Do not curl, WebFetch, or WebSearch for episodes. Everything you
+need is mirrored into the **feed-bridge** repo, which is checked out next to this one (usually
+`/home/user/feed-bridge`; `config.source_repo` has the hint). Read its `README.md` once.
 
-- If `config.podcast.feed_url` is set, use it.
-- Otherwise resolve it: `https://itunes.apple.com/lookup?id=1680633614` → `results[0].feedUrl`.
+1. Read `feed-bridge/status.json`. If `run_at` is older than `config.source_repo.stale_after_hours`,
+   the mirror is stale (Jilly's Mac is probably asleep). Record `"status": "bridge_stale"` in the
+   ledger, commit, and make your final message one line saying so. Do not guess from search.
+2. For each podcast in `config.podcasts`, read `feed-bridge/<bridge_path>/episodes.json`. Take
+   every episode published since `processed.json.last_run_utc` (first run for a new podcast: the
+   most recent 3). Drop any whose GUID already appears in `processed.json.episodes`.
+3. For each candidate, find its transcript: `feed-bridge/<bridge_path>/transcripts/index.json`
+   maps YouTube video id → title/date/file. Match by **date (same day or ±1) and title similarity**,
+   not exact title; the video title often differs slightly from the audio title. Read the `.txt`.
+   Auto-captions are unpunctuated; read for content, not style.
+4. If there is no transcript yet for an episode (video lands ~1h after audio; bridge runs 3x/day),
+   use `description` from episodes.json and mark `"source": "show-notes"`. With a transcript, mark
+   `"source": "transcript"`. Never mark `websearch-fallback` again; that path is retired.
 
-Fetch the feed. Take every episode published since `processed.json.last_run_utc` (first run: just
-the most recent 3). Drop any whose GUID already appears in `processed.json.episodes`.
-
-**If the feed is unreachable** — the proxy returns 403 on CONNECT for a host the network policy
-doesn't allow — do not silently produce nothing. Fall back to `WebSearch` for the episode title
-and any published summary, mark the entry `"source": "websearch-fallback"` in the ledger, and say
-so plainly at the top of the email so JR knows the extraction is thinner than usual. If even that
-fails, write the ledger with `"status": "unreachable"` and skip the email.
+Ledger entries now carry `"podcast": "<slug>"`. Existing entries without it are AI Daily Brief.
 
 ## Step 2 — Decide if it's worth an email
 
@@ -48,18 +55,24 @@ NLW often puts the tactical material in the **back half** of an episode, after t
 Weight the later portion accordingly — an episode whose first ten minutes are pure news may still
 be the most actionable one of the week.
 
+How I AI is the opposite shape: nearly every episode is a guest demoing a real workflow on screen,
+so the bar is usually cleared. The risk there is vagueness, not news. Pull the guest's **literal**
+prompt text, tool chain, file structure, or checklist from the transcript; a tactic that says
+"they used Claude Code with a CLAUDE.md" is not finished until the rule itself is written out.
+
 If nothing clears the bar, record the episodes in the ledger with `"actionable": false` and a
 one-line reason, commit, and **send no email**. A quiet night is a correct outcome, not a failure.
 Do not pad a thin episode to justify a send.
 
 ## Step 3 — Extract the tactics
 
-Work from the fullest source you can reach: transcript > full show notes > description > search
-coverage. Note which one you used — extraction confidence depends on it.
+Work from the fullest source available: transcript > show notes/description. Note which one you
+used — extraction confidence depends on it.
 
 For each tactic, capture:
 
-- **The tactic** — one sentence, in NLW's actual claim, not a generalization of it
+- **The tactic** — one sentence, in the speaker's actual claim (NLW, or the How I AI guest), not a
+  generalization of it
 - **Why it works** — the mechanism, one or two sentences. Skip if the episode doesn't give one;
   don't invent a rationale.
 - **Ready-to-paste artifact** — the part that matters. Not a description of the technique, but the
@@ -91,7 +104,8 @@ email beats a padded one, and padding is what turns this into another unread new
 Append to `podcast-insights/technique-library.md`, newest section at the top, following the format
 already in the file.
 
-Before appending, check for duplicates: NLW returns to the same themes, and the library is only
+Before appending, check for duplicates across BOTH podcasts: NLW returns to the same themes, and How
+I AI guests often demo the same tool, and the library is only
 useful if it doesn't say the same thing eleven times. If a tactic materially repeats one already
 in the library, **update the existing entry** — sharpen it, add the new episode as a second source,
 note what's new — rather than adding a near-copy. Genuine refinements of an old idea are worth
@@ -123,7 +137,7 @@ Structure, in this order — the one thing comes first because it's the part tha
 
 1. **Try tomorrow** — the single tactic, with its paste-ready artifact inline
 2. **Also from this episode** — remaining tactics, each with its artifact
-3. **Episode** — title, date, link, and which source the extraction came from
+3. **Episode** — podcast, title, date, link, and which source (transcript / show-notes) it came from
 4. A link to the library file for anything older
 
 Keep the prompts in `<pre>` blocks so they survive copy-paste out of the email intact. That is the
@@ -150,5 +164,7 @@ Do not open a pull request.
 - **Never send an email for an episode already in the ledger.** Duplicates are the fastest way to
   make JR stop reading these.
 - If several days went unprocessed, handle them in one pass and one email — not one email per day.
-- If the same tactic keeps recurring across episodes, say so in the email. That repetition is
-  itself signal about what NLW thinks matters.
+- If the same tactic keeps recurring across episodes or across the two shows, say so in the email.
+  That repetition is itself signal.
+- Bridge data is refreshed by Jilly's Mac at 5:00, 12:00, 18:00 ET (`~/.config/feed-bridge/`). If it
+  is stale for 2+ nights, the fix is on the Mac, not in this routine.

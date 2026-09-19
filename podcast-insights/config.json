@@ -1,13 +1,32 @@
 {
-  "podcast": {
-    "name": "The AI Daily Brief (formerly The AI Breakdown)",
-    "host": "Nathaniel Whittemore (NLW)",
-    "apple_podcast_id": "1680633614",
-    "feed_url": "",
-    "feed_url_note": "Leave blank to auto-resolve from apple_podcast_id via the iTunes lookup API on each run. Fill it in to pin a specific feed and skip resolution.",
-    "listener_link": "https://pca.st/podcast/d41026a0-bb2a-013b-f3ee-0acc26574db2"
+  "_comment": "Two podcasts, one library. All feed/transcript data is read from the private repo Jrichcrick/feed-bridge (mirrored by Jilly's Mac 3x/day) because this sandbox cannot reach podcast hosts. Never fetch the origin URLs from a routine.",
+  "source_repo": {
+    "url": "https://github.com/Jrichcrick/feed-bridge",
+    "checkout_path_hint": "/home/user/feed-bridge",
+    "stale_after_hours": 30
   },
-
+  "podcasts": [
+    {
+      "slug": "ai-daily-brief",
+      "name": "The AI Daily Brief (formerly The AI Breakdown)",
+      "host": "Nathaniel Whittemore (NLW)",
+      "apple_podcast_id": "1680633614",
+      "listener_link": "https://pca.st/podcast/d41026a0-bb2a-013b-f3ee-0acc26574db2",
+      "bridge_path": "podcasts/ai-daily-brief",
+      "cadence": "daily, ~20-30 min",
+      "tactics_note": "NLW puts tactical material in the back half after the news read. Weight the later portion."
+    },
+    {
+      "slug": "how-i-ai",
+      "name": "How I AI",
+      "host": "Claire Vo",
+      "listener_link": "https://www.chatprd.ai/how-i-ai",
+      "youtube": "https://www.youtube.com/@howiaipodcast",
+      "bridge_path": "podcasts/how-i-ai",
+      "cadence": "weekly-ish, 30-60 min, guest walks through a real workflow on screen",
+      "tactics_note": "Almost every episode is a live demo of a specific workflow. The tactic is usually the guest's exact prompt, tool chain, or checklist. Extract the literal steps; quote the guest, not Claire."
+    }
+  ],
   "delivery": {
     "to": "Jrichcrick@salesforce.com",
     "from_account": "jrichcrick20@gmail.com",
@@ -17,7 +36,6 @@
     "schedule_local": "19:07 America/New_York",
     "subject_prefix": "AI Daily Brief — tactics to try"
   },
-
   "filtering": {
     "mode": "actionable_only",
     "min_tactics_to_send": 2,
@@ -36,17 +54,18 @@
       "company drama, personnel moves, earnings"
     ]
   },
-
   "audience_context": {
     "who": "JR — works with Salesforce CSMs and AEs on Claude Code enablement (see repo index.html)",
-    "tools_at_work": ["Claude (web/desktop)", "Claude Code"],
+    "tools_at_work": [
+      "Claude (web/desktop)",
+      "Claude Code"
+    ],
     "prompt_targets": [
       "Claude web/desktop chat prompts — paste-and-go",
       "Claude Code artifacts — CLAUDE.md rules, slash commands, terminal workflows"
     ],
     "bias": "Favor tactics that translate into customer-facing enablement or JR's own daily work. Skip anything that only matters to model researchers."
   },
-
   "output": {
     "library_path": "podcast-insights/technique-library.md",
     "ledger_path": "podcast-insights/processed.json",
