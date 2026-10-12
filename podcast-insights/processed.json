@@ -1,8 +1,8 @@
 {
   "_comment": "Ledger of episodes the automation has already evaluated. Prevents re-sending the same episode and lets a run recover after a missed day. Newest first. Trim entries older than ~90 days.",
-  "last_run_utc": "2026-10-11T23:08:00Z",
+  "last_run_utc": "2026-10-12T23:08:00Z",
   "status": "bridge_stale",
-  "last_run_note": "2026-10-11: feed-bridge status.json run_at 2026-09-19T19:49:15Z is ~22 days old (>30h). No episodes processed; fix is on the Mac.",
+  "last_run_note": "2026-10-12: feed-bridge status.json run_at 2026-09-19T19:49:15Z is ~23 days old (>30h). No episodes processed; fix is on the Mac. Second consecutive stale night.",
   "episodes": [
     {
       "guid": "05d6a935-f68e-4fd0-b9b7-fd2ce936d402",
